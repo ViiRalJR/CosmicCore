@@ -27,9 +27,7 @@ public class MaskCache extends Cache {
     }
 
     public void removeMask(Mask type) {
-        if (this.masks.contains(type)) {
-            this.masks.remove(type);
-        }
+        this.masks.remove(type);
     }
 
     public boolean hasMask() {

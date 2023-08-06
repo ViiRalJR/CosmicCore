@@ -13,3 +13,5 @@ commands:
     description: masks
   giveextractor:
     description: extractor
+  giveskin:
+    description: skins

@@ -1,10 +1,11 @@
-package me.viiral.cosmiccore.modules.mask.struct.item;
+package me.viiral.cosmiccore.modules.skins.struct.item;
 
 import com.massivecraft.factions.util.CC;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.viiral.cosmiccore.modules.mask.struct.Mask;
-import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.skins.struct.Skin;
+import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -14,83 +15,81 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class MaskHelmetBuilder {
+public class SkinArmorBuilder {
 
     private static final String COSMIC_DATA = "cosmicData";
-    private static final String MASK_TYPE = "maskType";
-    private static final String MASK_FORMAT = "&f&lMask (";
-    private static final String MASK_DELIMITER = "@;;";
+    private static final String SKIN_TYPE = "skinType";
+    private static final String SKIN_FORMAT = "&f&lItem Skin (";
+    private static final String SKIN_DELIMITER = "@;;";
 
     private NBTItem nbtItem;
     private final NBTCompound cosmicData;
 
-    public MaskHelmetBuilder(ItemStack itemStack) {
+    public SkinArmorBuilder(ItemStack itemStack) {
         this(new NBTItem(itemStack));
     }
 
-    public MaskHelmetBuilder(NBTItem item) {
+    public SkinArmorBuilder(NBTItem item) {
         this.nbtItem = item;
         this.cosmicData = nbtItem.getOrCreateCompound(COSMIC_DATA);
     }
 
-    public boolean hasMask() {
-        if (this.cosmicData.hasTag(MASK_TYPE)) {
-            return this.cosmicData.getString(MASK_TYPE) != null && !this.cosmicData.getString(MASK_TYPE).equals("null");
+    public boolean hasSkin() {
+        if (this.cosmicData.hasTag(SKIN_TYPE)) {
+            return this.cosmicData.getString(SKIN_TYPE) != null && !this.cosmicData.getString(SKIN_TYPE).equals("null");
         }
         return false;
     }
 
-    public MaskHelmetBuilder applyMask(List<Mask> masks) {
-        String maskTypes = masks.stream()
-                .map(Mask::getName)
-                .collect(Collectors.joining(MASK_DELIMITER));
+    public SkinArmorBuilder applySkin(List<Skin> skins) {
+        String skinTypes = skins.stream()
+                .map(Skin::getName)
+                .collect(Collectors.joining(SKIN_DELIMITER));
 
-        this.cosmicData.setString(MASK_TYPE, maskTypes);
-        this.addMaskLore(masks);
-
+        this.cosmicData.setString(SKIN_TYPE, skinTypes);
+        this.addSkinLore(skins);
         return this;
     }
 
-    private void addMaskLore(List<Mask> masks) {
+    private void addSkinLore(List<Skin> skins) {
         ItemStack itemStack = this.nbtItem.getItem();
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        String maskNames = masks.stream()
-                .map(mask -> mask.getColor() + "&l" + mask.getName())
-                .collect(Collectors.joining(", ", MASK_FORMAT, "&f&l)"));
+        String skinNames = skins.stream()
+                .map(skin -> skin.getColor() + "&l" + skin.getName())
+                .collect(Collectors.joining(", ", SKIN_FORMAT, "&f&l)"));
 
         List<String> lore = getLore();
-        lore.add(maskNames);
+        lore.add(skinNames);
 
         itemMeta.setLore(CC.translate(lore));
         itemStack.setItemMeta(itemMeta);
     }
 
-    public MaskHelmetBuilder removeMask() {
+    public SkinArmorBuilder removeSkin() {
         ItemStack itemStack = this.nbtItem.getItem();
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        String maskLine = CC.translate(MASK_FORMAT);
+        String skinLine = CC.translate(SKIN_FORMAT);
 
         List<String> lore = this.getLore()
                 .stream()
-                .filter(str -> !str.startsWith(maskLine))
+                .filter(str -> !str.startsWith(skinLine))
                 .collect(Collectors.toList());
 
         itemMeta.setLore(lore);
-
         itemStack.setItemMeta(itemMeta);
 
         NBTItem item = new NBTItem(itemStack);
-        item.getOrCreateCompound(COSMIC_DATA).removeKey(MASK_TYPE);
+        item.getOrCreateCompound(COSMIC_DATA).removeKey(SKIN_TYPE);
         this.nbtItem = item;
         return this;
     }
 
-    public List<Mask> getMasks() {
-        String maskString = Optional.ofNullable(this.cosmicData.getString("maskType")).orElse("");
-        return Arrays.stream(maskString.split(MASK_DELIMITER))
-                .map(s -> MaskRegister.getInstance().getMaskFromID(s))
+    public List<Skin> getSkins() {
+        String skinString = Optional.ofNullable(this.cosmicData.getString("skinType")).orElse("");
+        return Arrays.stream(skinString.split(SKIN_DELIMITER))
+                .map(s -> SkinRegister.getInstance().getSkinFromID(s))
                 .collect(Collectors.toList());
     }
 

@@ -86,6 +86,7 @@ public class ArmorSetAPI {
         CachedPlayer cachedPlayer = CosmicCore.getInstance().getCacheManager().getCachedPlayer(player);
         ArmorCrystalCache cache = (ArmorCrystalCache) (cachedPlayer.hasCache("armor_crystal") ? cachedPlayer.getCache("armor_crystal") : cachedPlayer.registerCache(new ArmorCrystalCache(player)));
         ItemStack[] armor = player.getInventory().getArmorContents();
+        cache.clear();
         for (ItemStack item : armor) {
             if (ArmorSetAPI.hasCrystalTypeOnItem(item))
                 for (ArmorSet set : ArmorSetAPI.getCrystalTypesFromString(ArmorSetAPI.getCrystalIDOnItem(item))) {

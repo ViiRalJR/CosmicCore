@@ -32,6 +32,9 @@ import me.viiral.cosmiccore.modules.mask.command.MaskCommand;
 import me.viiral.cosmiccore.modules.mask.listener.MaskListener;
 import me.viiral.cosmiccore.modules.mask.struct.Mask;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.skins.command.SkinCommand;
+import me.viiral.cosmiccore.modules.skins.listener.SkinListener;
+import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.WorldGuardUtils;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
@@ -66,6 +69,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
     private ConfigManager configManager;
     private CacheManager cacheManager;
     private MaskRegister maskRegister;
+    private SkinRegister skinRegister;
     private SoulManager soulManager;
     private GkitManager gkitManager;
     boolean joinable = false;
@@ -87,7 +91,6 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         this.armorSetRegister = new ArmorSetRegister();
         this.armorSetRegister.initialize();
 
-
         this.soulManager = new SoulManager();
 
         this.enchantRegister = new EnchantRegister(this);
@@ -108,6 +111,9 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         this.maskRegister = new MaskRegister(this);
         this.maskRegister.initialize();
 
+        this.skinRegister = new SkinRegister(this);
+        this.skinRegister.initialize();
+
         this.commandManager = new CommandManager(this);
         this.registerCommandParameters();
         this.registerCommandCompletion();
@@ -116,6 +122,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         getCommand("givecrystal").setExecutor(new MultiCommand());
         getCommand("givemask").setExecutor(new MaskCommand());
         getCommand("giveextractor").setExecutor(new CrystalExtractorCommand());
+        getCommand("giveskin").setExecutor(new SkinCommand());
         this.registerListeners();
 
     }
@@ -141,6 +148,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         pm.registerEvents(new ArmorSwapListener(this), this);
         pm.registerEvents(new TinkererListeners(), this);
         pm.registerEvents(new MaskListener(), this);
+        pm.registerEvents(new SkinListener(), this);
     }
 
     private void registerCommandParameters() {

@@ -10,7 +10,7 @@ import java.util.List;
 public class DriftayMask extends Mask {
 
     public DriftayMask() {
-        super("driftay", "");
+        super("Driftay", "");
     }
 
     @Override
@@ -20,6 +20,6 @@ public class DriftayMask extends Mask {
 
     @Override
     public List<String> getLore() {
-        return Collections.singletonList("Driftay test lore for mask");
+        return Collections.singletonList("&cDriftay test lore for mask");
     }
 }

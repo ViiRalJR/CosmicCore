@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ViiralMask extends Mask {
     public ViiralMask() {
-        super("viiral", "");
+        super("ViiRal", "");
     }
 
     @Override
@@ -18,6 +18,6 @@ public class ViiralMask extends Mask {
 
     @Override
     public List<String> getLore() {
-        return Collections.singletonList("ViiRal test lore for mask");
+        return Collections.singletonList("&dViiRal test lore for mask");
     }
 }
