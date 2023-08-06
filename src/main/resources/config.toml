@@ -1,0 +1,10 @@
+[modules]
+
+[modules.users]
+enabled = true
+
+[modules.database]
+enabled = true
+
+[modules.hooks]
+enabled = true

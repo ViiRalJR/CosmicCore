@@ -1,0 +1,15 @@
+name: CosmicCore
+version: '${project.version}'
+main: me.viiral.cosmiccore.CosmicCore
+api-version: 1.13
+authors: [ ViiRal ]
+depend:
+  - WorldGuard
+  - Factions
+commands:
+  givecrystal:
+    description: crystals
+  givemask:
+    description: masks
+  giveextractor:
+    description: extractor

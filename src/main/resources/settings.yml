@@ -1,0 +1,25 @@
+enchanter:
+  gui-rows: 1
+  tier-items:
+    SIMPLE:
+      slot: 0
+      price: 500
+    UNIQUE:
+      slot: 1
+      price: 1000
+    ELITE:
+      slot: 2
+      price: 2000
+    ULTIMATE:
+      slot: 3
+      price: 5000
+    LEGENDARY:
+      slot: 4
+      price: 20000
+    SOUL:
+      slot: 5
+      price: 50000
+    HEROIC:
+      slot: 6
+      price: 100000
+

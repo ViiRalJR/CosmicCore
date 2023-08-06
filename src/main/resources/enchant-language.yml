@@ -1,0 +1,74 @@
+SOUL_MODE_ENABLE:
+  - ""
+  - "&a&l** SOUL MODE: &nON&r&a&l **"
+  - "&7Active soul enchantments will now drain soul gems."
+  - ""
+SOUL_MODE_DISABLE:
+  - ""
+  - "&c&l** SOUL MODE: &nOFF&r&c&l **"
+  - "&7Soul enchantments will no longer drain soul gems."
+  - ""
+OUT_OF_SOULS: "&c&l** OUT OF SOUL **"
+CLICKED_WRONG_SOUL_GEM: "&c&l(!) &cThis Soul Gem is not currently active. (To disable Soul Mode, click the Soul Gem you used to enable it)."
+SOUL_DRAIN_MESSAGE: "&e&l** SOULS: &n{souls}&e&l **"
+
+NE_COMMAND_HELP:
+  - "&8--- &4Nightmare &cEnchantments &8---"
+  - "&4/ce &cenchant &7<enchant> [level]"
+  - "&4/ce &cunenchant &7<enchant>"
+  - "&4/ce &cbook &7<enchant> <level> [player]"
+  - "&4/ce &crbook &7<tier> <amount> [player]"
+  - "&4/ce &csoulgem &7<souls> [player]"
+  - "&4/ce &cblackscroll &7<percent> [player]"
+  - "&4/ce &cwhitescroll &7<amount> [player]"
+  - "&4/ce &cnametag &7<amount> [player]"
+  - "&4/ce &ctransmogscroll &7<amount> [player]"
+  - "&4/ce &crandomizationscroll &7<amount> <tier> [player]"
+  - "&4/ce &csoultracker &7<amount> <tier> [player]"
+  - "&4/ce &cdust &7<tier> <percent> [player]"
+  - "&4/ce &corb &7<slots> <success> <type> [player]"
+  - "&4/ce &cgkit &7<gkit> [player]"
+  - "&4/ce &creload"
+
+INVALID_ENCHANTMENT_NAME: "&c&l(!) &cInvalid enchantment name."
+INVALID_ENCHANTMENT_LEVEL: "&c&l(!) &cInvalid enchantment level (max level: {max})."
+EMPTY_HAND: "&c&l(!) &cPlease hold an item in your hand."
+ALREADY_HAS_ENCHANTMENT: "&c&l(!) &cThis item already has this enchantment."
+DOESNT_HAVE_REQUIRED: "&c&l(!)&c You do not have the required enchantment to apply this heroic book."
+DOESNT_HAVE_ANY_ENCHANTMENTS: "&c&l(!) &cThis item doesn't have any enchantments."
+
+ADMIN_RELOADING: "&c&l(!) &7Reloading configs now..."
+ADMIN_RELOADED: "&c&l(!) &7Reloaded configs and other cool stuff. Took &4%took%ms&7."
+
+EQUIP_POTION_ENCHANT: "&a&l[+]&a {enchant} {enchant-level}: &7applying {effect} {effect-level}"
+UNEQUIP_POTION_ENCHANT: "&c&l[-]&c {enchant} {enchant-level}: &7removing {effect}"
+
+WEAK_SHOT:
+  - "&7Certain enchantments will &c&lNOT&7 proc on your victims"
+  - "&7unless your bow shot is charged at &c&lLEAST&7 75%"
+INVALID_ITEM_TYPE_FOR_ENCHANT: "&c&l(!) &cInvalid item type, this enchantment is a &n{valid-type}&c enchantment."
+NOT_ENOUGH_SLOTS: "&c&l(!) &cYou can only apply up to {slots} enchantments on this item."
+ITEM_PROTECTED_BY_WHITE_SCROLL: "&c&l(!) &cYour item was not destroyed because it was protected by a while scroll."
+RENAME_TAG_CLICKED: "&6&l(!) &6Type in chat to rename the item you are holding in your hand."
+SUCCESSFULLY_RENAMED: "&6&l(!) &6You have successfully renamed your item to: {new-name}&6."
+FULL_INVENTORY: "&c&l(!) &cWarning, you have a &lFULL&c inventory."
+
+BOOK_OPEN:
+  - "&e&l(!) &eYou examine the {book-type} Enchantment Book...&r"
+  - "&eand discover {book}!&r"
+BOOK_RIGHT_CLICK:
+  - "&e&l(!) &eTo apply this enchantment to an item, simply drag n' drop the book onto the item you'd like to enchant in your inventory!"
+  - "&7The &bSuccess Rate&7 is the chance of the book successfully being applied to your equipment. The &bDestruction Chance&7 is the percent chance of your piece of equipment being &nDESTROYED&7 if the book fails to apply."
+
+KIT_RECEIVED: "&a&l(!)&a You have received the &4{gkit}&c gkit."
+KIT_COOLDOWN: "&c&l(!)&c You have to wait another &4{time}&c."
+KIT_INVALID_NAME: "&c&l(!)&c Invalid gkit name."
+KIT_NO_ACCESS: "&c&l(!)&c You do not have access to this gkit."
+
+SOUL_TRACKER_APPLIED: "&e&l(!)&e You have applied a {soul-tracker} Soul Tracker&e to your {item}!"
+ALREADY_HAS_SOUL_TRACKER: "&c&l(!)&c This item already has a soul tracker applied to it."
+DOESNT_HAVE_SOUL_TRACKER: "&c&l(!)&c This item doesn't have a soul tracker applied to it."
+SOUL_HARVEST_COOLDOWN: "&c&l(!)&c You cannot collect {player}'s Soul for another {time}."
+
+REMOVE_EXP: "&c&l-{amount} EXP"
+NOT_ENOUGH_EXP: "&c&l(!)&c Not enough experience!"

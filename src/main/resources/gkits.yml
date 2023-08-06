@@ -1,0 +1,85 @@
+spooky:
+  name: "Spooky"
+  cooldown: 86400
+  gui-item:
+    type: PUMPKIN
+    name: "&6&lSpooky Gkit"
+    lore:
+      - "&6"
+      - "&7Right Click to redeem"
+  commands:
+    - "ne rbook ELITE 1 {player}"
+  items:
+    sword:
+      type: DIAMOND_SWORD
+      name: "&6&lHeroic Headless Blade of Horror"
+      lore:
+        - "&6&oAn ancient blade imbued with the nightmares"
+        - "&6&oof all who have fallen before it."
+      enchants:
+        - "DAMAGE_ALL:5"
+        - "DURABILITY:3"
+        - "FIRE_ASPECT:2"
+      custom-enchants:
+        - "lifesteal:1:2"
+        - "rage:1:5"
+        - "blind:1:2"
+        - "demonforged:1:5"
+        - "execute:1:4"
+        - "paralyze:1:3"
+        - "trap:1:2"
+        - "vampire:1:2"
+        - "headless:1:2"
+        - "thunderingblow:1:2"
+    helmet:
+      type: DIAMOND_HELMET
+      name: "&6&lHeroic Grim Reaper Shroud"
+      lore:
+        - "&6&oAn oxy shroud, eminating death."
+      enchants:
+        - "PROTECTION_ENVIRONMENTAL:4"
+        - "DURABILITY:3"
+      custom-enchants:
+        - "overload:1:3"
+        - "deathbringer:1:2"
+        - "spirits:1:4"
+        - "voodoo:1:2"
+        - "curse:1:4"
+        - "molten:1:4"
+    chestplate:
+      type: DIAMOND_CHESTPLATE
+      name: "&eHeroic Headless Chestplate of Nightmares"
+      lore:
+        - "&e&oA chestplate with VERY spooky aura."
+      enchants:
+        - "PROTECTION_ENVIRONMENTAL:4"
+        - "DURABILITY:3"
+      custom-enchants:
+        - "tank:1:4"
+    leggings:
+      type: DIAMOND_LEGGINGS
+      name: "&eHeroic Headless Leggings of Nightmares"
+      lore:
+        - "&e&oA pair of leggings with VERY spooky aura."
+      enchants:
+        - "PROTECTION_ENVIRONMENTAL:4"
+        - "DURABILITY:3"
+      custom-enchants:
+        - "wither:1:4"
+        - "plaguecarrier:1:4"
+    boots:
+      type: DIAMOND_BOOTS
+      name: "&eHeroic Headless Boots of Nightmares"
+      lore:
+        - "&e&oA pair of boots with VERY spooky aura."
+      enchants:
+        - "PROTECTION_ENVIRONMENTAL:4"
+        - "DURABILITY:3"
+      custom-enchants:
+        - "armored:1:4"
+        - "gears:1:3"
+        - "undeadruse:1:4"
+        - "endershift:1:2"
+
+
+
