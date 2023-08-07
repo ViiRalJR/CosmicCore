@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import me.mattstudios.mf.base.CommandManager;
 import me.mattstudios.mf.base.components.TypeResult;
+import me.viiral.cosmiccore.conf.ConfigurationService;
 import me.viiral.cosmiccore.modules.armorsets.commands.AdminArmorSetCommand;
 import me.viiral.cosmiccore.modules.armorsets.commands.CrystalExtractorCommand;
 import me.viiral.cosmiccore.modules.armorsets.commands.MultiCommand;
@@ -42,6 +43,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -57,7 +59,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
             .excludeFieldsWithoutExposeAnnotation()
             .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
             .create();
-
+    private ConfigurationService configurationService;
     private EnchantConfigManager enchantConfigManager;
     private ArmorSetRegister armorSetRegister;
     private LanguageHandler languageHandler;
@@ -79,6 +81,8 @@ public final class CosmicCore extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
+
+        this.configurationService = new ConfigurationService();
 
         this.languageHandler = new LanguageHandler(this);
         this.languageHandler.load();
@@ -129,6 +133,11 @@ public final class CosmicCore extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
+        try {
+            this.configurationService.saveAllFiles();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         // Plugin shutdown logic
     }
 
