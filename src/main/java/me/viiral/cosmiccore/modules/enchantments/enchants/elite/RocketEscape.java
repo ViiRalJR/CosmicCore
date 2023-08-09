@@ -7,6 +7,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncom
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -25,6 +27,7 @@ import xyz.xenondevs.particle.data.texture.BlockTexture;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RocketEscape extends ArmorIncomingPVPDamageEventEnchant implements Reloadable {
@@ -57,12 +60,8 @@ public class RocketEscape extends ArmorIncomingPVPDamageEventEnchant implements 
         if (victim.getHealth() - event.getFinalDamage() > 2) return;
         if (super.isOnCooldown(victim)) return;
 
-//        Player user = (Player) attacker;
-//        if (EliteAPI.hasMask(user.getInventory().getHelmet()) && user.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(user.getInventory().getHelmet(), "Terminator")) {
-//            if (ThreadLocalRandom.current().nextInt(101) <= 50) {
-//                return;
-//            }
-//        }
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))
+            if ((new Random().nextInt(100) + 1) > 50) return;
 
         if (Math.random() < this.procChance * enchantInfo.getLevel()) {
             super.getDamageHandler().cancelDamage(event, this.getName());

@@ -6,6 +6,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncom
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.IronGolem;
@@ -14,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Ragdoll extends ArmorIncomingPVPDamageEventEnchant {
@@ -35,6 +38,10 @@ public class Ragdoll extends ArmorIncomingPVPDamageEventEnchant {
 //            }
 //        }
         if (Math.random() < procChance * enchantInfo.getLevel()) {
+
+            if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))
+                if ((new Random().nextInt(100) + 1) > 50) return;
+
             pushAwayEntity(attacker, victim, 1.5 + 0.5 * enchantInfo.getLevel());
         }
     }

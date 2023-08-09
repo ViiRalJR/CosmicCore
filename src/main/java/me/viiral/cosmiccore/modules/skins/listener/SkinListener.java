@@ -26,6 +26,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -152,16 +154,25 @@ public class SkinListener implements Listener {
                 && ItemUtils.isArmor(event.getCurrentItem()) && event.getClick().isRightClick();
     }
 
-    private SkinResult applySkin(SkinArmorBuilder item, SkinBuilder skin) {
-        if (item.hasSkin()) {
+    private SkinResult applySkin(SkinArmorBuilder armorItemBuilder, SkinBuilder skinBuilder) {
+        ItemStack armorItem = armorItemBuilder.build();
+        ItemStack skinItem = skinBuilder.build();
+
+        if (armorItemBuilder.hasSkin()) {
             return SkinResult.CONTAINS;
-        } else if (item.build().getAmount() > 1 || skin.build().getAmount() > 1){
-            return SkinResult.INVALID_COUNT;
-        } else if (!item.build().getType().toString().endsWith(skin.getApplicable())) {
-            return SkinResult.WRONG_ITEM;
-        } else {
-            return SkinResult.SUCCESS;
         }
+
+        if (armorItem.getAmount() > 1 || skinItem.getAmount() > 1) {
+            return SkinResult.INVALID_COUNT;
+        }
+
+        List<Material> applicableMaterials = Arrays.asList(skinBuilder.getApplicable().getApplicable());
+
+        if (!applicableMaterials.contains(armorItem.getType())) {
+            return SkinResult.WRONG_ITEM;
+        }
+
+        return SkinResult.SUCCESS;
     }
 
     private SkinResult removeSkin(SkinArmorBuilder item) {

@@ -1,6 +1,7 @@
 package me.viiral.cosmiccore.modules.skins.skins;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
+import me.viiral.cosmiccore.modules.skins.struct.SkinType;
 import me.viiral.cosmiccore.utils.CC;
 
 import java.util.Collections;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class DriftaySkin extends Skin {
     public DriftaySkin() {
-        super("Driftay", "_HELMET");
+        super("Driftay", SkinType.HELMET);
     }
 
     @Override

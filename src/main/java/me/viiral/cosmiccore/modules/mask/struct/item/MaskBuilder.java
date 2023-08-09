@@ -53,6 +53,7 @@ public class MaskBuilder extends CustomItem {
             if (i != masksLength - 1) name.append(", ");
             else name.append(ChatColor.WHITE).append(ChatColor.BOLD).append(")");
 
+            if (masksLength > 1) lore.add(mask.getColor() + ChatColor.BOLD + mask.getName().toUpperCase() + " MASK");
             lore.addAll(mask.getLore());
             lore.add("&7");
             nbt.append(mask.getID()).append(NBT_SEPARATOR);

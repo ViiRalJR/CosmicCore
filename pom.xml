@@ -134,7 +134,7 @@
             <artifactId>saberfactions</artifactId>
             <version>1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/SaberFactions.jar</systemPath>
+            <systemPath>${project.basedir}/libs/Factions.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.mattstudios.utils</groupId>

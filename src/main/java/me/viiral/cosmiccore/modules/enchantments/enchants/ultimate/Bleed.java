@@ -13,6 +13,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -48,12 +50,14 @@ public class Bleed extends WeaponDamageEventEnchant {
                 return;
             }
 
-            victim.addPotionEffect(
-                    new PotionEffect(PotionEffectType.SLOW,
-                    (victimBleedStack.getBleedStack() + 1) * 20,
-                    Math.min(victimBleedStack.getBleedStack() - 1, 1)),
-                    true
-            );
+            if (!MaskAPI.hasMaskOn((Player) victim, MaskRegister.getInstance().getMaskFromName("Holy"))) {
+                victim.addPotionEffect(
+                        new PotionEffect(PotionEffectType.SLOW,
+                                (victimBleedStack.getBleedStack() + 1) * 20,
+                                Math.min(victimBleedStack.getBleedStack() - 1, 1)),
+                        true
+                );
+            }
 
             victim.getWorld().playEffect(victim.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
             victimBleedStack.incrementBleedStack();

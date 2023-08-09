@@ -9,12 +9,15 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncom
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Shockwave extends ArmorIncomingPVPDamageEventEnchant {
@@ -34,12 +37,8 @@ public class Shockwave extends ArmorIncomingPVPDamageEventEnchant {
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (super.isOnCooldown(victim)) return;
 
-//        Player user = (Player) attacker;
-//        if (EliteAPI.hasMask(user.getInventory().getHelmet()) && user.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(user.getInventory().getHelmet(), "Terminator")) {
-//            if (ThreadLocalRandom.current().nextInt(101) <= 50) {
-//                return;
-//            }
-//        }
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))
+            if ((new Random().nextInt(100) + 1) > 50) return;
 
 
         if (Math.random() < procChance * enchantInfo.getLevel()) {

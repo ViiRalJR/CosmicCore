@@ -11,6 +11,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.souls.SoulManager;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.utils.CC;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -22,6 +25,7 @@ import xyz.xenondevs.particle.ParticleEffect;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Phoenix extends ArmorIncomingPVPDamageEventEnchant implements SoulEnchant {
@@ -78,6 +82,19 @@ public class Phoenix extends ArmorIncomingPVPDamageEventEnchant implements SoulE
         if (!soulModeCache.hasEnoughSouls(soulCost)) {
             super.sendMessage(victim, this.outOfSoulsMessage);
             return;
+        }
+
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Thanos"))) {
+            attacker.sendMessage(CC.GoldB + "*** BLOCKED ENEMIES PHOENIX (THANOS MASK) ***");
+            return;
+        }
+
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Death Knight"))) {
+
+            if ((new Random().nextInt(100) + 1) > 50) {
+                attacker.sendMessage(CC.DarkAquaB + "*** BLOCKED ENEMIES PHOENIX (DEATH KNIGHT MASK) ***");
+                return;
+            }
         }
 
         soulModeCache.getSoulGemBuilder().removeSouls(soulCost);

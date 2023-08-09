@@ -90,7 +90,7 @@ public class MaskHelmetBuilder {
     public List<Mask> getMasks() {
         String maskString = Optional.ofNullable(this.cosmicData.getString("maskType")).orElse("");
         return Arrays.stream(maskString.split(MASK_DELIMITER))
-                .map(s -> MaskRegister.getInstance().getMaskFromID(s))
+                .map(s -> MaskRegister.getInstance().getMaskFromName(s))
                 .collect(Collectors.toList());
     }
 

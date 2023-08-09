@@ -6,6 +6,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.viiral.cosmiccore.modules.mask.struct.Mask;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -89,7 +90,7 @@ public class SkinArmorBuilder {
     public List<Skin> getSkins() {
         String skinString = Optional.ofNullable(this.cosmicData.getString("skinType")).orElse("");
         return Arrays.stream(skinString.split(SKIN_DELIMITER))
-                .map(s -> SkinRegister.getInstance().getSkinFromID(s))
+                .map(s -> SkinRegister.getInstance().getSkinFromName(s))
                 .collect(Collectors.toList());
     }
 

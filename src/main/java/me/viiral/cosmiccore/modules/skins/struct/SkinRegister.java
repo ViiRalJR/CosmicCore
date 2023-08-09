@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.skins.skins.DriftaySkin;
 import me.viiral.cosmiccore.modules.skins.skins.ViiRalSkin;
+import me.viiral.cosmiccore.modules.skins.skins.amulet.*;
 import org.bukkit.event.HandlerList;
 
 import java.util.*;
@@ -26,7 +27,10 @@ public class SkinRegister {
 
     public void initialize() {
         registerAll(
-                new DriftaySkin(), new ViiRalSkin()
+                new AmuletOfCorruption(), new AmuletOfDestruction(), new GoldChain(), new LostAmulet(), new LuauLei(),
+                new RadioactiveAmulet()
+
+                // Secret Santa Next
         );
     }
 

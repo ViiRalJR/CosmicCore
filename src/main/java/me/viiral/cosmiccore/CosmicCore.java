@@ -82,7 +82,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
 
-        this.configurationService = new ConfigurationService();
+        //this.configurationService = new ConfigurationService();
 
         this.languageHandler = new LanguageHandler(this);
         this.languageHandler.load();

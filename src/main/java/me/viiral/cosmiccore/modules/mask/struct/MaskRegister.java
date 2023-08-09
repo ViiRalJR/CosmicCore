@@ -2,8 +2,7 @@ package me.viiral.cosmiccore.modules.mask.struct;
 
 import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
-import me.viiral.cosmiccore.modules.mask.masks.DriftayMask;
-import me.viiral.cosmiccore.modules.mask.masks.ViiralMask;
+import me.viiral.cosmiccore.modules.mask.masks.*;
 import org.bukkit.event.HandlerList;
 
 import java.util.*;
@@ -26,6 +25,20 @@ public class MaskRegister {
 
     public void initialize() {
         registerAll(
+
+                // FINISHED MASKS
+                new DeathKnightMask(), new GlitchMask(), new HolyMask(), new NecromancerMask(), new PartyMask(),
+                new PurgeMask(), new TurkeyMask(), new ScarecrowMask(), new ZuesMask(), new ThanosMask(),
+                // STARTED ON MASKS
+                new DragonMask(), new TerminatorMask(),
+
+
+                // NOT FINISHED MASKS
+                new BunnyMask(), new JokerMask(),
+                new MonopolyMask(), new PilgrimMask(),
+                new ReindeerMask(), new SantaMask(),
+
+                // TEST MASKS
                 new DriftayMask(), new ViiralMask()
         );
     }

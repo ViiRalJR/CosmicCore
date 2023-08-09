@@ -1,17 +1,18 @@
-package me.viiral.cosmiccore.modules.skins.skins;
+package me.viiral.cosmiccore.modules.skins.skins.amulet;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
 import me.viiral.cosmiccore.utils.CC;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ViiRalSkin extends Skin {
+public class GoldChain extends Skin {
 
-    public ViiRalSkin() {
-        super("ViiRal", SkinType.HELMET);
+    public GoldChain() {
+        super("40K Gold Chain", SkinType.AMULET);
     }
+
     @Override
     public String getColor() {
         return CC.LightPurple;
@@ -19,6 +20,8 @@ public class ViiRalSkin extends Skin {
 
     @Override
     public List<String> getLore() {
-        return Collections.singletonList("&dTest lore for the ViiRal skin");
+        List<String> lore = new ArrayList<>();
+        lore.add("&c+2% /sell prices");
+        return lore;
     }
 }

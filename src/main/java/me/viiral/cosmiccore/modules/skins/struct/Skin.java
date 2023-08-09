@@ -22,12 +22,12 @@ import java.util.function.UnaryOperator;
 public abstract class Skin implements Listener {
 
     private final String name;
-    private final String applicable;
+    private final SkinType skinType;
     private final DamageHandler damageHandler;
 
-    public Skin(String name, String applicable) {
+    public Skin(String name, SkinType skinType) {
         this.name = name;
-        this.applicable = applicable;
+        this.skinType = skinType;
         this.damageHandler = CosmicCore.getInstance().getDamageHandler();
     }
 
@@ -35,8 +35,8 @@ public abstract class Skin implements Listener {
         return this.getSkinIDFromName(this.name);
     }
 
-    public String getApplicable() {
-        return applicable;
+    public SkinType getApplicable() {
+        return skinType;
     }
 
     protected void sendMessage(LivingEntity player, List<String> message, UnaryOperator<String> function) {

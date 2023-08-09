@@ -15,6 +15,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.souls.SoulManager;
 import me.viiral.cosmiccore.modules.enchantments.tasks.NaturesWrathTask;
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import org.bukkit.ChatColor;
@@ -34,6 +36,7 @@ import xyz.xenondevs.particle.ParticleEffect;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class NaturesWrath extends ArmorIncomingPVPDamageEventEnchant implements SoulEnchant {
 
@@ -75,6 +78,17 @@ public class NaturesWrath extends ArmorIncomingPVPDamageEventEnchant implements 
         if (!(attacker instanceof Player)) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE) return;
         if (super.isOnCooldown(victim)) return;
+
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Thanos"))) {
+            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&l*** THANOS MASK (&7Blocked Natures Wrath&b&l) ***"));
+            return;
+        }
+
+        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Zues"))) {
+            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l*** ZEUS MASK (&7Blocked Natures Wrath&b&l) ***"));
+            return;
+        }
+
 //        if (EliteAPI.hasMask(victim.getInventory().getHelmet()) && victim.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(victim.getInventory().getHelmet(), "Zeus")) {
 //            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l*** ZEUS MASK (&7Blocked Natures Wrath&b&l) ***"));
 //            return;

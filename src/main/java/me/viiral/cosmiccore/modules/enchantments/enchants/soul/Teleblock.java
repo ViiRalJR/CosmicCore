@@ -10,6 +10,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import me.viiral.cosmiccore.modules.enchantments.struct.souls.SoulManager;
+import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -42,7 +45,11 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, Player victim, Player attacker, Arrow arrow, EnchantedItemBuilder enchantedItemBuilder) {
         if (!this.soulManager.isInSoulMode(attacker)) return;
 
-//        if (EliteAPI.hasMask(victim.getInventory().getHelmet()) && victim.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(victim.getInventory().getHelmet(), "Glitch")) return;
+
+        if (MaskAPI.hasMaskOn(victim, MaskRegister.getInstance().getMaskFromName("Glitch"))) {
+            victim.sendMessage(CC.WhiteB + "*** BLOCKED TELEBLOCK (GLITCH MASK) ***");
+            return;
+        }
 
         int level = enchantedItemBuilder.getEnchantmentLevel(this);
         int soulCost = (int) this.soulCostExpression.setVariable("level", level).evaluate();

@@ -36,6 +36,13 @@ public class MaskAPI {
                 .orElse(Collections.emptyList());
     }
 
+    public static boolean hasMaskOn(Player player, Mask mask) {
+        CachedPlayer cachedPlayer = CosmicCore.getInstance().getCacheManager().getCachedPlayer(player);
+        MaskCache maskCache = (MaskCache) cachedPlayer.getCache("mask");
+
+        return maskCache.getMasks().stream().anyMatch(m -> m.equals(mask));
+    }
+
     public static boolean hasMaskOnItem(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
             return false;

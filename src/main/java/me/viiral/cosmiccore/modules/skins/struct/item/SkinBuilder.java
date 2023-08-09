@@ -8,6 +8,7 @@ import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
 import me.viiral.cosmiccore.modules.mask.struct.item.MaskBuilder;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
+import me.viiral.cosmiccore.modules.skins.struct.SkinType;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;
 import org.bukkit.ChatColor;
@@ -66,7 +67,7 @@ public class SkinBuilder extends CustomItem {
                 .setName(name.toString())
                 .addLore(lore)
                 .addLore("",
-                        "&7Attach this skin to any " + getLabel(skins.get(0).getApplicable()),
+                        "&7Attach this skin to any " + skins.get(0).getApplicable().getLabel(),
                         "&7to override its visual appearance.",
                         "",
                         "&7Drag n' Drop onto item to attach.",
@@ -78,7 +79,7 @@ public class SkinBuilder extends CustomItem {
         NBTItem nbtItem = new NBTItem(itemStack);
         this.nbtItem = nbtItem;
         nbtItem.setString("randomUUID", UUID.randomUUID().toString());
-        nbtItem.setString("applicable", skins.get(0).getApplicable());
+        nbtItem.setString("applicable", skins.get(0).getApplicable().toString());
 
         super.applyData(nbt.toString());
         this.nbtItem = nbtItem;
@@ -91,22 +92,10 @@ public class SkinBuilder extends CustomItem {
                 .collect(Collectors.toList());
     }
 
-    public String getApplicable() {
-        return Optional.ofNullable(this.nbtItem.getString("applicable")).orElse("");
+    public SkinType getApplicable() {
+        return SkinType.valueOf(this.nbtItem.getString("applicable"));
     }
 
-    public String getLabel(String str) {
-        if (Objects.equals(str, "_BOOTS")) {
-            return "Boots";
-        } else if (Objects.equals(str, "_LEGGINGS")) {
-            return "Leggings";
-        } else if (Objects.equals(str, "_CHESTPLATE")) {
-            return "Chestplates";
-        } else if (Objects.equals(str, "_HELMET")) {
-            return "Helmets";
-        }
-        return "ERROR";
-    }
 
     public ItemStack build() {
         return this.nbtItem.getItem();
