@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.modules.skins.skins.amulet;
+package me.viiral.cosmiccore.modules.skins.skins.amulets;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
@@ -21,7 +21,7 @@ public class RadioactiveAmulet extends Skin {
     @Override
     public List<String> getLore() {
         List<String> lore = new ArrayList<>();
-        lore.add("&c15% chance fro double loot from Mobs in /warp end");
+        lore.add("&c15% chance for double loot from Mobs in /warp end");
         lore.add("&c-50% Incoming PvE Damage in /warp end");
         return lore;
     }

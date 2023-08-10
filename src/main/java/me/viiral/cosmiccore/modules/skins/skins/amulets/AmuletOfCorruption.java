@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.modules.skins.skins.amulet;
+package me.viiral.cosmiccore.modules.skins.skins.amulets;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
@@ -7,22 +7,21 @@ import me.viiral.cosmiccore.utils.CC;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LuauLei extends Skin {
+public class AmuletOfCorruption extends Skin {
 
-    public LuauLei() {
-        super("Luau Lei", SkinType.AMULET);
+    public AmuletOfCorruption() {
+        super("Amulet of Corruption", SkinType.AMULET);
     }
 
     @Override
     public String getColor() {
-        return CC.Red;
+        return CC.DarkPurple;
     }
 
     @Override
     public List<String> getLore() {
         List<String> lore = new ArrayList<>();
-        lore.add("&c+25% Outgoing Soul Enchant damage");
-        lore.add("&cChance to block Soul Enchant Damage Modifiers");
+        lore.add("&cImmune to enemy armor crystals of same type on attached item.");
         return lore;
     }
 }

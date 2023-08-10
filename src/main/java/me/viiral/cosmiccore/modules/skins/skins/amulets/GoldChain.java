@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.modules.skins.skins.amulet;
+package me.viiral.cosmiccore.modules.skins.skins.amulets;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
@@ -7,21 +7,21 @@ import me.viiral.cosmiccore.utils.CC;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmuletOfDestruction extends Skin {
+public class GoldChain extends Skin {
 
-    public AmuletOfDestruction() {
-        super("Amulet of Destruction", SkinType.AMULET);
+    public GoldChain() {
+        super("40K Gold Chain", SkinType.AMULET);
     }
 
     @Override
     public String getColor() {
-        return CC.DarkPurple;
+        return CC.LightPurple;
     }
 
     @Override
     public List<String> getLore() {
         List<String> lore = new ArrayList<>();
-        lore.add("&c+7.5% Outgoing Damage");
+        lore.add("&c+2% /sell prices");
         return lore;
     }
 }

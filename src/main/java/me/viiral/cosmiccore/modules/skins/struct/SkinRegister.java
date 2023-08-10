@@ -2,9 +2,12 @@ package me.viiral.cosmiccore.modules.skins.struct;
 
 import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
-import me.viiral.cosmiccore.modules.skins.skins.DriftaySkin;
-import me.viiral.cosmiccore.modules.skins.skins.ViiRalSkin;
-import me.viiral.cosmiccore.modules.skins.skins.amulet.*;
+import me.viiral.cosmiccore.modules.enchantments.enchants.unique.Curse;
+import me.viiral.cosmiccore.modules.skins.skins.amulets.*;
+import me.viiral.cosmiccore.modules.skins.skins.backpacks.*;
+import me.viiral.cosmiccore.modules.skins.skins.belts.*;
+import me.viiral.cosmiccore.modules.skins.skins.boots.*;
+import me.viiral.cosmiccore.modules.skins.skins.helmet.*;
 import org.bukkit.event.HandlerList;
 
 import java.util.*;
@@ -27,10 +30,31 @@ public class SkinRegister {
 
     public void initialize() {
         registerAll(
-                new AmuletOfCorruption(), new AmuletOfDestruction(), new GoldChain(), new LostAmulet(), new LuauLei(),
-                new RadioactiveAmulet()
 
-                // Secret Santa Next
+                // Amulets
+                new AmuletOfCorruption(), new AmuletOfDestruction(), new GoldChain(), new LostAmulet(), new LuauLei(),
+                new RadioactiveAmulet(),
+
+
+                // Backpacks
+                new BugOutBag(), new CursedWings(), new DeepspaceBackpack(), new RainbowBackpack(), new TeddyBackpack(),
+
+                // Helmets
+                new CosmicGamesHat(), new FlamingHalo(), new HazmatHelmet(), new LeviathanTrophy(),
+                new MinemanMuzzle(), new NeonEmotions(), new ReindeerAntlers(), new SantaHat(),
+                new WitchHat(),
+
+                // belts
+                new BandolierBelt(), new CandyBuckle(), new CandySortingBelt(), new ChainBelt(), new CorruptBelt(),
+                new CrystallineBand(), new CupidsHeart(), new DivineStash(), new FirstAidFannypack(),
+                new HulaSkirt(), new InfinityBelt(), new PartyBelt(), new RainbowBelt(), new RoyalBelt(),
+                new SpaceBelt(), new TacticalBelt(), new UtilityBelt(), new GucciBelt(),
+
+                // boots
+                new BarrysBolts(), new BigTimbs(), new BloodstainedGaloshes(), new BunnySlippers(),
+                new CamouflageYeezys(), new CupidsWingedBoots(), new HazmatBoots(), new KnightBoots(),
+                new MoonBoots(), new RetaliationBoots(), new RocketBoots(), new RollerSkates(),
+                new SnowflakeSlippers(), new TeddySlippers()
         );
     }
 

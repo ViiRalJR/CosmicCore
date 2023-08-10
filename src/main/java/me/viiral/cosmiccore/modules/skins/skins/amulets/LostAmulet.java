@@ -1,8 +1,11 @@
-package me.viiral.cosmiccore.modules.skins.skins.amulet;
+package me.viiral.cosmiccore.modules.skins.skins.amulets;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
 import me.viiral.cosmiccore.utils.CC;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +28,10 @@ public class LostAmulet extends Skin {
         lore.add("&c-5% Incoming Damage");
         lore.add("&cIncreases outgoing damage from Soul Enchants by 1.1x");
         return lore;
+    }
+
+    @Override
+    public void onAttacked(Player attacked, Entity attacker, EntityDamageByEntityEvent event) {
+        this.getDamageHandler().reduceDamage(7.5, event, "lost_amulet");
     }
 }

@@ -1,16 +1,16 @@
-package me.viiral.cosmiccore.modules.skins.skins.amulet;
+package me.viiral.cosmiccore.modules.skins.skins.boots;
 
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
 import me.viiral.cosmiccore.utils.CC;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class GoldChain extends Skin {
+public class BunnySlippers extends Skin {
 
-    public GoldChain() {
-        super("40K Gold Chain", SkinType.AMULET);
+    public BunnySlippers() {
+        super("Bunny Slippers", SkinType.BOOTS);
     }
 
     @Override
@@ -20,8 +20,6 @@ public class GoldChain extends Skin {
 
     @Override
     public List<String> getLore() {
-        List<String> lore = new ArrayList<>();
-        lore.add("&c+2% /sell prices");
-        return lore;
+        return Arrays.asList("&cWeb/Lava Walker", "&c2% Dodge");
     }
 }

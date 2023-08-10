@@ -133,12 +133,11 @@ public final class CosmicCore extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        try {
-            this.configurationService.saveAllFiles();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        // Plugin shutdown logic
+//        try {
+//            this.configurationService.saveAllFiles();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
 
