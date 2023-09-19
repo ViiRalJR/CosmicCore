@@ -31,7 +31,7 @@ public class ArmorSwapListener implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (!event.hasItem()) return;
 
-        ItemStack itemInHand = event.getItem();
+        ItemStack itemInHand = event.getPlayer().getItemInHand();
         int itemInHandArmorSlot = getArmorSlot(itemInHand);
 
         if (itemInHandArmorSlot == -1) return;
