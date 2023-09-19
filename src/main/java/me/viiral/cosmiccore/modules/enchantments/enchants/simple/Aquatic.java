@@ -21,6 +21,6 @@ public class Aquatic extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.WATER_BREATHING);
+        this.removePotionEffect(player, PotionEffectType.WATER_BREATHING, level -1);
     }
 }

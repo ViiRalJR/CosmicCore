@@ -26,7 +26,7 @@ public class Overload extends ArmorEquipEventEnchant implements Heroicable {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.HEALTH_BOOST);
+        this.removePotionEffect(player, PotionEffectType.HEALTH_BOOST, level - 1);
     }
 
     @Override

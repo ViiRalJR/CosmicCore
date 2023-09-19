@@ -22,6 +22,6 @@ public class Glowing extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.NIGHT_VISION);
+        this.removePotionEffect(player, PotionEffectType.NIGHT_VISION, level - 1);
     }
 }

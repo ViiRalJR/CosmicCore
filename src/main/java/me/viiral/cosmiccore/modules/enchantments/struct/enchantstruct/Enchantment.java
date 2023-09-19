@@ -93,8 +93,8 @@ public abstract class Enchantment implements Listener {
         userManager.addPotionEffect(player.getUniqueId(), type, amplifier, duration);
     }
 
-    protected void removePotionEffect(Player player, PotionEffectType effect) {
-        userManager.removePotionEffect(player.getUniqueId(), effect);
+    protected void removePotionEffect(Player player, PotionEffectType effect, int amplifier) {
+        userManager.removePotionEffect(player.getUniqueId(), effect, amplifier);
     }
 
 }

@@ -21,6 +21,6 @@ public class Gears extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.SPEED);
+        this.removePotionEffect(player, PotionEffectType.SPEED, level - 1);
     }
 }

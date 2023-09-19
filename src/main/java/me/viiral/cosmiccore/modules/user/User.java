@@ -46,6 +46,14 @@ public class User {
         refresh();
     }
 
+    public void removePotionEffect(PotionEffectType type, int amplifier) {
+        if (this.effects.get(type).getAmplifier() <= amplifier) {
+            this.effects.remove(type);
+            getPlayer().removePotionEffect(type);
+            refresh();
+        }
+    }
+
 
     private void addPotionEffect(PotionEffectType type, int amplifier, int duration) {
         PotionEffect effect = new PotionEffect(type, duration, amplifier);

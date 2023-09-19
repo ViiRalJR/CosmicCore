@@ -24,6 +24,6 @@ public class Springs extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.JUMP);
+        this.removePotionEffect(player, PotionEffectType.JUMP, level - 1);
     }
 }

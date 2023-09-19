@@ -6,6 +6,8 @@ import me.viiral.cosmiccore.modules.armorsets.struct.cache.ArmorCrystalCache;
 import me.viiral.cosmiccore.modules.armorsets.struct.cache.ArmorSetCache;
 import me.viiral.cosmiccore.modules.enchantments.EnchantsAPI;
 import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
+import me.viiral.cosmiccore.modules.skins.SkinsAPI;
+import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;

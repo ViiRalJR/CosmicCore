@@ -19,6 +19,6 @@ public class AntiGravity extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.JUMP);
+        this.removePotionEffect(player, PotionEffectType.JUMP, level + 2);
     }
 }

@@ -28,7 +28,7 @@ public class UserManager {
         this.users.get(uuid).addEffect(type, amplifier, duration);
     }
 
-    public void removePotionEffect(UUID uuid, PotionEffectType type) {
-        this.users.get(uuid).removePotionEffect(type);
+    public void removePotionEffect(UUID uuid, PotionEffectType type, int amplifier) {
+        this.users.get(uuid).removePotionEffect(type, amplifier);
     }
 }

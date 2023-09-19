@@ -25,9 +25,9 @@ public class Drunk extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.INCREASE_DAMAGE);
-        this.removePotionEffect(player, PotionEffectType.SLOW);
-        this.removePotionEffect(player, PotionEffectType.SLOW_DIGGING);
+        this.removePotionEffect(player, PotionEffectType.INCREASE_DAMAGE, Math.min(level - 1, 2));
+        this.removePotionEffect(player, PotionEffectType.SLOW, Math.min(level - 1, 2));
+        this.removePotionEffect(player, PotionEffectType.SLOW_DIGGING, 2);
 
     }
 }

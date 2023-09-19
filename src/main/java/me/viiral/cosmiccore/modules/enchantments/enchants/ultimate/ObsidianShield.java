@@ -21,6 +21,6 @@ public class ObsidianShield extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.FIRE_RESISTANCE);
+        this.removePotionEffect(player, PotionEffectType.FIRE_RESISTANCE, level - 1);
     }
 }

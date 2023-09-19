@@ -1,9 +1,15 @@
 package me.viiral.cosmiccore.modules.skins.listener;
 
 import me.viiral.cosmiccore.CosmicCore;
+import me.viiral.cosmiccore.modules.enchantments.EnchantsAPI;
+import me.viiral.cosmiccore.modules.enchantments.events.EnchantProcEvent;
+import me.viiral.cosmiccore.modules.enchantments.events.EnchantProcOnEquip;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorEquipEventEnchant;
+import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.skins.SkinsAPI;
+import me.viiral.cosmiccore.modules.skins.struct.EquipableSkin;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.cache.SkinCache;
 import me.viiral.cosmiccore.modules.skins.struct.item.SkinArmorBuilder;
@@ -23,6 +29,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -85,6 +92,41 @@ public class SkinListener implements Listener {
     @EventHandler
     public void onSkinRemove(InventoryClickEvent event) {
         handleSkinRemoval(event);
+    }
+
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void armorEquipEvent(ArmorEquipEvent event) {
+        ItemStack itemStack = event.getNewArmorPiece();
+
+        if (!ItemUtils.isEnchantable(itemStack)) return;
+
+        SkinArmorBuilder skinArmorBuilder = new SkinArmorBuilder(itemStack);
+
+        if (!skinArmorBuilder.hasSkin()) return;
+
+        skinArmorBuilder.getSkins().forEach(skin -> {
+            if (skin instanceof EquipableSkin) {
+                ((EquipableSkin) skin).onEquip(event.getPlayer());
+            }
+        });
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void armorUnEquipEvent(ArmorEquipEvent event) {
+        ItemStack itemStack = event.getOldArmorPiece();
+
+        if (!ItemUtils.isEnchantable(itemStack)) return;
+
+        SkinArmorBuilder skinArmorBuilder = new SkinArmorBuilder(itemStack);
+
+        if (!skinArmorBuilder.hasSkin()) return;
+
+        skinArmorBuilder.getSkins().forEach(skin -> {
+            if (skin instanceof EquipableSkin) {
+                ((EquipableSkin) skin).onUnequip(event.getPlayer());
+            }
+        });
     }
 
     private SkinCache getSkinCacheFromPlayer(Player player) {
@@ -151,7 +193,7 @@ public class SkinListener implements Listener {
     private boolean isValidSkinRemovalEvent(InventoryClickEvent event) {
         return event.getCurrentItem() != null && (event.getCursor() == null || event.getCursor().getType() == Material.AIR)
                 && event.getWhoClicked().getGameMode() == GameMode.SURVIVAL
-                && ItemUtils.isArmor(event.getCurrentItem()) && event.getClick().isRightClick();
+                && ItemUtils.isArmor(event.getCurrentItem()) && event.getClick().isRightClick() && event.getSlotType() != InventoryType.SlotType.ARMOR;
     }
 
     private SkinResult applySkin(SkinArmorBuilder armorItemBuilder, SkinBuilder skinBuilder) {

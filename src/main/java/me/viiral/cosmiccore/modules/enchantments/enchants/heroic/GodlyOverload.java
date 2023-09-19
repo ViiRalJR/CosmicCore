@@ -24,7 +24,7 @@ public class GodlyOverload extends ArmorEquipEventEnchant implements HeroicEncha
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        this.removePotionEffect(player, PotionEffectType.HEALTH_BOOST);
+        this.removePotionEffect(player, PotionEffectType.HEALTH_BOOST, (level * 2) - 1);
     }
 
     @Override
