@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
-public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
+public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
 
     private static final HandlerList handlers = new HandlerList();
     private boolean cancel = false;
@@ -62,18 +62,18 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
      * @return If this event is cancelled
      */
     public final boolean isCancelled(){
-        return this.cancel;
+        return cancel;
     }
 
     public final ArmorType getType(){
-        return this.type;
+        return type;
     }
 
     /**
      * Returns the last equipped armor piece, could be a piece of armor, or null
      */
     public final ItemStack getOldArmorPiece(){
-        return this.oldArmorPiece;
+        return oldArmorPiece;
     }
 
     public final void setOldArmorPiece(final ItemStack oldArmorPiece){
@@ -84,7 +84,7 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
      * Returns the newly equipped armor, could be a piece of armor, or null
      */
     public final ItemStack getNewArmorPiece(){
-        return this.newArmorPiece;
+        return newArmorPiece;
     }
 
     public final void setNewArmorPiece(final ItemStack newArmorPiece){
@@ -95,10 +95,10 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
      * Gets the method used to either equip or unequip an armor piece.
      */
     public EquipMethod getMethod(){
-        return this.equipType;
+        return equipType;
     }
 
-    public enum EquipMethod { // These have got to be the worst documentations ever.
+    public enum EquipMethod{// These have got to be the worst documentations ever.
         /**
          * When you shift click an armor piece to equip or unequip
          */
@@ -111,10 +111,6 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
          * When you manually equip or unequip the item. Use to be DRAG
          */
         PICK_DROP,
-        /**
-         * same as PICK_DROP but click type is double click
-         */
-        DOUBLE_PICK_DROP,
         /**
          * When you right click an armor piece in the hotbar without the inventory open to equip.
          */

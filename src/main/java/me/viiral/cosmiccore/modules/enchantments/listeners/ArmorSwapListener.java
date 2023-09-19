@@ -69,83 +69,42 @@ public class ArmorSwapListener implements Listener {
         player.updateInventory();
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerInteract(PlayerInteractEvent e) {
-        if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK)
-            return;
-        if (e.getPlayer().getItemInHand() == null || !isArmor(e.getPlayer().getItemInHand().getType()))
-            return;
-        if (e.hasBlock() && (e
-                .getClickedBlock().getState() instanceof org.bukkit.block.Chest || e
-                .getClickedBlock().getState() instanceof org.bukkit.block.Dispenser || e
-                .getClickedBlock().getState() instanceof org.bukkit.block.Dropper || e
-                .getClickedBlock().getState() instanceof org.bukkit.block.Furnace || e
-                .getClickedBlock().getState() instanceof org.bukkit.block.Hopper || e
-                .getClickedBlock().getType() == Material.GOLD_BLOCK || e
-                .getClickedBlock().getType() == Material.IRON_BLOCK))
-            return;
-        String worldName = e.getPlayer().getWorld().getName();
-        if (e.isCancelled() && (worldName.equals("world_duels") || worldName.equals("world_duels2") || worldName.equals("cosmic-pvparenas")))
-            return;
-        Player p = e.getPlayer();
-        if (p.hasMetadata("lastArmorSwap") && MinecraftServer.currentTick - p.getMetadata("lastArmorSwap").get(0).asLong() <= 12L)
-            return;
-        if (e.isCancelled() && p.hasMetadata("noArmorSwap"))
-            return;
-        e.setCancelled(true);
-        e.setUseInteractedBlock(Event.Result.DENY);
-        e.setUseItemInHand(Event.Result.DENY);
+    @EventHandler
+    public void onArmorSwap(PlayerInteractEvent event) {
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (!event.hasItem()) return;
 
-       //EnchantsAPI.clearEnchantsFromCacheFromOneArmorItem(p, e.getItem());
-       //EnchantsAPI.reprocEnchantsFromOneArmorItem(p, e.getItem());
-       //ArmorSetCache armorSetCache = (ArmorSetCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_set");
-       //armorSetCache.clear();
-       //ArmorSetAPI.refreshArmorSets(p);
+        ItemStack itemInHand = event.getPlayer().getItemInHand();
+        int itemInHandArmorSlot = getArmorSlot(itemInHand);
 
-        //ArmorCrystalCache armorCrystalCache = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_crystal");
-        //armorCrystalCache.clear();
-        //ArmorSetAPI.refreshArmorCrystals(p);
-        p.setMetadata("lastArmorSwap", new FixedMetadataValue(CosmicCore.getInstance(), MinecraftServer.currentTick));
-        equipArmor(p, e.getItem());
-        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 10.0F, 0.95F);
+        if (itemInHandArmorSlot == -1) return;
+
+        Player player = event.getPlayer();
+        ItemStack[] armorContents = player.getInventory().getArmorContents();
+        ItemStack armorItem = armorContents[itemInHandArmorSlot];
+
+
+        if (armorItem == null || armorItem.getType() == Material.AIR) return;
+
+        EnchantsAPI.clearEnchantsFromCacheFromOneArmorItem(event.getPlayer(), armorItem);
+
+        armorContents[itemInHandArmorSlot] = itemInHand;
+
+        event.getPlayer().getInventory().setArmorContents(armorContents);
+        EnchantsAPI.reprocEnchantsFromOneArmorItem(player, itemInHand);
+
+        ArmorSetCache armorSetCache = (ArmorSetCache) CacheManager.getInstance().getCachedPlayer(event.getPlayer()).getCache("armor_set");
+        armorSetCache.clear();
+        ArmorSetAPI.refreshArmorSets(player);
+
+        ArmorCrystalCache armorCrystalCache = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer(event.getPlayer()).getCache("armor_crystal");
+        armorCrystalCache.clear();
+        ArmorSetAPI.refreshArmorCrystals(player);
+
+        player.setItemInHand(armorItem);
+        player.updateInventory();
+        player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0F, 1.2F);
     }
-
-    //@EventHandler
-    //public void onArmorSwap(PlayerInteractEvent event) {
-    //    if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-    //    if (!event.hasItem()) return;
-//
-    //    ItemStack itemInHand = event.getPlayer().getItemInHand();
-    //    int itemInHandArmorSlot = getArmorSlot(itemInHand);
-//
-    //    if (itemInHandArmorSlot == -1) return;
-//
-    //    Player player = event.getPlayer();
-    //    ItemStack[] armorContents = player.getInventory().getArmorContents();
-    //    ItemStack armorItem = armorContents[itemInHandArmorSlot];
-//
-//
-    //    if (armorItem == null || armorItem.getType() == Material.AIR) return;
-//
-    //    EnchantsAPI.clearEnchantsFromCacheFromOneArmorItem(event.getPlayer(), armorItem);
-//
-    //    armorContents[itemInHandArmorSlot] = itemInHand;
-//
-    //    event.getPlayer().getInventory().setArmorContents(armorContents);
-    //    EnchantsAPI.reprocEnchantsFromOneArmorItem(player, itemInHand);
-//
-    //    ArmorSetCache armorSetCache = (ArmorSetCache) CacheManager.getInstance().getCachedPlayer(event.getPlayer()).getCache("armor_set");
-    //    armorSetCache.clear();
-    //    ArmorSetAPI.refreshArmorSets(player);
-//
-    //    ArmorCrystalCache armorCrystalCache = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer(event.getPlayer()).getCache("armor_crystal");
-    //    armorCrystalCache.clear();
-    //    ArmorSetAPI.refreshArmorCrystals(player);
-//
-    //    player.setItemInHand(armorItem);
-    //    player.updateInventory();
-    //    player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0F, 1.2F);
-    //}
 
     private int getArmorSlot(ItemStack itemStack) {
         if (!ItemUtils.isArmor(itemStack)) return -1;
