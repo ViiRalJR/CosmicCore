@@ -79,9 +79,11 @@ public class ArmorListener implements Listener {
             if (cache.getCurrentArmorSet() != null)
                 cache.getCurrentArmorSet().onAttack((Player) attacker, attacked, event);
 
-            ArmorCrystalCache cache1 = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer((Player) attacked).getCache("armor_crystal");
-            if (cache1.hasCrystals())
-                cache1.getCrystals().forEach((armorSet, amount) -> armorSet.onAttackCrystal((Player) attacker, attacked, amount, event));
+            if (attacked instanceof Player) {
+                ArmorCrystalCache cache1 = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer((Player) attacked).getCache("armor_crystal");
+                if (cache1.hasCrystals())
+                    cache1.getCrystals().forEach((armorSet, amount) -> armorSet.onAttackCrystal((Player) attacker, attacked, amount, event));
+            }
         }
     }
 

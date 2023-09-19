@@ -6,11 +6,13 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.checkerframework.checker.units.qual.A;
 
 public class Berserk extends WeaponDamageEventEnchant {
 
@@ -26,7 +28,7 @@ public class Berserk extends WeaponDamageEventEnchant {
         if (!(victim instanceof Player)) return;
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
             if (!attacker.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE))
-                attacker.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, enchantedItemBuilder.getEnchantmentLevel(this) * 20, 1));
+                this.addPotionEffect(attacker, PotionEffectType.INCREASE_DAMAGE, enchantedItemBuilder.getEnchantmentLevel(this) * 20, 1);
         }
     }
 }

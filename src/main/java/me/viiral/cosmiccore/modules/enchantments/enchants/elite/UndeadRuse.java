@@ -39,7 +39,7 @@ public class UndeadRuse extends ArmorIncomingPVPDamageEventEnchant {
         if (event.getEntityType() != EntityType.ZOMBIE) return;
         if (!(event.getTarget() instanceof Player)) return;
         if (!event.getEntity().hasMetadata("zombie-target")) return;
-        String uuid = String.valueOf(event.getEntity().getMetadata("zombie-target").get(0).asString());
+        String uuid = event.getEntity().getMetadata("zombie-target").get(0).asString();
         if (!uuid.equals(event.getTarget().getUniqueId().toString())) event.setCancelled(true);
     }
 }

@@ -21,7 +21,7 @@ public class Stormcaller extends ArmorIncomingPVPDamageEventEnchant {
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
-            attacker.getLocation().getWorld().strikeLightningEffect(attacker.getLocation());
+            attacker.getWorld().strikeLightningEffect(attacker.getLocation());
         }
     }
 }

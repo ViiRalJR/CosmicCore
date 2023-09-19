@@ -8,7 +8,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.GameMode;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -37,15 +39,14 @@ public class Protection extends ArmorIncomingPVPDamageEventEnchant {
             int level = enchantInfo.getLevel();
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victim);
             victim.getNearbyEntities(range, range, range).forEach(entity -> {
-                if (!(entity instanceof Player)) return;
-                Player nearbyPlayer = (Player) entity;
+                if (!(entity instanceof Player nearbyPlayer)) return;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);
                 if (fPlayer.getRelationTo(fPlayerNearby).isAtMost(Relation.NEUTRAL)) return;
                 super.getDamageHandler().healEntity(nearbyPlayer, level > 4 ? 2 : 1, this.getName());
                 if (enchantInfo.getLevel() > 3 && Math.random() < 0.5) {
-                    nearbyPlayer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, enchantInfo.getLevel() * 20, regenerationLevel, true));
+                    this.addPotionEffect(nearbyPlayer, PotionEffectType.REGENERATION, enchantInfo.getLevel() * 20, regenerationLevel);
                 }
             });
             super.registerCooldown(victim, cooldown);

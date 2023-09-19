@@ -31,12 +31,6 @@ public class Ragdoll extends ArmorIncomingPVPDamageEventEnchant {
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (attacker instanceof IronGolem) return;
-//        Player user = (Player) attacker;
-//        if (EliteAPI.hasMask(user.getInventory().getHelmet()) && user.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(user.getInventory().getHelmet(), "Terminator")) {
-//            if (ThreadLocalRandom.current().nextInt(101) <= 50) {
-//                return;
-//            }
-//        }
         if (Math.random() < procChance * enchantInfo.getLevel()) {
 
             if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))

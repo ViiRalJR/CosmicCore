@@ -22,9 +22,8 @@ public class ObsidianDestroyer extends Enchantment {
         if (event.isCancelled()) return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK && event.hasBlock() && event.getClickedBlock().getType() == Material.OBSIDIAN) {
 
-            ItemStack itemStack = event.getPlayer().getItemInHand();
+            ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
 
-            if (itemStack == null) return;
             if (!this.getType().getItems().contains(itemStack.getType())) return;
 
             EnchantedItemBuilder enchantedItemBuilder = new EnchantedItemBuilder(itemStack);

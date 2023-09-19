@@ -5,11 +5,13 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.BowEventEn
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.checkerframework.checker.units.qual.A;
 
 public class Entangle extends BowEventEnchant {
 
@@ -23,7 +25,7 @@ public class Entangle extends BowEventEnchant {
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, Player victim, Player attacker, Arrow arrow,  EnchantedItemBuilder enchantedItemBuilder) {
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, Integer.MAX_VALUE, true));
+            this.addPotionEffect(victim, PotionEffectType.SLOW, 40, Integer.MAX_VALUE);
         }
     }
 }

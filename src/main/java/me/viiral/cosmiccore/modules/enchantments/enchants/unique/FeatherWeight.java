@@ -5,6 +5,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +25,7 @@ public class FeatherWeight extends WeaponDamageEventEnchant {
 
         if (Math.random() <= enchantedItemBuilder.getEnchantmentLevel(this) * 0.2) {
             int level = enchantedItemBuilder.getEnchantmentLevel(this);
-            attacker.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, level* 20, level - 1), true);
+            this.addPotionEffect(attacker, PotionEffectType.FAST_DIGGING, level * 30, level -1);
         }
     }
 }

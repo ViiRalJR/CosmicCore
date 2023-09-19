@@ -44,8 +44,7 @@ public class Cactus extends ArmorIncomingPVPDamageEventEnchant implements Silenc
 
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
-        if (!(attacker instanceof Player)) return;
-        Player attackerPlayer = ((Player) attacker);
+        if (!(attacker instanceof Player attackerPlayer)) return;
         super.getDamageHandler().damage(attackerPlayer, (int) (damage * enchantInfo.getLevel()), this.getName());
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
         attackerPlayer.playEffect(attackerPlayer.getLocation(), Effect.STEP_SOUND, Material.CACTUS);

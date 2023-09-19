@@ -37,8 +37,7 @@ public class SpiritLink extends ArmorIncomingPVPDamageEventEnchant {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victim);
             for (Entity nearbyEntity : victim.getNearbyEntities(range, range, range)) {
-                if (!(nearbyEntity instanceof Player)) continue;
-                Player nearbyPlayer = (Player) nearbyEntity;
+                if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) continue;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

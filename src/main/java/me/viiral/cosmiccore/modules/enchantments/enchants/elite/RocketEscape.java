@@ -9,6 +9,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -66,7 +67,7 @@ public class RocketEscape extends ArmorIncomingPVPDamageEventEnchant implements 
         if (Math.random() < this.procChance * enchantInfo.getLevel()) {
             super.getDamageHandler().cancelDamage(event, this.getName());
             victim.setVelocity(new Vector(0, (enchantInfo.getLevel() + 2) * 3, 0));
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * (enchantInfo.getLevel() + 2), 19, true, false));
+            this.addPotionEffect(victim, PotionEffectType.REGENERATION, 20 * (enchantInfo.getLevel() + 2), 19);
             super.registerCooldown(victim, this.cooldown);
             this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
             super.sendMessage(victim, this.message);

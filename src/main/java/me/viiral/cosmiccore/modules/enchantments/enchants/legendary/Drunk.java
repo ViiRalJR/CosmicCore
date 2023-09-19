@@ -4,7 +4,9 @@ import me.viiral.cosmiccore.modules.enchantments.language.EnchantLanguage;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorEquipEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
-import me.viiral.cosmiccore.utils.RomanNumeral;import org.bukkit.entity.Player;
+import me.viiral.cosmiccore.utils.RomanNumeral;
+
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -16,54 +18,16 @@ public class Drunk extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorEquipEvent(Player player, int level) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, Math.min(level - 1, 2)), true);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Math.min(level - 1, 2)), true);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 2), true);
-        EnchantLanguage.EQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Strength")
-                        .replace("{effect-level}", RomanNumeral.convertToRoman(Math.min(level, 3)))
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
-        EnchantLanguage.EQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Slowness")
-                        .replace("{effect-level}", RomanNumeral.convertToRoman(Math.min(level, 3)))
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
-        EnchantLanguage.EQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Mining Fatigue")
-                        .replace("{effect-level}", RomanNumeral.convertToRoman(3))
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
+        this.addPotionEffect(player, PotionEffectType.INCREASE_DAMAGE, 0, Math.min(level - 1, 2));
+        this.addPotionEffect(player, PotionEffectType.SLOW, 0, Math.min(level - 1, 2));
+        this.addPotionEffect(player, PotionEffectType.SLOW_DIGGING, 0, 2);
     }
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-        player.removePotionEffect(PotionEffectType.SLOW);
-        player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
-        EnchantLanguage.UNEQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Strength")
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
-        EnchantLanguage.UNEQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Slowness")
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
-        EnchantLanguage.UNEQUIP_POTION_ENCHANT.send(player,
-                str -> str
-                        .replace("{effect}", "Mining Fatigue")
-                        .replace("{enchant}", this.getName())
-                        .replace("{enchant-level}", RomanNumeral.convertToRoman(level))
-        );
+        this.removePotionEffect(player, PotionEffectType.INCREASE_DAMAGE);
+        this.removePotionEffect(player, PotionEffectType.SLOW);
+        this.removePotionEffect(player, PotionEffectType.SLOW_DIGGING);
+
     }
 }

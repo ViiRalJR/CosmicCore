@@ -7,11 +7,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 
-
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Blind extends BowEventEnchant implements BlindingEnchant {
@@ -27,6 +25,6 @@ public class Blind extends BowEventEnchant implements BlindingEnchant {
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, Player victim, Player attacker, Arrow arrow, EnchantedItemBuilder enchantedItemBuilder) {
         if (victim.hasPotionEffect(PotionEffectType.BLINDNESS)) return;
         if (Math.random() <= procChance * enchantedItemBuilder.getEnchantmentLevel(this))
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, enchantedItemBuilder.getEnchantmentLevel(this) * 20, 0, true));
+            this.addPotionEffect(victim, PotionEffectType.BLINDNESS, enchantedItemBuilder.getEnchantmentLevel(this) * 20, 0);
     }
 }

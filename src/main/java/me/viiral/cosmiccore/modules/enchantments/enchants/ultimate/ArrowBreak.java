@@ -4,6 +4,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantmen
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,21 +19,19 @@ public class ArrowBreak extends Enchantment {
 
     @EventHandler
     public void onIncomingArrowDamage(EntityDamageByEntityEvent event) {
-        if (event.isCancelled()) return;
-        if (event.getDamage() <= 0) return;
-        if (!(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Arrow)) return;
+        if (event.isCancelled() || event.getDamage() <= 0) return;
 
-        Player victim = (Player) event.getEntity();
-        ItemStack itemStack = victim.getItemInHand();
+        if (!(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Arrow)) return;
 
-        if (itemStack == null) return;
-        if (!this.getType().getItems().contains(itemStack.getType())) return;
+        ItemStack itemStack = victim.getInventory().getItemInMainHand();
+
+        if (itemStack.getType() == Material.AIR || !this.getType().getItems().contains(itemStack.getType())) return;
 
         EnchantedItemBuilder enchantedItemBuilder = new EnchantedItemBuilder(itemStack);
-
         if (!enchantedItemBuilder.hasEnchantment(this)) return;
 
         if (super.isOnCooldown(victim)) return;
+
         event.setCancelled(true);
         super.registerCooldown(victim, 20);
     }

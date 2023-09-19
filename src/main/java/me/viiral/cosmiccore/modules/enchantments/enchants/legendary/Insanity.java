@@ -21,10 +21,8 @@ public class Insanity extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player)) return;
-        Player playerVictim = (Player) victim;
-        if (playerVictim.getItemInHand() == null) return;
-        if (!EnchantType.SWORD.getItems().contains(playerVictim.getItemInHand().getType())) return;
+        if (!(victim instanceof Player playerVictim)) return;
+        if (!EnchantType.SWORD.getItems().contains(playerVictim.getInventory().getItemInMainHand().getType())) return;
         super.getDamageHandler().increaseDamage(damageBuff * enchantedItemBuilder.getEnchantmentLevel(this), event, this.getName());
     }
 }

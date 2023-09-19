@@ -3,7 +3,7 @@ package me.viiral.cosmiccore.modules.armorsets.struct.armorsets;
 import me.viiral.cosmiccore.modules.armorsets.struct.ArmorSet;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;
-import me.viiral.cosmiccore.utils.player.PotionEffectUtils;
+import me.viiral.cosmiccore.utils.potion.PotionEffectUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;

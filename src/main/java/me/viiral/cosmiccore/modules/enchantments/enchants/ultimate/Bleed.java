@@ -16,7 +16,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuild
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.utils.CacheUtils;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Effect;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -51,12 +53,7 @@ public class Bleed extends WeaponDamageEventEnchant {
             }
 
             if (!MaskAPI.hasMaskOn((Player) victim, MaskRegister.getInstance().getMaskFromName("Holy"))) {
-                victim.addPotionEffect(
-                        new PotionEffect(PotionEffectType.SLOW,
-                                (victimBleedStack.getBleedStack() + 1) * 20,
-                                Math.min(victimBleedStack.getBleedStack() - 1, 1)),
-                        true
-                );
+                this.addPotionEffect((Player) victim, PotionEffectType.SLOW, (victimBleedStack.getBleedStack() + 1) * 20, Math.min(victimBleedStack.getBleedStack() - 1, 1));
             }
 
             victim.getWorld().playEffect(victim.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
@@ -65,8 +62,7 @@ public class Bleed extends WeaponDamageEventEnchant {
 
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victimPlayer);
             for (Entity entity : victim.getNearbyEntities(7, 7, 7)) {
-                if (!(entity instanceof Player)) continue;
-                Player nearbyPlayer = (Player) entity;
+                if (!(entity instanceof Player nearbyPlayer)) continue;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) continue;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

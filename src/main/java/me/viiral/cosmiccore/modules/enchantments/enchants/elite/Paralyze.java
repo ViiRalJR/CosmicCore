@@ -7,6 +7,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,14 +25,17 @@ public class Paralyze extends WeaponDamageEventEnchant implements SlownessEnchan
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player)) return;
+        if (!(victim instanceof Player playerVictim)) return;
+
         if (Math.random() < procChance) {
-            Player playerVictim = ((Player) victim);
             int level = enchantedItemBuilder.getEnchantmentLevel(this);
-            playerVictim.getLocation().getWorld().strikeLightningEffect(playerVictim.getLocation());
-            playerVictim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, level > 2 ? 1 : 0));
+
+            playerVictim.getWorld().strikeLightningEffect(playerVictim.getLocation());
+
+            this.addPotionEffect(playerVictim, PotionEffectType.SLOW, 100, level > 2 ? 1 : 0);
+
             if (level == 4) {
-                playerVictim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 1));
+                this.addPotionEffect(playerVictim, PotionEffectType.SLOW, 100, 1);
             }
         }
     }

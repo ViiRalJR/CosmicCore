@@ -7,6 +7,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -25,9 +26,9 @@ public class Insomnia extends WeaponDamageEventEnchant implements SlownessEnchan
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 80, 0, true));
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 80, 0, true));
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 80, 0, true));
+            this.addPotionEffect((Player) victim, PotionEffectType.SLOW_DIGGING, 80, 0);
+            this.addPotionEffect((Player) victim, PotionEffectType.CONFUSION, 80, 0);
+            this.addPotionEffect((Player) victim, PotionEffectType.SLOW, 80, 0);
         }
     }
 }

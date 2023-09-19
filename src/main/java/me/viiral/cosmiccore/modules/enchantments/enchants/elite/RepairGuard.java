@@ -4,6 +4,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorEquipEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
+
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,7 +28,7 @@ public class RepairGuard extends ArmorEquipEventEnchant {
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
         if (super.isOnCooldown(player)) return;
-        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, level + 1), true);
+        this.addPotionEffect(player, PotionEffectType.ABSORPTION, duration * 20, level + 1);
         super.registerCooldown(player, cooldown);
     }
 }

@@ -48,7 +48,7 @@ public class Spirits extends ArmorIncomingPVPDamageEventEnchant {
         if (event.getEntityType() != EntityType.BLAZE) return;
         if (!(event.getTarget() instanceof Player)) return;
         if (!event.getEntity().hasMetadata("spirits-target")) return;
-        String uuid = String.valueOf(event.getEntity().getMetadata("spirits-target").get(0).asString());
+        String uuid = event.getEntity().getMetadata("spirits-target").get(0).asString();
         if (!uuid.equals(event.getTarget().getUniqueId().toString())) event.setCancelled(true);
     }
 }

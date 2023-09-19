@@ -63,19 +63,6 @@ public class Phoenix extends ArmorIncomingPVPDamageEventEnchant implements SoulE
         if (victim.getHealth() - event.getFinalDamage() > 0.0) return;
         if (super.isOnCooldown(victim)) return;
 
-        Player user = (Player) attacker;
-//        if (EliteAPI.hasMask(user.getInventory().getHelmet()) && user.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(user.getInventory().getHelmet(), "Elden")) {
-//            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l* PHOENIX BLOCKED [&7" + attacker.getName() + "&c&l] *"));
-//            attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l* ELDEN MASK [&7" + victim.getName() + "'s Phoenix Blocked &b&l] *"));
-//            return;
-//        }
-//        if (EliteAPI.hasMask(user.getInventory().getHelmet()) && user.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(user.getInventory().getHelmet(), "Death-Knight")) {
-//            if (ThreadLocalRandom.current().nextInt(101) <= 33) {
-//                victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l* PHOENIX BLOCKED [&7" + attacker.getName() + "&c&l] *"));
-//                attacker.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&l* DEATH KNIGHT MASK [&7" + victim.getName() + "'s Phoenix Blocked &c&l] *"));
-//                return;
-//            }
-//        }
         int soulCost = this.getSoulCost();
         SoulModeCache soulModeCache = this.soulManager.getSoulModeCache(victim);
 

@@ -26,16 +26,11 @@ public class Teleportation extends Enchantment {
 
     @EventHandler
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Arrow)) return;
+        if (!(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Arrow arrow)) return;
 
-        Arrow arrow = (Arrow) event.getDamager();
+        if (!(arrow.getShooter() instanceof Player attacker)) return;
 
-        if (!(arrow.getShooter() instanceof Player)) return;
-
-        Player victim = (Player) event.getEntity();
-        Player attacker = (Player) arrow.getShooter();
-
-        ItemStack itemStack = attacker.getItemInHand();
+        ItemStack itemStack = attacker.getInventory().getItemInMainHand();
 
         if (!ItemUtils.isEnchantable(itemStack)) return;
 

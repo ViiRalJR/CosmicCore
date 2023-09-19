@@ -14,6 +14,8 @@ import me.viiral.cosmiccore.modules.armorsets.commands.MultiCommand;
 import me.viiral.cosmiccore.modules.armorsets.listeners.ArmorListener;
 import me.viiral.cosmiccore.modules.armorsets.struct.ArmorSet;
 import me.viiral.cosmiccore.modules.armorsets.struct.ArmorSetRegister;
+import me.viiral.cosmiccore.modules.combat.CombatListener;
+import me.viiral.cosmiccore.modules.combat.CombatManager;
 import me.viiral.cosmiccore.modules.enchantments.commands.*;
 import me.viiral.cosmiccore.modules.enchantments.gkits.Gkit;
 import me.viiral.cosmiccore.modules.enchantments.gkits.GkitManager;
@@ -31,11 +33,12 @@ import me.viiral.cosmiccore.modules.enchantments.struct.items.OrbBuilder;
 import me.viiral.cosmiccore.modules.enchantments.struct.souls.SoulManager;
 import me.viiral.cosmiccore.modules.mask.command.MaskCommand;
 import me.viiral.cosmiccore.modules.mask.listener.MaskListener;
-import me.viiral.cosmiccore.modules.mask.struct.Mask;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.modules.skins.command.SkinCommand;
 import me.viiral.cosmiccore.modules.skins.listener.SkinListener;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
+import me.viiral.cosmiccore.modules.user.UserListener;
+import me.viiral.cosmiccore.modules.user.UserManager;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.WorldGuardUtils;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
@@ -67,6 +70,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
     private WorldGuardUtils worldGuardUtils;
     private GkitUserManager gkitUserManager;
     private CommandManager commandManager;
+    private CombatManager combatManager;
     private DamageHandler damageHandler;
     private ConfigManager configManager;
     private CacheManager cacheManager;
@@ -74,6 +78,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
     private SkinRegister skinRegister;
     private SoulManager soulManager;
     private GkitManager gkitManager;
+    private UserManager userManager;
     boolean joinable = false;
 
 
@@ -92,10 +97,16 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         this.worldGuardUtils = new WorldGuardUtils();
         this.damageHandler = new DamageHandler(this);
 
+        this.combatManager = new CombatManager();
+
         this.armorSetRegister = new ArmorSetRegister();
         this.armorSetRegister.initialize();
 
+        this.commandManager = new CommandManager(this);
+
         this.soulManager = new SoulManager();
+
+        this.userManager = new UserManager();
 
         this.enchantRegister = new EnchantRegister(this);
         this.enchantRegister.initialize();
@@ -157,6 +168,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         pm.registerEvents(new TinkererListeners(), this);
         pm.registerEvents(new MaskListener(), this);
         pm.registerEvents(new SkinListener(), this);
+        pm.registerEvents(new CombatListener(combatManager), this);
     }
 
     private void registerCommandParameters() {

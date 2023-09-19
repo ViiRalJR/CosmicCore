@@ -6,6 +6,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -17,20 +19,27 @@ public class AutoSmelt extends BlockBreakEventEnchant {
 
     @Override
     public void runBlockBreakEvent(BlockBreakEvent event, EnchantedItemBuilder enchantedItemBuilder) {
-        Location location = event.getBlock().getLocation().add(0.5, 0.5, 0.5);
+        Block block = event.getBlock();
 
-        switch (event.getBlock().getType()) {
-            case IRON_ORE:
-                location.getWorld().dropItem(location, new ItemStack(Material.IRON_INGOT));
-                break;
-            case GOLD_ORE:
-                location.getWorld().dropItem(location, new ItemStack(Material.GOLD_INGOT));
-                break;
-            default:
+        Location location = block.getLocation().add(0.5, 0.5, 0.5);
+        World world = location.getWorld();
+        if (world == null) return;
+
+        Material blockType = block.getType();
+        ItemStack dropItem;
+
+        switch (blockType) {
+            case IRON_ORE -> dropItem = new ItemStack(Material.IRON_INGOT);
+            case GOLD_ORE -> dropItem = new ItemStack(Material.GOLD_INGOT);
+            default -> {
                 return;
+            }
         }
 
+        world.dropItem(location, dropItem);
+
         event.setCancelled(true);
-        event.getBlock().setType(Material.AIR);
+        block.setType(Material.AIR);
     }
+
 }

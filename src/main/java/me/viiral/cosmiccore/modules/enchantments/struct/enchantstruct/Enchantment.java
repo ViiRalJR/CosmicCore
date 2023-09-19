@@ -5,6 +5,7 @@ import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantCooldownCache;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
+import me.viiral.cosmiccore.modules.user.UserManager;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
@@ -12,6 +13,7 @@ import me.viiral.cosmiccore.utils.cache.CachedPlayer;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ public abstract class Enchantment implements Listener {
     private final int max;
     private final EnchantType type;
     private final DamageHandler damageHandler;
+    private final UserManager userManager;
     private boolean isHeroic;
 
     public Enchantment(String name, EnchantTier tier, boolean stackable, int max, EnchantType type, String... description) {
@@ -38,6 +41,7 @@ public abstract class Enchantment implements Listener {
         this.max = max;
         this.type = type;
         this.damageHandler = CosmicCore.getInstance().getDamageHandler();
+        this.userManager = CosmicCore.getInstance().getUserManager();
         this.isHeroic = false;
     }
 
@@ -84,5 +88,14 @@ public abstract class Enchantment implements Listener {
     protected void setHeroic() {
         this.isHeroic = true;
     }
+
+    protected void addPotionEffect(Player player, PotionEffectType type, int duration, int amplifier) {
+        userManager.addPotionEffect(player.getUniqueId(), type, amplifier, duration);
+    }
+
+    protected void removePotionEffect(Player player, PotionEffectType effect) {
+        userManager.removePotionEffect(player.getUniqueId(), effect);
+    }
+
 }
 

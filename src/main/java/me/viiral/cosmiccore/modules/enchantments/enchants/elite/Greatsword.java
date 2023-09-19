@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class Greatsword extends WeaponDamageEventEnchant {
 
@@ -24,10 +25,15 @@ public class Greatsword extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player)) return;
-        Player playerVictim = ((Player) victim);
-        if (playerVictim.getItemInHand() == null) return;
-        if (playerVictim.getItemInHand().getType() != Material.BOW) return;
+        if (!(victim instanceof Player playerVictim)) return;
+
+        ItemStack mainHandItem = playerVictim.getInventory().getItemInMainHand();
+        ItemStack offHandItem = playerVictim.getInventory().getItemInOffHand();
+
+        // Checking both main hand and off hand for a bow
+        if (mainHandItem.getType() != Material.BOW && offHandItem.getType() != Material.BOW) {
+            return;
+        }
 
         if (Math.random() < procChance) {
             super.getDamageHandler().increaseDamage(damageBuff, event, this.getName());

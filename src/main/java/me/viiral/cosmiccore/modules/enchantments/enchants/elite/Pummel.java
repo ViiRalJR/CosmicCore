@@ -10,7 +10,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Bukkit;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -45,13 +47,12 @@ public class Pummel extends WeaponDamageEventEnchant {
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(attacker);
             int level = enchantedItemBuilder.getEnchantmentLevel(this);
             attacker.getNearbyEntities(range, range, range).forEach(entity -> {
-                if (!(entity instanceof Player)) return;
-                Player nearbyPlayer = (Player) entity;
+                if (!(entity instanceof Player nearbyPlayer)) return;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);
                 if (fPlayer.getRelationTo(fPlayerNearby).isAtLeast(Relation.TRUCE)) return;
-                nearbyPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (level + 2) * 20, slownessLevel, true));
+                this.addPotionEffect(nearbyPlayer, PotionEffectType.SLOW, (level + 2) * level, slownessLevel);
             });
             super.registerCooldown(attacker, cooldown);
         }

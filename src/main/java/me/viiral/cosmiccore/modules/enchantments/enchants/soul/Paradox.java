@@ -69,8 +69,7 @@ public class Paradox extends ArmorIncomingPVPDamageEventEnchant implements SoulE
 
             for (Entity nearbyEntity : victim.getNearbyEntities(radius, radius, radius)) {
                 if (nearbyEntity.equals(victim)) continue;
-                if (!(nearbyEntity instanceof Player)) continue;
-                Player nearbyPlayer = ((Player) nearbyEntity);
+                if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
 

@@ -3,6 +3,7 @@ package me.viiral.cosmiccore.modules.enchantments.enchants.simple;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorEquipEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
+
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,11 +16,11 @@ public class Aquatic extends ArmorEquipEventEnchant {
 
     @Override
     public void runArmorEquipEvent(Player player, int level) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, Integer.MAX_VALUE, level - 1), true);
+        this.addPotionEffect(player, PotionEffectType.WATER_BREATHING, 0,level - 1);
     }
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
-        player.removePotionEffect(PotionEffectType.WATER_BREATHING);
+        this.removePotionEffect(player, PotionEffectType.WATER_BREATHING);
     }
 }

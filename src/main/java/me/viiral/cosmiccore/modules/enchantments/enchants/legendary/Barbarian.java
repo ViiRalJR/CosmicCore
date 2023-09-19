@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class Barbarian extends WeaponDamageEventEnchant {
 
@@ -23,13 +24,14 @@ public class Barbarian extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player)) return;
+        if (!(victim instanceof Player playerVictim)) return;
 
-        Player playerVictim = ((Player) victim);
+        ItemStack heldItem = playerVictim.getInventory().getItemInMainHand();
 
-        if (playerVictim.getItemInHand() == null || playerVictim.getItemInHand().getType() == Material.AIR) return;
-        if (!ItemUtils.isAxe(playerVictim.getItemInHand())) return;
+        if (heldItem.getType() == Material.AIR) return;
+        if (!ItemUtils.isAxe(heldItem)) return;
 
         super.getDamageHandler().increaseDamage(damageBuff, event, this.getName());
     }
+
 }

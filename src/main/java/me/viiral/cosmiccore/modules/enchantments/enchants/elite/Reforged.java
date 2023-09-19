@@ -5,6 +5,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,27 +21,30 @@ public class Reforged extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        ItemStack itemStack = attacker.getItemInHand();
-        itemStack.setDurability((short) (itemStack.getDurability() - 2));
-        attacker.setItemInHand(itemStack);
+        ItemStack itemStack = attacker.getInventory().getItemInMainHand();
+
+        if (itemStack.getType() == Material.AIR) return;
+
+        itemStack.setDurability((short) Math.max(itemStack.getDurability() - 2, 0));
+        attacker.getInventory().setItemInMainHand(itemStack);
     }
 
-
     @EventHandler
-    public void blockBreakEvent(BlockBreakEvent event) {
+    public void onBlockBreakEvent(BlockBreakEvent event) {
         if (event.isCancelled()) return;
 
-        ItemStack itemStack = event.getPlayer().getItemInHand();
+        Player player = event.getPlayer();
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
 
-        if (itemStack == null) return;
+        if (itemStack.getType() == Material.AIR) return;
         if (!this.getType().getItems().contains(itemStack.getType())) return;
 
         EnchantedItemBuilder enchantedItemBuilder = new EnchantedItemBuilder(itemStack);
 
         if (!enchantedItemBuilder.hasEnchantment(this)) return;
 
-        itemStack.setDurability((short) (itemStack.getDurability() - 10));
-        event.getPlayer().setItemInHand(itemStack);
+        itemStack.setDurability((short) Math.max(itemStack.getDurability() - 10, 0));
+        player.getInventory().setItemInMainHand(itemStack);
     }
 
 }

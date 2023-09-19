@@ -36,18 +36,16 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
     private final SoulManager soulManager;
 
     public Teleblock() {
-        super("Teleblock", EnchantTier.SOUL, 5, EnchantType.BOW, "Active soul enchant. Your bow is enchanted with enderpearl blocking magic,", "damaged players will be unable to use enderpearls for up to 20 seconds,", "and will lose up to 15 enderpearls from their inventory.");
+        super("Teleblock", EnchantTier.SOUL, 5, EnchantType.BOW, "Active soul enchant. Your bow is enchanted with enderpearl blocking magic,",
+                "damaged players will be unable to use enderpearls for up to 20 seconds,",
+                "and will lose up to 15 enderpearls from their inventory.");
         this.reloadValues();
         this.soulManager = CosmicCore.getInstance().getSoulManager();
     }
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, Player victim, Player attacker, Arrow arrow, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!this.soulManager.isInSoulMode(attacker)) return;
-
-
-        if (MaskAPI.hasMaskOn(victim, MaskRegister.getInstance().getMaskFromName("Glitch"))) {
-            victim.sendMessage(CC.WhiteB + "*** BLOCKED TELEBLOCK (GLITCH MASK) ***");
+        if (!this.soulManager.isInSoulMode(attacker) || MaskAPI.hasMaskOn(victim, MaskRegister.getInstance().getMaskFromName("Glitch"))) {
             return;
         }
 
@@ -58,7 +56,6 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
         if (!soulModeCache.hasEnoughSouls(soulCost)) return;
 
         TeleblockCache teleblockCache = CacheUtils.getTeleblockCache(victim);
-
         if (teleblockCache.isTeleblockActive()) return;
 
         soulModeCache.getSoulGemBuilder().removeSouls(soulCost);
@@ -67,16 +64,14 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
         PlayerInventory victimInventory = victim.getInventory();
 
         int pearlsToDestroy = level * 3;
-        for (int i = 0; i < victimInventory.getSize(); ++i) {
-            if (!(victimInventory.getItem(i) == null || victimInventory.getItem(i).getType() != Material.ENDER_PEARL || victimInventory.getItem(i).hasItemMeta() && victimInventory.getItem(i).getItemMeta().hasDisplayName())) {
-                int amount = victimInventory.getItem(i).getAmount();
+        for (ItemStack itemStack : victimInventory) {
+            if (itemStack != null && itemStack.getType() == Material.ENDER_PEARL && !(itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName())) {
+                int amount = itemStack.getAmount();
                 if (amount <= pearlsToDestroy) {
                     pearlsToDestroy -= amount;
-                    victimInventory.setItem(i, new ItemStack(Material.AIR));
+                    victimInventory.removeItem(itemStack);
                 } else {
-                    ItemStack invPearl = victimInventory.getItem(i);
-                    invPearl.setAmount(invPearl.getAmount() - pearlsToDestroy);
-                    victimInventory.setItem(i, invPearl);
+                    itemStack.setAmount(amount - pearlsToDestroy);
                     pearlsToDestroy = 0;
                 }
             }
@@ -87,16 +82,15 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
     @EventHandler
     public void onEnderpearlThrow(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (!event.hasItem()) return;
-        if (event.getItem().getType() != Material.ENDER_PEARL) return;
+
+        ItemStack item = event.getItem();
+        if (item == null || item.getType() != Material.ENDER_PEARL) return;
 
         TeleblockCache teleblockCache = CacheUtils.getTeleblockCache(event.getPlayer());
-
-        if (!teleblockCache.isTeleblockActive()) return;
-
-        event.setCancelled(true);
-        event.setUseItemInHand(Event.Result.DENY);
-        event.getPlayer().setItemInHand(event.getItem());
+        if (teleblockCache.isTeleblockActive()) {
+            event.setCancelled(true);
+            event.setUseItemInHand(Event.Result.DENY);
+        }
     }
 
     @Override
@@ -109,3 +103,4 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
         return 6;
     }
 }
+

@@ -8,7 +8,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.GameMode;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -35,13 +37,12 @@ public class Commander extends ArmorIncomingPVPDamageEventEnchant {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victim);
             victim.getNearbyEntities(range, range, range).forEach(entity -> {
-                if (!(entity instanceof Player)) return;
-                Player nearbyPlayer = (Player) entity;
+                if (!(entity instanceof Player nearbyPlayer)) return;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);
                 if (fPlayer.getRelationTo(fPlayerNearby).isAtMost(Relation.NEUTRAL)) return;
-                nearbyPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 80, 1, true));
+                this.addPotionEffect(nearbyPlayer, PotionEffectType.FAST_DIGGING, 80, 1);
             });
             super.registerCooldown(victim, cooldown);
         }

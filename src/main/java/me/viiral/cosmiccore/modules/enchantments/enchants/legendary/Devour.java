@@ -33,9 +33,8 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player)) return;
+        if (!(victim instanceof Player victimPlayer)) return;
 
-        Player victimPlayer = ((Player) victim);
         BleedStacksCache victimBleedStack = CacheUtils.getBleedStackCache(victimPlayer);
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victimPlayer, 20));
         super.getDamageHandler().increaseDamage(victimBleedStack.getBleedStack() * 10, event, this.getName());

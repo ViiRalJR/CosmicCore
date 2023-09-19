@@ -16,8 +16,7 @@ public class Implants extends ArmorEquipEventEnchant {
 
     @EventHandler
     public void onFoodLoss(FoodLevelChangeEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
-        Player player = (Player) event.getEntity();
+        if (!(event.getEntity() instanceof Player player)) return;
         if (!EnchantsAPI.hasEnchantment(player, this)) return;
         event.setCancelled(true);
         player.setFoodLevel(20);

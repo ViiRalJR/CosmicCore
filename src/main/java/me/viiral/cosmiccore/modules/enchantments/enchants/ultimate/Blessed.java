@@ -6,7 +6,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
-import me.viiral.cosmiccore.utils.player.PotionEffectUtils;
+import me.viiral.cosmiccore.utils.potion.PotionEffectUtils;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

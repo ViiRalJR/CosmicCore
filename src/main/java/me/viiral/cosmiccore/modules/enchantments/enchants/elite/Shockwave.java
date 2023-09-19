@@ -44,8 +44,7 @@ public class Shockwave extends ArmorIncomingPVPDamageEventEnchant {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victim);
             victim.getNearbyEntities(range, range, range).forEach(entity -> {
-                if (!(entity instanceof Player)) return;
-                Player nearbyPlayer = (Player) entity;
+                if (!(entity instanceof Player nearbyPlayer)) return;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

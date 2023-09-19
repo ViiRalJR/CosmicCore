@@ -12,6 +12,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+
 public class Assassin extends WeaponDamageEventEnchant implements Heroicable {
 
     public Assassin() {
@@ -22,24 +26,16 @@ public class Assassin extends WeaponDamageEventEnchant implements Heroicable {
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         final double distance = victim.getLocation().distance(attacker.getLocation());
 
-        if (distance < 0.25) {
-            super.getDamageHandler().increaseDamage(25.0, event, this.getName());
-            return;
-        }
-        if (distance < 0.5) {
-            super.getDamageHandler().increaseDamage(15.0, event, this.getName());
-            return;
-        }
-        if (distance < 0.75) {
-            super.getDamageHandler().increaseDamage(10.0, event, this.getName());
-            return;
-        }
-        if (distance < 1.0) {
-            super.getDamageHandler().increaseDamage(8.0, event, this.getName());
-            return;
-        }
-        if (distance < 2.0) {
-            super.getDamageHandler().increaseDamage(5.0, event, this.getName());
+        NavigableMap<Double, Double> distanceToDamageMap = new TreeMap<>();
+        distanceToDamageMap.put(0.25, 25.0);
+        distanceToDamageMap.put(0.5, 15.0);
+        distanceToDamageMap.put(0.75, 10.0);
+        distanceToDamageMap.put(1.0, 8.0);
+        distanceToDamageMap.put(2.0, 5.0);
+
+        Map.Entry<Double, Double> applicableEntry = distanceToDamageMap.floorEntry(distance);
+        if (applicableEntry != null) {
+            super.getDamageHandler().increaseDamage(applicableEntry.getValue(), event, this.getName());
         }
     }
 

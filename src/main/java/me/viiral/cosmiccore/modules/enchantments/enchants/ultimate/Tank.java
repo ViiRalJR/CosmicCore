@@ -21,8 +21,7 @@ public class Tank extends ArmorIncomingPVPDamageEventEnchant {
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (!(attacker instanceof Player)) return;
-        if (((Player) attacker).getItemInHand() == null) return;
-        if (!EnchantType.AXE.getItems().contains(((Player) attacker).getItemInHand().getType())) return;
+        if (!EnchantType.AXE.getItems().contains(((Player) attacker).getInventory().getItemInMainHand().getType())) return;
         super.getDamageHandler().reduceDamage(damageNegation * enchantInfo.getLevel(), event, this.getName());
     }
 }

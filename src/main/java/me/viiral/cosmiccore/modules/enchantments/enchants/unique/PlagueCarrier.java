@@ -34,9 +34,9 @@ public class PlagueCarrier extends ArmorIncomingPVPDamageEventEnchant {
         double dmg = event.getFinalDamage();
         if (victim.getHealth() - dmg <= 0.0) {
             int radius = Math.round((float) enchantInfo.getLevel() * 1.5f);
-            ArrayList<LivingEntity> victims = new ArrayList<LivingEntity>();
+            ArrayList<LivingEntity> victims = new ArrayList<>();
             FPlayer fp = FPlayers.getInstance().getByPlayer(victim);
-            for (Entity ent : victim.getNearbyEntities((double) radius, (double) radius, (double) radius)) {
+            for (Entity ent : victim.getNearbyEntities(radius, radius, radius)) {
                 if (!(ent instanceof LivingEntity) || ent instanceof Player && FPlayers.getInstance().getByPlayer((Player) ent).getRelationTo(fp).isAtLeast(Relation.TRUCE))
                     continue;
                 victims.add((LivingEntity) ent);
@@ -57,7 +57,7 @@ public class PlagueCarrier extends ArmorIncomingPVPDamageEventEnchant {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        if (event.getEntity() != null && event.getEntity().hasMetadata("plagueCarrier")) {
+        if (event.getEntity().hasMetadata("plagueCarrier")) {
             event.setYield(0.0f);
             int level = event.getEntity().getMetadata("plagueCarrier").get(0).asInt();
             Location loc = event.getLocation();

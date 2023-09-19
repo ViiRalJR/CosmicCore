@@ -31,9 +31,7 @@ public class ArrowDeflect extends Enchantment implements Reloadable {
     @EventHandler
     public void onIncomingArrowDamage(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Arrow)) return;
-        if (!(event.getEntity() instanceof Player)) return;
-
-        Player victim = ((Player) event.getEntity());
+        if (!(event.getEntity() instanceof Player victim)) return;
 
         if (!EnchantsAPI.hasEnchantment(victim, this)) return;
         if (super.isOnCooldown(victim)) return;

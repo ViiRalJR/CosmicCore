@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.utils.player;
+package me.viiral.cosmiccore.utils.potion;
 
 import lombok.Getter;
 import org.bukkit.entity.Player;

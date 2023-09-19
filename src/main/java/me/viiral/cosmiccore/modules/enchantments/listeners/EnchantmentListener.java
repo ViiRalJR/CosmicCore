@@ -1,6 +1,7 @@
 package me.viiral.cosmiccore.modules.enchantments.listeners;
 
 
+import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.EnchantsAPI;
 import me.viiral.cosmiccore.modules.enchantments.events.EnchantProcEvent;
 import me.viiral.cosmiccore.modules.enchantments.events.EnchantProcOnEquip;
@@ -20,11 +21,13 @@ public class EnchantmentListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
+        CosmicCore.getInstance().getUserManager().createUser(event.getPlayer().getUniqueId());
         EnchantsAPI.reprocEnchants(event.getPlayer());
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
+        CosmicCore.getInstance().getUserManager().removeUser(event.getPlayer().getUniqueId());
         EnchantsAPI.clearEnchants(event.getPlayer());
     }
 

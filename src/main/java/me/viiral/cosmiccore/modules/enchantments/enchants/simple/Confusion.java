@@ -6,6 +6,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDama
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +25,7 @@ public class Confusion extends WeaponDamageEventEnchant {
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 80, 0, true));
+            this.addPotionEffect((Player) victim, PotionEffectType.CONFUSION, 80, 0);
         }
     }
 }

@@ -11,6 +11,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class Blacksmith extends WeaponDamageEventEnchant {
 
@@ -23,12 +25,19 @@ public class Blacksmith extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            for (ItemStack itemStack : attacker.getInventory().getArmorContents()) {
-                if (!ItemUtils.isArmor(itemStack)) continue;
-                itemStack.setDurability((short) (itemStack.getDurability() - 2));
+        double randomChance = Math.random();
+        int enchantmentLevel = enchantedItemBuilder.getEnchantmentLevel(this);
+
+        if (randomChance < procChance * enchantmentLevel) {
+            ItemStack[] armorContents = attacker.getInventory().getArmorContents();
+            for (ItemStack itemStack : armorContents) {
+                if (ItemUtils.isArmor(itemStack) && itemStack.getItemMeta() instanceof Damageable damageable) {
+                    damageable.setDamage(damageable.getDamage() + 2);
+                    itemStack.setItemMeta(damageable);
+                }
             }
-            super.getDamageHandler().reduceDamage(50, event, this.getName());
+            attacker.getInventory().setArmorContents(armorContents);
+            getDamageHandler().reduceDamage(50, event, getName());
         }
     }
 }

@@ -7,6 +7,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -27,7 +28,7 @@ public class IceAspect extends WeaponDamageEventEnchant implements SlownessEncha
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, slownessAmplifier, true));
+            this.addPotionEffect((Player) victim, PotionEffectType.SLOW, 50, slownessAmplifier);
         }
     }
 }

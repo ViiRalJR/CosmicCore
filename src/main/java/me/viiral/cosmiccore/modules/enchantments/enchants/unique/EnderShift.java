@@ -5,7 +5,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Effect;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -47,8 +49,8 @@ public class EnderShift extends ArmorIncomingPVPDamageEventEnchant implements Re
         if (Math.random() < procChance) {
             super.getDamageHandler().cancelDamage(event, this.getName());
             victim.playSound(victim.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0F, 0.5F);
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, enchantInfo.getLevel() * 20, enchantInfo.getLevel() + 2, true));
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (enchantInfo.getLevel() + 1) * 20, enchantInfo.getLevel() + 1, true));
+            this.addPotionEffect(victim, PotionEffectType.ABSORPTION, enchantInfo.getLevel() * 20, enchantInfo.getLevel() + 2);
+            this.addPotionEffect(victim, PotionEffectType.SPEED, (enchantInfo.getLevel() + 1) * 20, enchantInfo.getLevel() + 2);
             super.registerCooldown(victim, cooldown);
             this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
             victim.playEffect(victim.getLocation(), Effect.STEP_SOUND, Material.ICE);

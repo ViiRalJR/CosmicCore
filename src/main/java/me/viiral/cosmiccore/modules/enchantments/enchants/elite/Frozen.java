@@ -6,6 +6,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncom
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.SlownessEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +25,7 @@ public class Frozen extends ArmorIncomingPVPDamageEventEnchant implements Slowne
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
-            attacker.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 0, true));
+            this.addPotionEffect((Player) attacker, PotionEffectType.SLOW, 60, 0);
         }
     }
 }

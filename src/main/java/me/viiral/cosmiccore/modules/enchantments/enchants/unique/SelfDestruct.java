@@ -43,7 +43,7 @@ public class SelfDestruct extends ArmorIncomingPVPDamageEventEnchant {
 
     @EventHandler(priority= EventPriority.LOWEST)
     public void onBlockExplode(EntityExplodeEvent event) {
-        if (event.getEntity() != null && event.getEntity().hasMetadata("SelfDestructTNT")) {
+        if (event.getEntity().hasMetadata("SelfDestructTNT")) {
             event.setYield(0.0f);
             event.blockList().clear();
             if (!PVPUtils.canPvPInRegion(event.getLocation())) return;

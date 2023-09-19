@@ -8,6 +8,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class Trap extends WeaponDamageEventEnchant implements SlownessEnchant {
 
             if (event.isCancelled()) return;
 
-            victim.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, slownessAmplifier, true));
+            this.addPotionEffect((Player) victim, PotionEffectType.SLOW, 60, slownessAmplifier);
         }
     }
 }

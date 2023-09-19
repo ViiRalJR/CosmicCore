@@ -89,14 +89,6 @@ public class NaturesWrath extends ArmorIncomingPVPDamageEventEnchant implements 
             return;
         }
 
-//        if (EliteAPI.hasMask(victim.getInventory().getHelmet()) && victim.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(victim.getInventory().getHelmet(), "Zeus")) {
-//            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l*** ZEUS MASK (&7Blocked Natures Wrath&b&l) ***"));
-//            return;
-//        }
-//        if (EliteAPI.hasMask(victim.getInventory().getHelmet()) && victim.getInventory().getHelmet() != null && EliteAPI.hasMaskEffect(victim.getInventory().getHelmet(), "Elden")) {
-//            victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l*** ELDEN MASK (&7Blocked Natures Wrath&b&l) ***"));
-//            return;
-//        }
         if (Math.random() < this.procChance) {
             SoulModeCache soulModeCache = this.soulManager.getSoulModeCache(victim);
 
@@ -120,8 +112,7 @@ public class NaturesWrath extends ArmorIncomingPVPDamageEventEnchant implements 
             List<Player> affectedPlayers = new ArrayList<>();
 
             for (Entity nearbyEntity : victim.getNearbyEntities(radius, radius, radius)) {
-                if (!(nearbyEntity instanceof Player)) continue;
-                Player nearbyPlayer = ((Player) nearbyEntity);
+                if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) continue;
 

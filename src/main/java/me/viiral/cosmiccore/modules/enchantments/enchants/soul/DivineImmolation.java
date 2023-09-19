@@ -12,7 +12,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import me.viiral.cosmiccore.utils.CacheUtils;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import net.objecthunter.exp4j.Expression;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+
+import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -58,15 +60,14 @@ public class DivineImmolation extends WeaponDamageEventEnchant implements DrainS
 
         for (Entity nearbyEntity : nearbyPlayers) {
             if (nearbyEntity.equals(attacker)) continue;
-            if (!(nearbyEntity instanceof Player)) continue;
-            Player nearbyPlayer = ((Player) nearbyEntity);
+            if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
             if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
             if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
 
             FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);
 
             if (fPlayer.getRelationTo(fPlayerNearby).isAtLeast(Relation.TRUCE)) continue;
-            nearbyPlayer.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1, true, false));
+            this.addPotionEffect(nearbyPlayer, PotionEffectType.WITHER, 60, 1);
             nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1.0f, 0.3f);
             nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.ENTITY_PIGLIN_ANGRY, 0.8f, 0.5f);
             CacheUtils.getDivineCache(nearbyPlayer).updateLastProcTime();
@@ -75,10 +76,8 @@ public class DivineImmolation extends WeaponDamageEventEnchant implements DrainS
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.WITHER) return;
-
-        Player player = ((Player) event.getEntity());
 
         if (CacheUtils.getDivineCache(player).isDivineActive()) {
             super.getDamageHandler().damage(player, this.damageExpression.setVariable("level", 4).evaluate(), "&c&lDivine Tick");
