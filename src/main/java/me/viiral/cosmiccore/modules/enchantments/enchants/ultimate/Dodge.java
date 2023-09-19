@@ -42,7 +42,7 @@ public class Dodge extends ArmorIncomingPVPDamageEventEnchant implements Reloada
         if (Math.random() < chance) {
             event.setCancelled(true);
             super.sendMessage(victim, this.message);
-            victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1.0f, 0.75f);
+            victim.getWorld().playSound(victim.getLocation(), Sound.BAT_TAKEOFF, 1.0f, 0.75f);
             this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
         }
     }

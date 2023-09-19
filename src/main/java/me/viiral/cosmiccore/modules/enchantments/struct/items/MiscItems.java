@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 public class MiscItems {
 
     public static ItemStack getTinkererDisplayXpBottle(int amountOfXP) {
-        ItemStack itemStack = new ItemBuilder(Material.EXPERIENCE_BOTTLE)
+        ItemStack itemStack = new ItemBuilder(Material.EXP_BOTTLE)
                 .setName("&a&lExperience Bottle&7 (Throw)")
                 .setLore(
                         "&dValue &f" + amountOfXP + " XP",
@@ -23,7 +23,7 @@ public class MiscItems {
     }
 
     public static ItemStack getMysteryDust() {
-        return new ItemBuilder(Material.GUNPOWDER)
+        return new ItemBuilder(Material.SULPHUR)
                 .setName("&fMystery Dust")
                 .setLore(
                         "&7The failed bi-product of",

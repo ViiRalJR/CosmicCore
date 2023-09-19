@@ -18,22 +18,21 @@ import static me.viiral.cosmiccore.modules.NbtTags.*;
 @Getter
 public enum EnchantTier {
 
-    SIMPLE(CC.Gray, Material.LIGHT_GRAY_STAINED_GLASS_PANE, 6, 1),
-    UNIQUE(CC.Green, Material.LIME_STAINED_GLASS_PANE, 5, 2),
-    ELITE(CC.Aqua, Material.LIGHT_BLUE_STAINED_GLASS_PANE, 4, 5),
-    ULTIMATE(CC.Yellow, Material.YELLOW_STAINED_GLASS_PANE, 3, 10),
-    LEGENDARY(CC.Gold, Material.ORANGE_STAINED_GLASS_PANE, 2, 20),
-    SOUL(CC.Red, Material.RED_STAINED_GLASS_PANE, 1, 0),
-    HEROIC(CC.LightPurple, Material.PINK_STAINED_GLASS_PANE, 0, 0);
-    ;
+    SIMPLE(CC.Gray, (short) 0, 6, 1),
+    UNIQUE(CC.Green, (short) 5, 5, 2),
+    ELITE(CC.Aqua, (short) 3, 4, 5),
+    ULTIMATE(CC.Yellow, (short) 4, 3, 10),
+    LEGENDARY(CC.Gold, (short) 1, 2, 20),
+    SOUL(CC.Red, (short) 14, 1, 0),
+    HEROIC(CC.LightPurple, (short) 2, 0, 0);
 
     private final String color;
-    private final Material guiItemMaterial;
+    private final short guiItemGlassColor;
     private final int weight;
     private final int soulValue;
 
     public ItemStack getGuiItem(int cost) {
-        return new ItemBuilder(guiItemMaterial, 1)
+        return new ItemBuilder(Material.STAINED_GLASS_PANE, 1, this.guiItemGlassColor)
                 .setName(this.color + CC.Bold + MiscUtils.toNiceString(this.name()) + " Enchantment &7(Right Click)")
                 .setLore(
                         "&7Examine to receive a random",

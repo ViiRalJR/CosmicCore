@@ -16,7 +16,7 @@ public class BlackScrollBuilder extends CustomItem {
     public BlackScrollBuilder(int percent) {
         super(BLACK_SCROLL_DATA_STRING);
 
-        ItemStack itemStack = new ItemBuilder(Material.INK_SAC)
+        ItemStack itemStack = new ItemBuilder(Material.INK_SACK)
                 .setName("&f&lBlack Scroll")
                 .addLore(
                         "&7Removes a random enchantment",

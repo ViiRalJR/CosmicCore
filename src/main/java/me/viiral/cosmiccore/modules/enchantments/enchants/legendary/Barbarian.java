@@ -24,9 +24,11 @@ public class Barbarian extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player playerVictim)) return;
+        if (!(victim instanceof Player)) return;
 
-        ItemStack heldItem = playerVictim.getInventory().getItemInMainHand();
+        Player playerVictim = (Player) victim;
+
+        ItemStack heldItem = playerVictim.getItemInHand();
 
         if (heldItem.getType() == Material.AIR) return;
         if (!ItemUtils.isAxe(heldItem)) return;

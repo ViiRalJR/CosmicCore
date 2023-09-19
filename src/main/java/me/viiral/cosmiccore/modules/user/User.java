@@ -28,7 +28,7 @@ public class User {
     }
 
     public void addEffect(PotionEffectType type, int amplifier, int duration) {
-        if (duration == 0) duration = PotionEffect.INFINITE_DURATION;
+        if (duration == 0) duration = Integer.MAX_VALUE;
         if (!hasPotion(type)) addPotionEffect(type, amplifier, duration);
         if (isStronger(type, amplifier)) {
             removePotionEffect(type);
@@ -59,7 +59,7 @@ public class User {
         PotionEffect effect = new PotionEffect(type, duration, amplifier);
         this.effects.put(type, effect);
         getPlayer().addPotionEffect(effect);
-        if (duration != PotionEffect.INFINITE_DURATION) removeTask(type, duration);
+        if (duration != Integer.MAX_VALUE) removeTask(type, duration);
     }
 
 

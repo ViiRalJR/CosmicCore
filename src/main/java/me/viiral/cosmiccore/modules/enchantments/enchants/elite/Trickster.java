@@ -28,10 +28,10 @@ public class Trickster extends ArmorIncomingPVPDamageEventEnchant {
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
             Location l1 = victim.getLocation().add(0.0, 1.0, 0.0);
-            Location l2 = victim.getTargetBlock(null, 4).getLocation().add(0.0, 1.0, 0.0).setDirection(attacker.getLocation().getDirection());
+            Location l2 = victim.getTargetBlock((HashSet<Byte>) null, 4).getLocation().add(0.0, 1.0, 0.0).setDirection(attacker.getLocation().getDirection());
             if (l2.getBlock().getType() == Material.AIR && l2.getBlock().getLocation().subtract(0.0, 1.0, 0.0).getBlock().getType() == Material.AIR) {
                 victim.teleport(l2, PlayerTeleportEvent.TeleportCause.PLUGIN);
-                victim.getWorld().playSound(l1, Sound.BLOCK_PORTAL_TRIGGER, 0.8f, 1.4f);
+                victim.getWorld().playSound(l1, Sound.PORTAL_TRIGGER, 0.8f, 1.4f);
             }
         }
     }

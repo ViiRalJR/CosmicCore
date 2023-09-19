@@ -48,7 +48,7 @@ public class EnderShift extends ArmorIncomingPVPDamageEventEnchant implements Re
 
         if (Math.random() < procChance) {
             super.getDamageHandler().cancelDamage(event, this.getName());
-            victim.playSound(victim.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0F, 0.5F);
+            victim.playSound(victim.getLocation(), Sound.ENDERDRAGON_GROWL, 1.0F, 0.5F);
             this.addPotionEffect(victim, PotionEffectType.ABSORPTION, enchantInfo.getLevel() * 20, enchantInfo.getLevel() + 2);
             this.addPotionEffect(victim, PotionEffectType.SPEED, (enchantInfo.getLevel() + 1) * 20, enchantInfo.getLevel() + 2);
             super.registerCooldown(victim, cooldown);

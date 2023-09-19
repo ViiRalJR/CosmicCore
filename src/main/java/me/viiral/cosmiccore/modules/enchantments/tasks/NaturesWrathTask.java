@@ -51,7 +51,7 @@ public class NaturesWrathTask extends BukkitRunnable {
     public void applyNaturesWrathDamage(Player player) {
         player.getWorld().strikeLightningEffect(player.getLocation());
         player.damage(this.level);
-        player.playSound(player.getLocation(), Sound.ENTITY_GHAST_SCREAM, 2.0f, 2.0f);
+        player.playSound(player.getLocation(), Sound.GHAST_SCREAM, 2.0f, 2.0f);
         player.sendMessage(CC.translate("&2&l** NATURES **"));
     }
 }

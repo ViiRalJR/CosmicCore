@@ -1,11 +1,8 @@
 package me.viiral.cosmiccore.modules.skins.struct.item;
 
-import com.ibm.icu.impl.UCharacterUtility;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import lombok.Getter;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.CustomItem;
-import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
-import me.viiral.cosmiccore.modules.mask.struct.item.MaskBuilder;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
@@ -15,7 +12,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import javax.xml.stream.events.StartDocument;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,7 +20,7 @@ public class SkinBuilder extends CustomItem {
 
     private static final String SKIN_FORMAT = "&f&lItem Skin (";
     private static final String NBT_SEPARATOR = "@;;";
-    private static final Material SKIN_MATERIAL = Material.ENDER_EYE;
+    private static final Material SKIN_MATERIAL = Material.EYE_OF_ENDER;
 
     public SkinBuilder(ItemStack itemStack) {
         super("skinType");

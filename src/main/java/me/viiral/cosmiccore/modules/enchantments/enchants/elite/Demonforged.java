@@ -9,8 +9,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class Demonforged extends WeaponDamageEventEnchant {
 
@@ -20,16 +18,13 @@ public class Demonforged extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player playerVictim)) return;
+        if (!(victim instanceof Player)) return;
+        Player playerVictim = ((Player) victim);
 
         for (ItemStack itemStack : playerVictim.getInventory().getArmorContents()) {
             if (!ItemUtils.isArmor(itemStack)) continue;
-
-            ItemMeta meta = itemStack.getItemMeta();
-            if (meta instanceof Damageable damageable) {
-                damageable.setDamage(damageable.getDamage() + 1);
-                itemStack.setItemMeta(damageable);
-            }
+            itemStack.setDurability((short) (itemStack.getDurability() + 1));
         }
+
     }
 }

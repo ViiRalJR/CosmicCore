@@ -33,7 +33,7 @@ public class Vampire extends WeaponDamageEventEnchant {
             Bukkit.getScheduler().runTaskLater(CosmicCore.getInstance(), () -> {
                 super.getDamageHandler().healEntity(attacker, enchantedItemBuilder.getEnchantmentLevel(this), this.getName());
             }, 30L);
-            attacker.playSound(attacker.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 0.75f, 2.0f);
+            attacker.playSound(attacker.getLocation(), Sound.FIREWORK_LAUNCH, 0.75f, 2.0f);
             super.registerCooldown(attacker, cooldown);
         }
     }

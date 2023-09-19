@@ -41,7 +41,8 @@ public class Rage extends WeaponDamageEventEnchant implements Reloadable {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player victimPlayer)) return;
+        if (!(victim instanceof Player)) return;
+        Player victimPlayer = (Player) victim;
 
         RageStacksCache rageStacksCache = CacheUtils.getRageStackCache(attacker);
 
@@ -68,7 +69,8 @@ public class Rage extends WeaponDamageEventEnchant implements Reloadable {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player player && event.getDamager() instanceof Player) {
+        if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
+            Player player = (Player) event.getEntity();
             RageStacksCache victimRageStack = CacheUtils.getRageStackCache(player);
             if (victimRageStack.getRageStack() > 0) {
                 victimRageStack.resetRageStack();

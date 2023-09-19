@@ -33,7 +33,8 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player victimPlayer)) return;
+        if (!(victim instanceof Player)) return;
+        Player victimPlayer = (Player) victim;
 
         BleedStacksCache victimBleedStack = CacheUtils.getBleedStackCache(victimPlayer);
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victimPlayer, 20));
@@ -43,7 +44,7 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable {
     @Override
     public void reloadValues() {
         this.particle = new ParticleBuilder(ParticleEffect.BLOCK_DUST)
-                .setParticleData(new BlockTexture(Material.MYCELIUM))
+                .setParticleData(new BlockTexture(Material.DIRT))
                 .setAmount(particleAmount)
                 .setOffsetY((float) particleYoffset)
                 .setSpeed((float) particleSpeed);

@@ -58,7 +58,7 @@ public class SoulDrainTask extends BukkitRunnable {
             if (soulCost == 0) return;
 
             soulModeCache.getSoulGemBuilder().removeSouls(soulCost);
-            player.playSound(player.getLocation(), Sound.ENTITY_GENERIC_EAT, 0.4F, 0.2F);
+            player.playSound(player.getLocation(), Sound.EAT, 0.4F, 0.2F);
             this.spellParticle.setLocation(player.getLocation()).display(player);
             soulModeCache.updateSoulGem();
 
@@ -67,7 +67,7 @@ public class SoulDrainTask extends BukkitRunnable {
             }
 
             if (soulModeCache.getSoulGemBuilder().getSouls() <= 0) {
-                player.playSound(player.getLocation(), Sound.ITEM_FIRECHARGE_USE, 1.0F, 1.2F);
+                player.playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1.0F, 1.2F);
                 soulModeCache.updateSoulGem();
                 this.soulManager.disableSoulMode(player);
             }

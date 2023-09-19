@@ -60,7 +60,9 @@ public class DivineImmolation extends WeaponDamageEventEnchant implements DrainS
 
         for (Entity nearbyEntity : nearbyPlayers) {
             if (nearbyEntity.equals(attacker)) continue;
-            if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
+            if (!(nearbyEntity instanceof Player)) continue;
+            Player nearbyPlayer = (Player) nearbyEntity;
+
             if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
             if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
 
@@ -68,20 +70,22 @@ public class DivineImmolation extends WeaponDamageEventEnchant implements DrainS
 
             if (fPlayer.getRelationTo(fPlayerNearby).isAtLeast(Relation.TRUCE)) continue;
             this.addPotionEffect(nearbyPlayer, PotionEffectType.WITHER, 60, 1);
-            nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1.0f, 0.3f);
-            nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.ENTITY_PIGLIN_ANGRY, 0.8f, 0.5f);
+            nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.FIREWORK_BLAST, 1.0f, 0.3f);
+            nearbyPlayer.playSound(nearbyEntity.getLocation(), Sound.ZOMBIE_PIG_ANGRY, 0.8f, 0.5f);
             CacheUtils.getDivineCache(nearbyPlayer).updateLastProcTime();
         }
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.WITHER) return;
+
+        Player player = (Player) event.getEntity();
 
         if (CacheUtils.getDivineCache(player).isDivineActive()) {
             super.getDamageHandler().damage(player, this.damageExpression.setVariable("level", 4).evaluate(), "&c&lDivine Tick");
-            player.playSound(player.getLocation(), Sound.ENTITY_PIGLIN_ANGRY, 0.8f, 0.5f);
+            player.playSound(player.getLocation(), Sound.ZOMBIE_PIG_ANGRY, 0.8f, 0.5f);
             super.sendMessage(player, this.message);
             this.particle.setLocation(player.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(player, 30));
         }

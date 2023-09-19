@@ -1,6 +1,5 @@
 package me.viiral.cosmiccore.modules.armorsets.struct.items;
 
-import com.ibm.icu.impl.UCharacterUtility;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.CustomItem;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;

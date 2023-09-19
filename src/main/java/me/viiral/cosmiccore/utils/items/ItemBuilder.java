@@ -150,7 +150,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setUnbreakable(boolean unbreakable) {
-        itemMeta.setUnbreakable(unbreakable);
+        itemMeta.spigot().setUnbreakable(unbreakable);
         return this;
     }
 

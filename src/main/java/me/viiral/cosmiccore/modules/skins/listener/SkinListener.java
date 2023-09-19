@@ -159,9 +159,9 @@ public class SkinListener implements Listener {
 
         SkinResult result = applySkin(item, skin);
         if (result == SkinResult.CONTAINS) {
-            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply skin, armor piece already contains a skin.", Sound.BLOCK_ANVIL_LAND);
+            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply skin, armor piece already contains a skin.", Sound.ANVIL_LAND);
         } else if (result == SkinResult.WRONG_ITEM) {
-            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply this skin to that type of armor piece.", Sound.BLOCK_ANVIL_LAND);
+            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply this skin to that type of armor piece.", Sound.ANVIL_LAND);
         } else if (result == SkinResult.SUCCESS) {
             cancelEventAndApplySkin(event, player, item, skin);
         }
@@ -237,14 +237,14 @@ public class SkinListener implements Listener {
         item.applySkin(skin.getSkins());
         event.setCurrentItem(item.build());
         event.setCursor(null);
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0f, 0.75f);
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1.0f, 0.75f);
     }
 
     private void cancelEventAndRemoveSkin(InventoryClickEvent event, Player player, SkinArmorBuilder item) {
         event.setCancelled(true);
         event.setCursor(new SkinBuilder(item.getSkins()).build());
         event.setCurrentItem(item.removeSkin().build());
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0F, 0.75f);
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1.0F, 0.75f);
     }
 
     private enum SkinResult {

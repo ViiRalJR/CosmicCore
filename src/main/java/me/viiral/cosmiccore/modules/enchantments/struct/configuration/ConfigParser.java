@@ -45,7 +45,7 @@ public final class ConfigParser {
 
         ItemStack item = itemBuilder.colorize().build();
 
-        if (itemSection.contains("skull-texture") && itemType == Material.PLAYER_HEAD && data == 3) {
+        if (itemSection.contains("skull-texture") && itemType == Material.SKULL_ITEM && data == 3) {
             item = SkullUtils.getSkull(item, itemSection.getString("skull-texture"));
         }
 

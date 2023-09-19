@@ -20,14 +20,14 @@ public class SoulManager {
         if (isInSoulMode(player)) return;
         soulModePlayers.put(player.getUniqueId(), new SoulModeCache(player, soulGemBuilder, slot));
         EnchantLanguage.SOUL_MODE_ENABLE.send(player);
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.2F);
+        player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0F, 1.2F);
     }
 
     public void disableSoulMode(Player player) {
         if (!isInSoulMode(player)) return;
         soulModePlayers.remove(player.getUniqueId());
         EnchantLanguage.SOUL_MODE_DISABLE.send(player);
-        player.playSound(player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1.0F, 1.2F);
+        player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 1.0F, 1.2F);
     }
 
     public void toggleSoulMode(Player player, SoulGemBuilder soulGemBuilder, int slot) {

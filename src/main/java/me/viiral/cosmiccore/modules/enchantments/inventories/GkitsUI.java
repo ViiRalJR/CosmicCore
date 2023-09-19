@@ -29,7 +29,7 @@ public class GkitsUI {
         this.gkitsUI.setItem(4, 3, new GuiItem(new ItemBuilder(Material.ARROW).setName("&cPrevious").colorize().build(), event -> this.gkitsUI.previous()));
         this.gkitsUI.setItem(4, 7, new GuiItem(new ItemBuilder(Material.ARROW).setName("&cNext").colorize().build(), event -> this.gkitsUI.next()));
 
-        this.gkitsUI.getFiller().fillBottom(new GuiItem(new ItemBuilder(Material.LEGACY_STAINED_GLASS_PANE).setName("").setDurability((short) 7).build()));
+        this.gkitsUI.getFiller().fillBottom(new GuiItem(new ItemBuilder(Material.STAINED_GLASS_PANE).setName("").setDurability((short) 7).build()));
 
         for (Gkit gkit : CosmicCore.getInstance().getGkitManager().getGkits()) {
             if (!gkit.isShowInUI()) continue;

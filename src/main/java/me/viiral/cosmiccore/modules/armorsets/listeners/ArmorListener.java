@@ -97,20 +97,24 @@ public class ArmorListener implements Listener {
         CrystalArmorBuilder crystalArmorBuilder = new CrystalArmorBuilder(event.getCurrentItem());
         CrystalExtractorBuilder crystalExtractorBuilder = new CrystalExtractorBuilder(event.getCursor());
 
-        switch (this.removeCrystal(crystalArmorBuilder, crystalExtractorBuilder)) {
-            case DOESNT_CONTAIN -> {
+        CrystalResult result = removeCrystal(crystalArmorBuilder, crystalExtractorBuilder);
+
+        switch (result) {
+            case DOESNT_CONTAIN:
                 event.setCancelled(true);
                 player.sendMessage(CC.translate("&c&l(!)&c This armor piece does not contain an armor crystal."));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0f, 0.1F);
-            }
-            case INVALID_COUNT -> event.setCancelled(true);
-            case SUCCESS -> {
+                player.playSound(player.getLocation(), Sound.ANVIL_LAND, 5.0f, 0.1F);
+                break;
+            case INVALID_COUNT:
+                event.setCancelled(true);
+                break;
+            case SUCCESS:
                 event.setCancelled(true);
                 ItemStack crystal = new ArmorCrystalBuilder(crystalExtractorBuilder.getPercentage(), ArmorSetAPI.getCrystalTypeOnItem(event.getCurrentItem())).build();
                 event.setCursor(crystal);
                 event.setCurrentItem(crystalArmorBuilder.removeCrystal().build());
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 0.75F);
-            }
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0F, 0.75F);
+                break;
         }
     }
 
@@ -125,25 +129,24 @@ public class ArmorListener implements Listener {
         CrystalArmorBuilder crystalItemBuilder = new CrystalArmorBuilder(event.getCurrentItem());
         ArmorCrystalBuilder crystalBuilder = new ArmorCrystalBuilder(event.getCursor());
 
-        switch (this.applyCrystal(crystalItemBuilder, crystalBuilder)) {
-            case CONTAINS -> {
-                event.setCancelled(true);
-                player.sendMessage(CC.translate("&c&l(!)&c Cannot apply crystal, armor piece already contains a crystal or is an armor set piece."));
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0F, 0.1F);
-            }
-            case FAIL -> {
-                event.setCancelled(true);
-                event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0F, 0.1F);
-            }
-            case SUCCESS -> {
-                event.setCancelled(true);
-                crystalItemBuilder.applyMultiCrystal(crystalBuilder.getArmorSets());
-                event.setCurrentItem(crystalItemBuilder.build());
-                event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.75f);
-            }
-            case INVALID_COUNT -> event.setCancelled(true);
+        CrystalResult result = applyCrystal(crystalItemBuilder, crystalBuilder);
+
+        if (result == CrystalResult.CONTAINS) {
+            event.setCancelled(true);
+            player.sendMessage(CC.translate("&c&l(!)&c Cannot apply crystal, armor piece already contains a crystal or is an armor set piece."));
+            player.playSound(player.getLocation(), Sound.ANVIL_LAND, 5.0F, 0.1F);
+        } else if (result == CrystalResult.FAIL) {
+            event.setCancelled(true);
+            event.setCursor(null);
+            player.playSound(player.getLocation(), Sound.ANVIL_LAND, 5.0F, 0.1F);
+        } else if (result == CrystalResult.SUCCESS) {
+            event.setCancelled(true);
+            crystalItemBuilder.applyMultiCrystal(crystalBuilder.getArmorSets());
+            event.setCurrentItem(crystalItemBuilder.build());
+            event.setCursor(null);
+            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 0.75f);
+        } else if (result == CrystalResult.INVALID_COUNT) {
+            event.setCancelled(true);
         }
     }
 

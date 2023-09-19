@@ -30,7 +30,7 @@ public class NaturesWrathCache extends Cache {
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, (7 + level) * 20, 128));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, (7 + level) * 20, 128));
         player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, (7 + level) * 20, 2));
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 2.0f, 2.0f);
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 2.0f, 2.0f);
         this.setAffected(true);
     }
 

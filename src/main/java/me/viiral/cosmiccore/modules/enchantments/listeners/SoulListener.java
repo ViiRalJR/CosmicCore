@@ -55,7 +55,7 @@ public class SoulListener implements Listener {
 
         currentSoulGem.addSouls(cursorSouls);
         event.setCurrentItem(currentSoulGem.build());
-        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1.0f, 1.4f);
+        player.playSound(player.getLocation(), Sound.ANVIL_USE, 1.0f, 1.4f);
         player.updateInventory();
 
     }
@@ -156,7 +156,7 @@ public class SoulListener implements Listener {
 
         if (!this.soulManager.isInSoulMode(player) && soulGemBuilder.getSouls() <= 0) {
             EnchantLanguage.OUT_OF_SOULS.send(player);
-            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.7f, 0.4f);
+            player.playSound(player.getLocation(), Sound.ITEM_BREAK, 0.7f, 0.4f);
             return;
         }
 

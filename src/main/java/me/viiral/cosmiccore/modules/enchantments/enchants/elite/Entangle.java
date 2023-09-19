@@ -9,9 +9,7 @@ import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuild
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.units.qual.A;
 
 public class Entangle extends BowEventEnchant {
 

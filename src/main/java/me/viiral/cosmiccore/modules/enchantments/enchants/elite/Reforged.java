@@ -21,12 +21,12 @@ public class Reforged extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        ItemStack itemStack = attacker.getInventory().getItemInMainHand();
+        ItemStack itemStack = attacker.getItemInHand();
 
         if (itemStack.getType() == Material.AIR) return;
 
         itemStack.setDurability((short) Math.max(itemStack.getDurability() - 2, 0));
-        attacker.getInventory().setItemInMainHand(itemStack);
+        attacker.setItemInHand(itemStack);
     }
 
     @EventHandler
@@ -34,7 +34,7 @@ public class Reforged extends WeaponDamageEventEnchant {
         if (event.isCancelled()) return;
 
         Player player = event.getPlayer();
-        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        ItemStack itemStack = player.getItemInHand();
 
         if (itemStack.getType() == Material.AIR) return;
         if (!this.getType().getItems().contains(itemStack.getType())) return;
@@ -44,7 +44,7 @@ public class Reforged extends WeaponDamageEventEnchant {
         if (!enchantedItemBuilder.hasEnchantment(this)) return;
 
         itemStack.setDurability((short) Math.max(itemStack.getDurability() - 10, 0));
-        player.getInventory().setItemInMainHand(itemStack);
+        player.setItemInHand(itemStack);
     }
 
 }

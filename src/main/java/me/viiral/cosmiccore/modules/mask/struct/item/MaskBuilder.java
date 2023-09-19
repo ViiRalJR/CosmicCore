@@ -19,7 +19,7 @@ public class MaskBuilder extends CustomItem {
 
     private static final String MASK_FORMAT = "&f&lMulti-Mask (";
     private static final String NBT_SEPARATOR = "@;;";
-    private static final Material MASK_MATERIAL = Material.PLAYER_HEAD;
+    private static final Material MASK_MATERIAL = Material.SKULL_ITEM;
 
     public MaskBuilder(ItemStack itemStack) {
         super("maskType");

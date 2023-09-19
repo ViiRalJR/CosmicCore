@@ -30,7 +30,7 @@ public class ArmorSetCache extends Cache {
             if (this.armorSets.containsKey(type) && this.armorSets.get(type) == 4) {
                 this.currentArmorSet = type;
                 this.player.sendMessage(type.getEquipMessage().toArray(new String[]{}));
-                this.player.playSound(this.player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1.0f, 0.75f);
+                this.player.playSound(this.player.getLocation(), Sound.BAT_TAKEOFF, 1.0f, 0.75f);
             }
         }
     }

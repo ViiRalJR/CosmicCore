@@ -5,6 +5,7 @@ import me.viiral.cosmiccore.modules.enchantments.EnchantsAPI;
 import me.viiral.cosmiccore.modules.enchantments.language.EnchantLanguage;
 import me.viiral.cosmiccore.modules.enchantments.struct.EnchantRegister;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.BookBuilder;
@@ -45,7 +46,7 @@ public class BookListeners implements Listener {
 
         if (!InventoryUtils.hasAvailableSlot(player)) {
             EnchantLanguage.FULL_INVENTORY.send(player);
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.7f, 1.4f);
+            player.playSound(player.getLocation(), Sound.VILLAGER_NO, 0.7f, 1.4f);
             return;
         }
 
@@ -61,7 +62,7 @@ public class BookListeners implements Listener {
         ItemStack book = bookBuilder.build();
 
         player.getInventory().addItem(book);
-        player.playSound(player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 0.7f, 1.4f);
+        player.playSound(player.getLocation(), Sound.BAT_TAKEOFF, 0.7f, 1.4f);
 
         if (itemStack.getAmount() > 1) {
             itemStack.setAmount(itemStack.getAmount() - 1);
@@ -97,72 +98,36 @@ public class BookListeners implements Listener {
         BookBuilder bookBuilder = new BookBuilder(event.getCursor());
         Enchantment enchantment = bookBuilder.getBookEnchantment();
         int level = bookBuilder.getBookLevel();
-
         switch (this.applyEnchantment(enchantedItemBuilder, bookBuilder)) {
-            case FAIL -> {
+            case FAIL:
                 event.setCancelled(true);
                 event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0F, 0.1F);
-            }
+                player.playSound(player.getLocation(), Sound.ANVIL_LAND, 5.0F, 0.1F);
+                break;
 
-            case HEROIC_SUCCESS -> {
+            case HEROIC_SUCCESS:
                 event.setCancelled(true);
                 Enchantment remove = CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromID(bookBuilder.getRequired());
                 enchantedItemBuilder.removeEnchantment(remove);
                 enchantedItemBuilder.addEnchantment(enchantment, level);
                 event.setCurrentItem(enchantedItemBuilder.build());
                 event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.75f);
-            }
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 0.75f);
+                break;
 
-            case REQUIRED -> {
+            case REQUIRED:
                 event.setCancelled(true);
                 EnchantLanguage.DOESNT_HAVE_REQUIRED.send(player);
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0F, 0.1F);
-            }
+                player.playSound(player.getLocation(), Sound.ANVIL_LAND, 5.0F, 0.1F);
+                break;
 
-            case SUCCESS -> {
+            case SUCCESS:
                 event.setCancelled(true);
                 enchantedItemBuilder.addEnchantment(enchantment, level);
                 event.setCurrentItem(enchantedItemBuilder.build());
                 event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.75f);
-            }
-            case DESTROY -> {
-                event.setCancelled(true);
-                event.setCursor(null);
-                event.setCurrentItem(null);
-                player.playSound(player.getLocation(), Sound.BLOCK_LAVA_POP, 5.0F, 0.1F);
-            }
-            case CONTAINS -> {
-                event.setCancelled(true);
-                EnchantLanguage.ALREADY_HAS_ENCHANTMENT.send(player);
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 5.0F, 0.1F);
-            }
-            case INVALID_COUNT -> event.setCancelled(true);
-            case INVALID_TYPE -> {
-                event.setCancelled(true);
-                EnchantLanguage.INVALID_ITEM_TYPE_FOR_ENCHANT.send(player, str -> str.replace("{valid-type}", enchantment.getType().name().toLowerCase(Locale.ROOT)));
-            }
-            case NOT_ENOUGH_SLOTS -> {
-                event.setCancelled(true);
-                EnchantLanguage.NOT_ENOUGH_SLOTS.send(player, str -> str.replace("{slots}", String.valueOf(enchantedItemBuilder.getSlots())));
-            }
-            case PROTECTED -> {
-                event.setCancelled(true);
-                event.setCursor(null);
-                enchantedItemBuilder.setProtected(false);
-                event.setCurrentItem(enchantedItemBuilder.build());
-                EnchantLanguage.ITEM_PROTECTED_BY_WHITE_SCROLL.send(player);
-            }
-            case CONTAINS_BUT_UPGRADE -> {
-                event.setCancelled(true);
-                enchantedItemBuilder.removeEnchantment(enchantment);
-                enchantedItemBuilder.addEnchantment(enchantment, level);
-                event.setCurrentItem(enchantedItemBuilder.build());
-                event.setCursor(null);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.75f);
-            }
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 0.75f);
+                break;
         }
     }
 
@@ -187,13 +152,15 @@ public class BookListeners implements Listener {
             return EnchantResult.NOT_ENOUGH_SLOTS;
         }
 
-        if (bookBuilder.getBookEnchantment() instanceof Heroicable h)
+        if (bookBuilder.getBookEnchantment() instanceof Heroicable) {
+            Heroicable h = (Heroicable) bookBuilder.getBookEnchantment();
             if (enchantedItemBuilder.hasEnchantment(h.getHeroicEnchant()))
                 if (enchantedItemBuilder.getEnchantmentLevel(enchantment) > bookBuilder.getBookLevel())
                     return EnchantResult.CONTAINS;
                 else
                     return EnchantResult.CONTAINS_BUT_UPGRADE;
 
+        }
         if (bookBuilder.isHeroic()) {
             if (!enchantedItemBuilder.hasEnchantment(bookBuilder.getRequired())) {
                 return EnchantResult.REQUIRED;

@@ -31,13 +31,15 @@ public class ArrowDeflect extends Enchantment implements Reloadable {
     @EventHandler
     public void onIncomingArrowDamage(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Arrow)) return;
-        if (!(event.getEntity() instanceof Player victim)) return;
+        if (!(event.getEntity() instanceof Player)) return;
+
+        Player victim = (Player) event.getEntity();
 
         if (!EnchantsAPI.hasEnchantment(victim, this)) return;
         if (super.isOnCooldown(victim)) return;
         event.setCancelled(true);
         super.registerCooldown(victim, 20);
-        victim.playSound(victim.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.7f, 0.2f);
+        victim.playSound(victim.getLocation(), Sound.ITEM_BREAK, 0.7f, 0.2f);
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
     }
 

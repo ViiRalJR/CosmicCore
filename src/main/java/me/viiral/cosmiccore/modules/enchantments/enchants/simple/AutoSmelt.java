@@ -28,12 +28,12 @@ public class AutoSmelt extends BlockBreakEventEnchant {
         Material blockType = block.getType();
         ItemStack dropItem;
 
-        switch (blockType) {
-            case IRON_ORE -> dropItem = new ItemStack(Material.IRON_INGOT);
-            case GOLD_ORE -> dropItem = new ItemStack(Material.GOLD_INGOT);
-            default -> {
-                return;
-            }
+        if (blockType == Material.IRON_ORE) {
+            dropItem = new ItemStack(Material.IRON_INGOT);
+        } else if (blockType == Material.GOLD_ORE) {
+            dropItem = new ItemStack(Material.GOLD_INGOT);
+        } else {
+            return;
         }
 
         world.dropItem(location, dropItem);

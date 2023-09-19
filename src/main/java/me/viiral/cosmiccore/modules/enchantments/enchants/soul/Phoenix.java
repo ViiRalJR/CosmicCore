@@ -89,13 +89,13 @@ public class Phoenix extends ArmorIncomingPVPDamageEventEnchant implements SoulE
         super.getDamageHandler().healEntity(victim, victim.getMaxHealth(), this.getName());
 
         super.sendMessage(victim, this.procMessage, str -> str.replace("{soul-cost}", String.valueOf(soulCost)).replace("{souls-left}", String.valueOf(soulModeCache.getSouls())));
-        victim.playSound(victim.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0f, 1.25f);
+        victim.playSound(victim.getLocation(), Sound.ENDERDRAGON_GROWL, 1.0f, 1.25f);
 
         for (Entity nearbyEntity : victim.getNearbyEntities(48.0, 48.0, 48.0)) {
             if (!(nearbyEntity instanceof Player)) continue;
             Player nearbyPlayer = (Player) nearbyEntity;
             super.sendMessage(nearbyPlayer, this.nearbyPlayersMessage, str -> str.replace("{player}", victim.getName()).replace("{soul-cost}", String.valueOf(soulCost)));
-            nearbyPlayer.playSound(victim.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1.0f, 1.25f);
+            nearbyPlayer.playSound(victim.getLocation(), Sound.ENDERDRAGON_GROWL, 1.0f, 1.25f);
         }
 
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayers(victim, 30));

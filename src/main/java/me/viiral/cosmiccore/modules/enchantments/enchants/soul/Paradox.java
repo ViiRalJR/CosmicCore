@@ -52,7 +52,7 @@ public class Paradox extends ArmorIncomingPVPDamageEventEnchant implements SoulE
 
             if (!soulModeCache.hasEnoughSouls(this.getSoulCost())) {
                 this.lavaParticle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayers(victim, 30));
-                victim.playSound(victim.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.7f, 0.4f);
+                victim.playSound(victim.getLocation(), Sound.ITEM_BREAK, 0.7f, 0.4f);
                 EnchantLanguage.OUT_OF_SOULS.send(victim);
                 super.registerCooldown(victim, cooldown);
                 return;
@@ -69,7 +69,10 @@ public class Paradox extends ArmorIncomingPVPDamageEventEnchant implements SoulE
 
             for (Entity nearbyEntity : victim.getNearbyEntities(radius, radius, radius)) {
                 if (nearbyEntity.equals(victim)) continue;
-                if (!(nearbyEntity instanceof Player nearbyPlayer)) continue;
+                if (!(nearbyEntity instanceof Player)) continue;
+
+                Player nearbyPlayer = (Player) nearbyEntity;
+
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
 

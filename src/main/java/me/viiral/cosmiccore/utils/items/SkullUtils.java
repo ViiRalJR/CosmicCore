@@ -16,10 +16,10 @@ import java.util.UUID;
 
 public class SkullUtils {
 
-    private final static ItemStack DEFAULT_SKULL = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+    private final static ItemStack DEFAULT_SKULL = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 
     public static ItemStack getSkullFromSkin(String skinURL) {
-        ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1, (short)3);
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
         if (skinURL == null || skinURL.isEmpty())
             return skull;
         SkullMeta skullMeta = (SkullMeta)skull.getItemMeta();
@@ -64,7 +64,7 @@ public class SkullUtils {
     }
 
     public static ItemStack getSkullFromPlayer(Player player) {
-        ItemStack item = new ItemStack(Material.PLAYER_HEAD, 1, (short) 3);
+        ItemStack item = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         SkullMeta skull = (SkullMeta) item.getItemMeta();
         skull.setDisplayName(player.getName());
         skull.setOwner(player.getName());

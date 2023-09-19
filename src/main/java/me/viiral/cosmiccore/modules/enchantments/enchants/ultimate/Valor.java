@@ -37,7 +37,7 @@ public class Valor extends ArmorIncomingPVPDamageEventEnchant implements Silence
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (!(attacker instanceof Player)) return;
         Player attackerPlayer = ((Player) attacker);
-        if (!EnchantType.SWORD.getItems().contains(attackerPlayer.getInventory().getItemInMainHand().getType())) return;
+        if (!EnchantType.SWORD.getItems().contains(attackerPlayer.getItemInHand().getType())) return;
         super.getDamageHandler().reduceDamage(damageNegation * enchantInfo.getLevel(), event, this.getName());
         this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 20));
         victim.playEffect(victim.getLocation(), Effect.STEP_SOUND, Material.GOLD_BLOCK);

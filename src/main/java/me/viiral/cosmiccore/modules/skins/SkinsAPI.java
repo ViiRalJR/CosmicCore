@@ -21,7 +21,7 @@ public class SkinsAPI {
     public static final String SKIN_TYPE_TAG = "skinType";
     public static final String SKIN_TYPE_SEPARATOR = "@;;";
     public static final String SKIN_CACHE_TAG = "skins";
-    public static final Material SKIN_MATERIAL = Material.ENDER_EYE;
+    public static final Material SKIN_MATERIAL = Material.EYE_OF_ENDER;
 
 
     public static List<Skin> getSkinTypesOnItem(ItemStack itemStack) {

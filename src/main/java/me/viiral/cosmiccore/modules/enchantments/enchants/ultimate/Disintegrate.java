@@ -10,8 +10,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class Disintegrate extends WeaponDamageEventEnchant {
 
@@ -21,19 +19,13 @@ public class Disintegrate extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player playerVictim)) return;
+        if (!(victim instanceof Player)) return;
+        Player playerVictim = ((Player) victim);
 
-        ItemStack[] armorContents = playerVictim.getInventory().getArmorContents();
-        if (armorContents == null) return;
-
-        for (ItemStack itemStack : armorContents) {
-            if (ItemUtils.isArmor(itemStack)) {
-                ItemMeta itemMeta = itemStack.getItemMeta();
-                if (itemMeta instanceof Damageable damageable) {
-                    damageable.setDamage(damageable.getDamage() + 1);
-                    itemStack.setItemMeta(damageable);
-                }
-            }
+        for (ItemStack itemStack : playerVictim.getInventory().getArmorContents()) {
+            if (!ItemUtils.isArmor(itemStack)) continue;
+            itemStack.setDurability((short) (itemStack.getDurability() + 1));
         }
+
     }
 }

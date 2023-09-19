@@ -18,7 +18,7 @@ public class MaskAPI {
     public static final String MASK_TYPE_TAG = "maskType";
     public static final String MASK_TYPE_SEPARATOR = "@;;";
     public static final String MASK_CACHE_TAG = "mask";
-    public static final Material MASK_MATERIAL = Material.PLAYER_HEAD;
+    public static final Material MASK_MATERIAL = Material.SKULL_ITEM;
 
     public static List<Mask> getMaskTypesOnItem(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {

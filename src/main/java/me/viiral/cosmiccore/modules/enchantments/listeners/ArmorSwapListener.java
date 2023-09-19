@@ -60,7 +60,7 @@ public class ArmorSwapListener implements Listener {
 
         player.setItemInHand(armorItem);
         player.updateInventory();
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.2F);
+        player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0F, 1.2F);
     }
 
     private int getArmorSlot(ItemStack itemStack) {

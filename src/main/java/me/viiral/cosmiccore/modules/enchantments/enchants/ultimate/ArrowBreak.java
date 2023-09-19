@@ -21,9 +21,11 @@ public class ArrowBreak extends Enchantment {
     public void onIncomingArrowDamage(EntityDamageByEntityEvent event) {
         if (event.isCancelled() || event.getDamage() <= 0) return;
 
-        if (!(event.getEntity() instanceof Player victim) || !(event.getDamager() instanceof Arrow)) return;
+        if (!(event.getEntity() instanceof Player) || !(event.getDamager() instanceof Arrow)) return;
 
-        ItemStack itemStack = victim.getInventory().getItemInMainHand();
+        Player victim = (Player) event.getEntity();
+
+        ItemStack itemStack = victim.getItemInHand();
 
         if (itemStack.getType() == Material.AIR || !this.getType().getItems().contains(itemStack.getType())) return;
 

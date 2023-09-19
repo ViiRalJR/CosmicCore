@@ -29,7 +29,6 @@ public class ConfigurationService {
             .disableHtmlEscaping()
             .serializeNulls()
             .enableComplexMapKeySerialization()
-            .setLenient()
             .create();
 
     private final Path dataDirectory;

@@ -25,7 +25,8 @@ public class Paralyze extends WeaponDamageEventEnchant implements SlownessEnchan
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player playerVictim)) return;
+        if (!(victim instanceof Player)) return;
+        Player playerVictim = (Player) victim;
 
         if (Math.random() < procChance) {
             int level = enchantedItemBuilder.getEnchantmentLevel(this);

@@ -17,7 +17,8 @@ public class EnderWalker extends Enchantment {
     @EventHandler
     public void onDamageByPoisonAndWither(EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.WITHER && event.getCause() != EntityDamageEvent.DamageCause.POISON) return;
-        if (!(event.getEntity() instanceof Player player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
 
         if (!player.isValid()) return;
         if (!EnchantsAPI.hasEnchantment(player, this)) return;

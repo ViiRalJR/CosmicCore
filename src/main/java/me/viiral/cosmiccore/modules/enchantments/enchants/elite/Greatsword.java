@@ -25,13 +25,14 @@ public class Greatsword extends WeaponDamageEventEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!(victim instanceof Player playerVictim)) return;
+        if (!(victim instanceof Player)) return;
 
-        ItemStack mainHandItem = playerVictim.getInventory().getItemInMainHand();
-        ItemStack offHandItem = playerVictim.getInventory().getItemInOffHand();
+        Player playerVictim = (Player) victim;
 
-        // Checking both main hand and off hand for a bow
-        if (mainHandItem.getType() != Material.BOW && offHandItem.getType() != Material.BOW) {
+        ItemStack mainHandItem = playerVictim.getInventory().getItemInHand();
+
+        // Checking both main hand and offhand for a bow
+        if (mainHandItem.getType() != Material.BOW) {
             return;
         }
 

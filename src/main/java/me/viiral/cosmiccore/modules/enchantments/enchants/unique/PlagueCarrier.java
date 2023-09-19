@@ -42,10 +42,10 @@ public class PlagueCarrier extends ArmorIncomingPVPDamageEventEnchant {
                 victims.add((LivingEntity) ent);
             }
 
-            victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 2.0f, 0.75f);
+            victim.getWorld().playSound(victim.getLocation(), Sound.CREEPER_HISS, 2.0f, 0.75f);
             for (LivingEntity livingEntity : victims) {
                 if (!(livingEntity instanceof Player)) continue;
-                livingEntity.getWorld().playSound(livingEntity.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 1.6f, 0.75f);
+                livingEntity.getWorld().playSound(livingEntity.getLocation(), Sound.CREEPER_HISS, 1.6f, 0.75f);
                 livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (2 + enchantInfo.getLevel()) * 20, enchantInfo.getLevel() >= 7 ? 1 : 0));
             }
             for (int plagueCarriers = radius / 2; plagueCarriers > 0; --plagueCarriers) {
@@ -61,7 +61,7 @@ public class PlagueCarrier extends ArmorIncomingPVPDamageEventEnchant {
             event.setYield(0.0f);
             int level = event.getEntity().getMetadata("plagueCarrier").get(0).asInt();
             Location loc = event.getLocation();
-            loc.getWorld().playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
+            loc.getWorld().playSound(loc, Sound.EXPLODE, 1.0f, 1.0f);
 
             for (Entity ent : event.getEntity().getNearbyEntities(5.0, 4.0, 5.0)) {
                 if (!(ent instanceof LivingEntity)) continue;

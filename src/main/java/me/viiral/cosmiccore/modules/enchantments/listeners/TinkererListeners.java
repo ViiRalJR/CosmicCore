@@ -106,7 +106,7 @@ public class TinkererListeners implements Listener {
         for (int i = 0; i < 54; i += 9) {
             for (int j = 0; j < 4; j++) {
                 if (tinkerer.getItem(i + j) == null) continue;
-                if (tinkerer.getItem(i + j).getType() == Material.LEGACY_STAINED_GLASS_PANE) continue;
+                if (tinkerer.getItem(i + j).getType() == Material.STAINED_GLASS_PANE) continue;
                 itemsList.add(tinkerer.getItem(i + j));
             }
         }

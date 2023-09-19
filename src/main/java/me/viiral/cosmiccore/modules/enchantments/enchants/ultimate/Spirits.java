@@ -29,7 +29,7 @@ public class Spirits extends ArmorIncomingPVPDamageEventEnchant {
         if (!(attacker instanceof Player)) return;
 
         if (Math.random() < 0.03) {
-            victim.playSound(victim.getLocation(), Sound.ENTITY_BLAZE_DEATH, 1.0F, 0.5F);
+            victim.playSound(victim.getLocation(), Sound.BLAZE_DEATH, 1.0F, 0.5F);
             Player attackerPlayer = ((Player) attacker);
 
             for (int i = 0; i < 3; i++) {

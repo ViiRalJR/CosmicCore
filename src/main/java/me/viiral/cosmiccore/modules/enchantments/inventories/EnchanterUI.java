@@ -53,9 +53,9 @@ public class EnchanterUI {
                         player.getInventory().addItem(EnchantTier.createMysteryBook(enchantTier, 1));
                         XPUtils.removeExperience(player, price);
                         EnchantLanguage.REMOVE_EXP.send(player, str -> str.replace("{amount}", String.valueOf(price)));
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.2F);
+                        player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1.0F, 1.2F);
                     } else {
-                        player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.7f, 1.4f);
+                        player.playSound(player.getLocation(), Sound.VILLAGER_NO, 0.7f, 1.4f);
                         EnchantLanguage.NOT_ENOUGH_EXP.send(player);
                     }
                 }

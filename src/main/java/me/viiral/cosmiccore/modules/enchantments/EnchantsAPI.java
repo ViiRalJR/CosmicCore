@@ -58,14 +58,14 @@ public class EnchantsAPI {
 
     public static boolean isSecretDust(ItemStack itemStack) {
         if (itemStack == null) return false;
-        if (itemStack.getType() != Material.FIRE_CHARGE) return false;
+        if (itemStack.getType() != Material.FIREBALL) return false;
         NBTItem nbtItem = new NBTItem(itemStack);
         return nbtItem.getString(COSMIC_DATA_STRING).equals(SECRET_DUST_DATA_STRING);
     }
 
     public static boolean isEnchantmentOrb(ItemStack itemStack) {
         if (itemStack == null) return false;
-        if (itemStack.getType() != Material.ENDER_EYE) return false;
+        if (itemStack.getType() != Material.EYE_OF_ENDER) return false;
         NBTItem nbtItem = new NBTItem(itemStack);
         return nbtItem.getString(COSMIC_DATA_STRING).equals(ORB_DATA_STRING);
     }
@@ -86,7 +86,7 @@ public class EnchantsAPI {
 
     public static boolean isBlackScroll(ItemStack itemStack) {
         if (itemStack == null) return false;
-        if (itemStack.getType() != Material.INK_SAC) return false;
+        if (itemStack.getType() != Material.INK_SACK) return false;
         NBTItem nbtItem = new NBTItem(itemStack);
         return nbtItem.getString(COSMIC_DATA_STRING).equals(BLACK_SCROLL_DATA_STRING);
     }

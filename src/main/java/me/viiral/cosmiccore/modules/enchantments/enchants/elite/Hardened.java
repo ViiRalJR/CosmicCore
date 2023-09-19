@@ -3,17 +3,19 @@ package me.viiral.cosmiccore.modules.enchantments.enchants.elite;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;
+import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.entity.LivingEntity;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
+
 import xyz.xenondevs.particle.ParticleBuilder;
 import xyz.xenondevs.particle.ParticleEffect;
+
 
 public class Hardened extends ArmorIncomingPVPDamageEventEnchant implements Reloadable {
 
@@ -37,16 +39,9 @@ public class Hardened extends ArmorIncomingPVPDamageEventEnchant implements Relo
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (Math.random() < procChance * enchantInfo.getLevel()) {
             this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victim, 30));
-
             for (ItemStack itemStack : victim.getInventory().getArmorContents()) {
                 if (!ItemUtils.isArmor(itemStack)) continue;
-
-                ItemMeta itemMeta = itemStack.getItemMeta();
-
-                if (itemMeta instanceof Damageable damageable) {
-                    damageable.setDamage(damageable.getDamage() - enchantInfo.getLevel() + 2);
-                    itemStack.setItemMeta(damageable);
-                }
+                itemStack.setDurability((short) (itemStack.getDurability() - enchantInfo.getLevel() + 2));
             }
         }
     }

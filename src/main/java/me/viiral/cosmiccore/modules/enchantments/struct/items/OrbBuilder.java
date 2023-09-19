@@ -20,7 +20,7 @@ public class OrbBuilder extends CustomItem {
 
         String loreFix = orbType == OrbType.ARMOR ? "slots on a piece of armor by " : "slots on a weapon by ";
 
-        ItemStack itemStack = new ItemBuilder(Material.ENDER_EYE)
+        ItemStack itemStack = new ItemBuilder(Material.EYE_OF_ENDER)
                 .setName("&6&l" + orbType.getFancyName() + " Enchantment Orb [&a&n" + slots + "&6&l]")
                 .addLore(
                         "&a" + successRate + "% Success Rate",

@@ -41,7 +41,8 @@ public class Dominate extends WeaponDamageEventEnchant implements Reloadable {
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (super.isOnCooldown(attacker)) return;
         if (Math.random() < this.procChance) {
-            if (!(victim instanceof Player victimPlayer)) return;
+            if (!(victim instanceof Player)) return;
+            Player victimPlayer = (Player) victim;
             DominateCache dominateCache = CacheUtils.getDominateCache(victimPlayer);
             dominateCache.procDominate(enchantedItemBuilder.getEnchantmentLevel(this));
             super.sendMessage(victim, this.message, str -> str
@@ -56,7 +57,8 @@ public class Dominate extends WeaponDamageEventEnchant implements Reloadable {
     @EventHandler
     public void onDamageWhileDominated(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
-        if (!(event.getDamager() instanceof Player damager)) return;
+        if (!(event.getDamager() instanceof Player)) return;
+        Player damager = (Player) event.getDamager();
         DominateCache dominateCache = CacheUtils.getDominateCache(damager);
         if (!dominateCache.isDominateActive()) return;
         super.getDamageHandler().reduceDamage(dominateCache.getDamageReduction(), event, this.getName());

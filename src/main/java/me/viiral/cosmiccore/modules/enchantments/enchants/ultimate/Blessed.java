@@ -27,7 +27,7 @@ public class Blessed extends WeaponDamageEventEnchant {
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (Math.random() < (this.procChance * enchantedItemBuilder.getEnchantmentLevel(this))) {
             super.sendMessage(attacker, this.message);
-            attacker.playSound(attacker.getLocation(), Sound.ENTITY_PLAYER_SPLASH, 1.2f, 2.0f);
+            attacker.playSound(attacker.getLocation(), Sound.SPLASH, 1.2f, 2.0f);
             PotionEffectUtils.bless(attacker);
         }
     }

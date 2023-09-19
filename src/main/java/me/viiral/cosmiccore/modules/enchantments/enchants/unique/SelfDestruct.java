@@ -33,7 +33,7 @@ public class SelfDestruct extends ArmorIncomingPVPDamageEventEnchant {
         if (super.isOnCooldown(victim)) return;
         if (victim.getHealth() - event.getFinalDamage() <= 0.0) {
             super.registerCooldown(victim, 200);
-            victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 2.0f, 0.75f);
+            victim.getWorld().playSound(victim.getLocation(), Sound.EXPLODE, 2.0f, 0.75f);
             int fuseTicks = 120 - enchantInfo.getLevel() * 20;
             for (int tntAmount = enchantInfo.getLevel() * 2; tntAmount > 0; --tntAmount) {
                 this.spawnExplosion(victim, this.getNearbyLocation(victim.getLocation(), 3, 1), fuseTicks);
@@ -48,7 +48,7 @@ public class SelfDestruct extends ArmorIncomingPVPDamageEventEnchant {
             event.blockList().clear();
             if (!PVPUtils.canPvPInRegion(event.getLocation())) return;
             Location loc = event.getLocation();
-            loc.getWorld().playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
+            loc.getWorld().playSound(loc, Sound.EXPLODE, 1.0f, 1.0f);
 
             String exploder = event.getEntity().getMetadata("SelfDestructTNT").get(0).asString();
             Player pExploder = Bukkit.getPlayer(exploder);

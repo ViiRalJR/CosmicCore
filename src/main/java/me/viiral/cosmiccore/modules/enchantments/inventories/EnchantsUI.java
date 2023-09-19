@@ -32,7 +32,7 @@ public class EnchantsUI {
             Gui gui = new EnchanterUI().getEnchantersUI();
             gui.open(event.getWhoClicked());
         }));
-        this.enchantsUI.getFiller().fillBottom(new GuiItem(new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setName("").build()));
+        this.enchantsUI.getFiller().fillBottom(new GuiItem(new ItemBuilder(Material.STAINED_GLASS_PANE).setName("").setDurability((short) 7).build()));
 
         for (Enchantment enchantment : EnchantRegister.getInstance().getOrderedEnchantments(enchantTier)) {
             this.enchantsUI.addItem(new GuiItem(new BookBuilder(enchantment, enchantment.getMax()).setDestroyRate(100).setSuccessRate(100).build()));

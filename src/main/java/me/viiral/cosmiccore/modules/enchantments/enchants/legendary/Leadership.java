@@ -32,7 +32,8 @@ public class Leadership extends ArmorOutgoingPVPDamageEventEnchant {
             int counter = 0;
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(attacker);
             for (Entity nearbyEntity : attacker.getNearbyEntities(this.range, this.range, this.range)) {
-                if (!(nearbyEntity instanceof Player nearbyPlayer)) return;
+                if (!(nearbyEntity instanceof Player)) return;
+                Player nearbyPlayer = (Player) nearbyEntity;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

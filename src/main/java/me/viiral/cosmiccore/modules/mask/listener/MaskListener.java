@@ -115,7 +115,7 @@ public class MaskListener implements Listener {
 
         MaskResult result = applyMask(item, mask);
         if (result == MaskResult.CONTAINS) {
-            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply mask, helmet already contains a mask.", Sound.BLOCK_ANVIL_LAND);
+            cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply mask, helmet already contains a mask.", Sound.ANVIL_LAND);
         } else if (result == MaskResult.SUCCESS) {
             cancelEventAndApplyMask(event, player, item, mask);
         }
@@ -173,14 +173,14 @@ public class MaskListener implements Listener {
         item.applyMask(mask.getMasks());
         event.setCurrentItem(item.build());
         event.setCursor(null);
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0f, 0.75f);
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1.0f, 0.75f);
     }
 
     private void cancelEventAndRemoveMask(InventoryClickEvent event, Player player, MaskHelmetBuilder item) {
         event.setCancelled(true);
         event.setCursor(new MaskBuilder(item.getMasks()).build());
         event.setCurrentItem(item.removeMask().build());
-        player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 1.0f, 0.75f);
+        player.playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1.0f, 0.75f);
     }
 
     private enum MaskResult {

@@ -62,7 +62,8 @@ public class Bleed extends WeaponDamageEventEnchant {
 
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(victimPlayer);
             for (Entity entity : victim.getNearbyEntities(7, 7, 7)) {
-                if (!(entity instanceof Player nearbyPlayer)) continue;
+                if (!(entity instanceof Player)) continue;
+                Player nearbyPlayer = (Player) entity;
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) continue;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) continue;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

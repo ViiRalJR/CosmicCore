@@ -118,7 +118,7 @@ public class YijkiArmorSet extends ArmorSet implements WeaponArmorSet {
         FPlayer fp = FPlayers.getInstance().getByPlayer(player);
         for (int i = 0; i < 16; ++i) {
             Location l = LocationUtils.getNearbyLocation(center, 8, 2, 0);
-            l.getWorld().playSound(l, Sound.ENTITY_WITHER_SPAWN, 1.0f, 0.4f);
+            l.getWorld().playSound(l, Sound.WITHER_SPAWN, 1.0f, 0.4f);
             //de.inventivegames.particle.ParticleEffect.WITCH_MAGIC.sendToPlayers(Bukkit.getOnlinePlayers(), l.clone(), 0f, 1f, 0f, 0.7f, 32);
             //de.inventivegames.particle.ParticleEffect.WITCH_MAGIC.sendToPlayers(Bukkit.getOnlinePlayers(), l.clone(), 0f, 0f, 0f, 0.7f, 32);
             procLocations.add(l);
@@ -135,7 +135,7 @@ public class YijkiArmorSet extends ArmorSet implements WeaponArmorSet {
         Bukkit.getScheduler().runTaskLater(CosmicCore.getInstance(), () -> {
             for (Location l : procLocations) {
                 l.getWorld().strikeLightningEffect(l);
-                l.getWorld().playSound(l, Sound.ENTITY_WITHER_SPAWN, 1.0f, 0.4f);
+                l.getWorld().playSound(l, Sound.WITHER_SPAWN, 1.0f, 0.4f);
                 for (Player pNear : nearbyPlayers) {
                     if (!(pNear.getLocation().distanceSquared(l) <= 2.0) || FPlayers.getInstance().getByPlayer(pNear).getRelationTo(fp).isAtLeast(Relation.TRUCE) || !CosmicCore.getInstance().getWorldGuardUtils().canPvPInRegion(pNear.getLocation()))
                         continue;

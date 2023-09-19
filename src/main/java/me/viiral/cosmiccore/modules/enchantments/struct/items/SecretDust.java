@@ -16,7 +16,7 @@ public class SecretDust extends CustomItem {
     public SecretDust(EnchantTier enchantTier, int maxPercent) {
         super(SECRET_DUST_DATA_STRING);
 
-        ItemStack itemStack = new ItemBuilder(Material.FIRE_CHARGE)
+        ItemStack itemStack = new ItemBuilder(Material.FIREWORK_CHARGE)
                 .setName(enchantTier.getColor() + enchantTier.getFormatedName() + " Secret Dust &7(Right Click)")
                 .addLore(
                         "&aSuccess: +0-" + maxPercent + "%",

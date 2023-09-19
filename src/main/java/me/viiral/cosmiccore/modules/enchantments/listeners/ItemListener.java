@@ -381,7 +381,7 @@ public class ItemListener implements Listener {
             player.setItemInHand(event.getItem());
             player.updateInventory();
             EnchantLanguage.OUT_OF_SOULS.send(player);
-            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.7f, 0.4f);
+            player.playSound(player.getLocation(), Sound.ITEM_BREAK, 0.7f, 0.4f);
             return;
         }
 

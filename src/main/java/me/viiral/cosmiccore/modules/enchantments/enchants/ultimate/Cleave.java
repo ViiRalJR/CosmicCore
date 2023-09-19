@@ -31,7 +31,9 @@ public class Cleave extends WeaponDamageEventEnchant {
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(attacker);
             int level = enchantedItemBuilder.getEnchantmentLevel(this);
             attacker.getNearbyEntities(level, 10.0, level).forEach(entity -> {
-                if (!(entity instanceof Player nearbyPlayer)) return;
+                if (!(entity instanceof Player)) return;
+                Player nearbyPlayer = (Player) entity;
+
                 if (nearbyPlayer.getGameMode() != GameMode.SURVIVAL) return;
                 if (!PVPUtils.canPvPInRegion(nearbyPlayer)) return;
                 FPlayer fPlayerNearby = FPlayers.getInstance().getByPlayer(nearbyPlayer);

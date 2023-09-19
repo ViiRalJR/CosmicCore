@@ -55,7 +55,7 @@ public class Silence extends WeaponDamageEventEnchant {
             int finalSilenceTime = silenceTime;
             super.sendMessage(attacker, this.messageAttacker, str -> str.replace("{duration}", String.valueOf(finalSilenceTime)));
             super.sendMessage(victim, this.messageVictim, str -> str.replace("{duration}", String.valueOf(finalSilenceTime)));
-            victim.getWorld().playSound(victim.getLocation(), Sound.ENTITY_WITHER_HURT, 1.0f, 0.25f);
+            victim.getWorld().playSound(victim.getLocation(), Sound.WITHER_HURT, 1.0f, 0.25f);
         }
     }
 

@@ -50,7 +50,8 @@ public class BookBuilder extends CustomItem {
         nbtItem.setInteger(SUCCESS_RATE_STRING, success);
         nbtItem.setInteger(DESTROY_RATE_STRING, destroy);
         nbtItem.setBoolean("heroic", enchantment.isHeroic());
-        if (enchantment instanceof HeroicEnchant e) {
+        if (enchantment instanceof HeroicEnchant) {
+            HeroicEnchant e = (HeroicEnchant) enchantment;
             nbtItem.setString("required", e.getNonHeroicEnchant().getID());
         }
         this.nbtItem = nbtItem;

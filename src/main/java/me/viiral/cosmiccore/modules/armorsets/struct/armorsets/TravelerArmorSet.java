@@ -121,8 +121,8 @@ public class TravelerArmorSet extends ArmorSet implements Listener {
                     continue;
                 if (nearbyPlayer.hasMetadata("NPC"))
                     continue;
-                nearbyPlayer.playSound(nearbyPlayer.getLocation().add(0.0D, 4.0D, 0.0D), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.1F);
-                nearbyPlayer.playSound(nearbyPlayer.getLocation().add(0.0D, 4.0D, 0.0D), Sound.BLOCK_ANVIL_LAND, 1.0F, 1.1F);
+                nearbyPlayer.playSound(nearbyPlayer.getLocation().add(0.0D, 4.0D, 0.0D), Sound.ENDERMAN_TELEPORT, 1.0F, 1.1F);
+                nearbyPlayer.playSound(nearbyPlayer.getLocation().add(0.0D, 4.0D, 0.0D), Sound.ANVIL_LAND, 1.0F, 1.1F);
                 nearbyPlayer.sendMessage(CC.DarkPurpleB + "** DIMENSIONAL SHIFT (" + CC.Red + fpNear.getRelationTo(damagedFPlayer).getColor() + victim.getName() + " [4s]" + CC.DarkPurpleB + ") **");
 
                 this.spawnDimensionalBlocks(nearbyPlayer, victim);
@@ -178,7 +178,7 @@ public class TravelerArmorSet extends ArmorSet implements Listener {
                 double locX = x + this.getRandomOffset(5.8D);
                 double locZ = z + this.getRandomOffset(5.8D);
                 Location location = new Location(center.getWorld(), locX, playerY, locZ);
-                Material material = (new Random()).nextBoolean() ? Material.NETHERRACK : Material.END_STONE;
+                Material material = (new Random()).nextBoolean() ? Material.NETHERRACK : Material.ENDER_STONE;
                 FallingBlock fallingBlock = location.getWorld().spawnFallingBlock(location, material, (byte)0);
                 fallingBlock.setVelocity(new Vector(0, -1, 0));
                 fallingBlock.setHurtEntities(false);

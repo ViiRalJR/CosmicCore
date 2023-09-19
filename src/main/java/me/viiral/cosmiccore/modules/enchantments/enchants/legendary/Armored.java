@@ -39,7 +39,7 @@ public class Armored extends ArmorIncomingPVPDamageEventEnchant implements Silen
     @Override
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (!(attacker instanceof Player)) return;
-        if (!EnchantType.SWORD.getItems().contains(((Player) attacker).getInventory().getItemInMainHand().getType())) return;
+        if (!EnchantType.SWORD.getItems().contains(((Player) attacker).getItemInHand().getType())) return;
 
         double damageNegation = enchantInfo.getLevel() * damageNegationMultiplier;
         super.getDamageHandler().reduceDamage(damageNegation, event, this.getName());

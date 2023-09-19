@@ -22,14 +22,14 @@ public class ObsidianDestroyer extends Enchantment {
         if (event.isCancelled()) return;
         if (event.getAction() == Action.LEFT_CLICK_BLOCK && event.hasBlock() && event.getClickedBlock().getType() == Material.OBSIDIAN) {
 
-            ItemStack itemStack = event.getPlayer().getInventory().getItemInMainHand();
+            ItemStack itemStack = event.getPlayer().getItemInHand();
 
             if (!this.getType().getItems().contains(itemStack.getType())) return;
 
             EnchantedItemBuilder enchantedItemBuilder = new EnchantedItemBuilder(itemStack);
 
             if (!enchantedItemBuilder.hasEnchantment(this)) return;
-            FLocation breakLoc = new FLocation(event.getClickedBlock().getLocation());
+            FLocation breakLoc = FLocation.wrap(event.getClickedBlock().getLocation());
             FPlayer fPlayer = FPlayers.getInstance().getByPlayer(event.getPlayer());
             Faction faction = fPlayer.getFaction();
 

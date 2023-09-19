@@ -37,7 +37,7 @@ public class ReflectiveBlock extends WeaponDamageEventEnchant implements HeroicE
             super.getDamageHandler().reduceDamage(this.damageDecrease, event, this.getName());
             super.registerCooldown(attacker, this.cooldown);
             if (Math.random() < this.procChance * enchantedItemBuilder.getEnchantmentLevel(this) && victimPlayer.isBlocking()) {
-                victimPlayer.playSound(victimPlayer.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.7f, 0.2f);
+                victimPlayer.playSound(victimPlayer.getLocation(), Sound.ITEM_BREAK, 0.7f, 0.2f);
             }
         }
     }
