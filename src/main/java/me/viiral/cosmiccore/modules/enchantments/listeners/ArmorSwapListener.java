@@ -96,15 +96,15 @@ public class ArmorSwapListener implements Listener {
         e.setUseInteractedBlock(Event.Result.DENY);
         e.setUseItemInHand(Event.Result.DENY);
 
-        EnchantsAPI.clearEnchantsFromCacheFromOneArmorItem(p, e.getItem());
-        EnchantsAPI.reprocEnchantsFromOneArmorItem(p, e.getItem());
-        ArmorSetCache armorSetCache = (ArmorSetCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_set");
-        armorSetCache.clear();
-        ArmorSetAPI.refreshArmorSets(p);
+       //EnchantsAPI.clearEnchantsFromCacheFromOneArmorItem(p, e.getItem());
+       //EnchantsAPI.reprocEnchantsFromOneArmorItem(p, e.getItem());
+       //ArmorSetCache armorSetCache = (ArmorSetCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_set");
+       //armorSetCache.clear();
+       //ArmorSetAPI.refreshArmorSets(p);
 
-        ArmorCrystalCache armorCrystalCache = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_crystal");
-        armorCrystalCache.clear();
-        ArmorSetAPI.refreshArmorCrystals(p);
+        //ArmorCrystalCache armorCrystalCache = (ArmorCrystalCache) CacheManager.getInstance().getCachedPlayer(p).getCache("armor_crystal");
+        //armorCrystalCache.clear();
+        //ArmorSetAPI.refreshArmorCrystals(p);
         p.setMetadata("lastArmorSwap", new FixedMetadataValue(CosmicCore.getInstance(), MinecraftServer.currentTick));
         equipArmor(p, e.getItem());
         p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 10.0F, 0.95F);
