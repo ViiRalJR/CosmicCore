@@ -295,6 +295,8 @@ public class ItemListener implements Listener {
     public void onPlayerDeathUpdateSoulTracker(PlayerDeathEvent event) {
         Player killer = event.getEntity().getKiller();
 
+        if(killer == null) return;
+
         if (killer.getItemInHand() == null) return;
 
         ItemStack itemStack = killer.getItemInHand();
