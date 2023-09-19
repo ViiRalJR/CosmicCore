@@ -10,6 +10,8 @@ import java.util.List;
 
 public class CosmicGamesHat extends Skin {
 
+    // TODO: 19/09/2023 Slotbot ticket
+
     public CosmicGamesHat() {
         super("CosmicGames Hat", SkinType.HELMET);
     }

@@ -9,6 +9,8 @@ import java.util.List;
 
 public class MinemanMuzzle extends Skin {
 
+    // TODO: 19/09/2023 this
+
     public MinemanMuzzle() {
         super("Mineman Muzzle", SkinType.HELMET);
     }

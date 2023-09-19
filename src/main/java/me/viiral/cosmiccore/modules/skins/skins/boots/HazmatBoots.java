@@ -9,6 +9,8 @@ import java.util.List;
 
 public class HazmatBoots extends Skin {
 
+    // TODO: 19/09/2023 Silence pet
+
     public HazmatBoots() {
         super("Hazmat Boots", SkinType.BOOTS);
     }

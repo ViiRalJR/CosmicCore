@@ -6,6 +6,9 @@ import me.viiral.cosmiccore.modules.armorsets.ArmorSetAPI;
 import me.viiral.cosmiccore.modules.enchantments.EnchantsAPI;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.skins.SkinsAPI;
+import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
+import me.viiral.cosmiccore.modules.skins.struct.cache.SkinCache;
+import me.viiral.cosmiccore.utils.potion.PotionEffectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -30,6 +33,20 @@ public class User {
     public void addEffect(PotionEffectType type, int amplifier, int duration) {
         if (duration == 0) duration = Integer.MAX_VALUE;
         if (!hasPotion(type)) addPotionEffect(type, amplifier, duration);
+
+        if (type == PotionEffectType.SLOW) {
+            if (SkinsAPI.hasSkinOn(getPlayer(), SkinRegister.getInstance().getSkinFromName("Snowflake Slippers"))) return;
+            if (SkinsAPI.hasSkinOn(getPlayer(), SkinRegister.getInstance().getSkinFromName("Bloodstained Galoshes"))) return;
+            if (SkinsAPI.hasSkinOn(getPlayer(), SkinRegister.getInstance().getSkinFromName("Hazmat Helmet"))) return;
+
+        }
+
+        if (PotionEffectUtils.getDebuffsList().contains(type)) {
+            if (SkinsAPI.hasSkinOn(getPlayer(), SkinRegister.getInstance().getSkinFromName("Roller Skates"))) return;
+            if (SkinsAPI.hasSkinOn(getPlayer(), SkinRegister.getInstance().getSkinFromName("Hazmat Boots"))) return;
+
+        }
+
         if (isStronger(type, amplifier)) {
             removePotionEffect(type);
             addPotionEffect(type, amplifier, duration);

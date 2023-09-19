@@ -9,6 +9,8 @@ import java.util.List;
 
 public class BandolierBelt extends Skin {
 
+    // TODO: 19/09/2023 this
+
     public BandolierBelt() {
         super("Bandolier Belt", SkinType.BELT);
     }

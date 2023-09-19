@@ -10,6 +10,8 @@ import java.util.List;
 
 public class MoonBoots extends Skin {
 
+    // TODO: 19/09/2023 Increase armor set bonus and crystal
+
     public MoonBoots() {
         super("Moon Boots", SkinType.BOOTS);
     }

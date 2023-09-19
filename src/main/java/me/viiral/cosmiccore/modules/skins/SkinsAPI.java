@@ -3,6 +3,8 @@ package me.viiral.cosmiccore.modules.skins;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.viiral.cosmiccore.CosmicCore;
+import me.viiral.cosmiccore.modules.mask.struct.Mask;
+import me.viiral.cosmiccore.modules.mask.struct.cache.MaskCache;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import me.viiral.cosmiccore.modules.skins.struct.cache.SkinCache;
@@ -69,5 +71,12 @@ public class SkinsAPI {
                     skinCache.addSkin(skin);
                 }
         }
+    }
+
+    public static boolean hasSkinOn(Player player, Skin skin) {
+        CachedPlayer cachedPlayer = CosmicCore.getInstance().getCacheManager().getCachedPlayer(player);
+        SkinCache skinCache = (SkinCache) cachedPlayer.getCache("skins");
+
+        return skinCache.getSkins().stream().anyMatch(m -> m.equals(skin));
     }
 }

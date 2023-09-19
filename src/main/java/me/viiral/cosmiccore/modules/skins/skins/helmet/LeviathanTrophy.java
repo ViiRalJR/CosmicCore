@@ -9,6 +9,8 @@ import java.util.List;
 
 public class LeviathanTrophy extends Skin {
 
+    // TODO: 19/09/2023 this
+
     public LeviathanTrophy() {
         super("Leviathan Trophy", SkinType.HELMET);
     }

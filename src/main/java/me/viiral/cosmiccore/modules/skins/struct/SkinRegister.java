@@ -31,6 +31,9 @@ public class SkinRegister {
     public void initialize() {
         registerAll(
 
+                // FINISHED
+                new SnowflakeSlippers(),
+
                 // Amulets
                 new AmuletOfCorruption(), new AmuletOfDestruction(), new GoldChain(), new LostAmulet(), new LuauLei(),
                 new RadioactiveAmulet(),
@@ -54,7 +57,7 @@ public class SkinRegister {
                 new BarrysBolts(), new BigTimbs(), new BloodstainedGaloshes(), new BunnySlippers(),
                 new CamouflageYeezys(), new CupidsWingedBoots(), new HazmatBoots(), new KnightBoots(),
                 new MoonBoots(), new RetaliationBoots(), new RocketBoots(), new RollerSkates(),
-                new SnowflakeSlippers(), new TeddySlippers()
+                new TeddySlippers()
         );
     }
 
@@ -77,7 +80,7 @@ public class SkinRegister {
 
     public Skin getSkinFromID(String id) {
         return Optional.ofNullable(id)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(String::toLowerCase)
                 .map(skins::get)
                 .orElseThrow(() -> new IllegalArgumentException("Skin ID must not be null or empty."));
@@ -85,10 +88,11 @@ public class SkinRegister {
 
     public String getSkinIDFromName(String name) {
         return Optional.ofNullable(name)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(n -> n.replace(" ", "").toLowerCase())
                 .orElseThrow(() -> new IllegalArgumentException("Skin name must not be null or empty."));
     }
+
 
     public Skin getSkinFromName(String name) {
         return this.skins.get(getSkinIDFromName(name));
@@ -100,7 +104,7 @@ public class SkinRegister {
 
     public boolean isSkinFromId(String id) {
         return this.skins.containsKey(Optional.ofNullable(id)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(String::toLowerCase)
                 .orElseThrow(() -> new IllegalArgumentException("Mask ID Must not be null or empty.")));
     }

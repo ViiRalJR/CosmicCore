@@ -36,10 +36,8 @@ public class MaskRegister {
                 // NOT FINISHED MASKS
                 new BunnyMask(), new JokerMask(),
                 new MonopolyMask(), new PilgrimMask(),
-                new ReindeerMask(), new SantaMask(),
+                new ReindeerMask(), new SantaMask()
 
-                // TEST MASKS
-                new DriftayMask(), new ViiralMask()
         );
     }
 
@@ -62,18 +60,20 @@ public class MaskRegister {
 
     public Mask getMaskFromID(String id) {
         return Optional.ofNullable(id)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(String::toLowerCase)
                 .map(masks::get)
                 .orElseThrow(() -> new IllegalArgumentException("Mask ID must not be null or empty."));
     }
 
+
     public String getMaskIDFromName(String name) {
         return Optional.ofNullable(name)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(n -> n.replace(" ", "").toLowerCase())
                 .orElseThrow(() -> new IllegalArgumentException("Mask name must not be null or empty."));
     }
+
 
     public Mask getMaskFromName(String name) {
         return this.masks.get(getMaskIDFromName(name));
@@ -86,10 +86,11 @@ public class MaskRegister {
 
     public boolean isMaskFromId(String id) {
         return this.masks.containsKey(Optional.ofNullable(id)
-                .filter(Predicate.not(String::isEmpty))
+                .filter(n -> !n.isEmpty())
                 .map(String::toLowerCase)
                 .orElseThrow(() -> new IllegalArgumentException("Mask ID must not be null or empty.")));
     }
+
 
     public boolean isMaskFromName(String name) {
         return this.masks.containsKey(getMaskIDFromName(name));

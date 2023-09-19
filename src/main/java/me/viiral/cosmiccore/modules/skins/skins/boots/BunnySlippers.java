@@ -9,6 +9,8 @@ import java.util.List;
 
 public class BunnySlippers extends Skin {
 
+    // TODO: 19/09/2023 this
+
     public BunnySlippers() {
         super("Bunny Slippers", SkinType.BOOTS);
     }

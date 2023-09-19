@@ -12,6 +12,8 @@ import java.util.List;
 
 public class BarrysBolts extends Skin implements EquipableSkin {
 
+    // TODO: 19/09/2023 bloody deep wounds
+
     public BarrysBolts() {
         super("Barrys Bolts", SkinType.BOOTS);
     }

@@ -3,10 +3,13 @@ package me.viiral.cosmiccore.modules.mask.listener;
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
+import me.viiral.cosmiccore.modules.mask.struct.EquippableMask;
 import me.viiral.cosmiccore.modules.mask.struct.Mask;
 import me.viiral.cosmiccore.modules.mask.struct.cache.MaskCache;
 import me.viiral.cosmiccore.modules.mask.struct.item.MaskBuilder;
 import me.viiral.cosmiccore.modules.mask.struct.item.MaskHelmetBuilder;
+import me.viiral.cosmiccore.modules.skins.struct.EquipableSkin;
+import me.viiral.cosmiccore.modules.skins.struct.item.SkinArmorBuilder;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.armor.ArmorEquipEvent;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
@@ -73,6 +76,23 @@ public class MaskListener implements Listener {
                 }
             }
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void armorEquipEvent(ArmorEquipEvent event) {
+        ItemStack itemStack = event.getNewArmorPiece();
+
+        if (!ItemUtils.isEnchantable(itemStack)) return;
+
+        MaskHelmetBuilder maskHelmetBuilder = new MaskHelmetBuilder(itemStack);
+
+        if (!maskHelmetBuilder.hasMask()) return;
+
+        maskHelmetBuilder.getMasks().forEach(mask -> {
+            if (mask instanceof EquippableMask) {
+                ((EquipableSkin) mask).onEquip(event.getPlayer());
+            }
+        });
     }
 
     @EventHandler
