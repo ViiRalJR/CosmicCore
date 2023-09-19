@@ -44,6 +44,7 @@ public class ItemListener implements Listener {
         this.soulManager = plugin.getSoulManager();
     }
 
+
     @EventHandler
     public void onDustApply(InventoryClickEvent event) {
         if (event.getCurrentItem() == null || event.getCursor() == null) return;
@@ -173,6 +174,29 @@ public class ItemListener implements Listener {
 
         enchantedItemBuilder.setProtected(true);
         event.setCurrentItem(enchantedItemBuilder.build());
+    }
+
+    @EventHandler
+    public void onHolyWhiteScrollApply(InventoryClickEvent event) {
+        if (event.getCurrentItem() == null || event.getCursor() == null) return;
+        Player player = (Player) event.getWhoClicked();
+        if (player.getGameMode() != GameMode.SURVIVAL) return;
+
+        if (!EnchantsAPI.isHolyWhiteScroll(event.getCursor()) || !ItemUtils.isEnchantable(event.getCurrentItem())) return;
+
+        EnchantedItemBuilder enchantedItemBuilder = new EnchantedItemBuilder(event.getCurrentItem());
+
+        event.setCancelled(true);
+
+        if (!enchantedItemBuilder.isProtected()) return;
+
+        if (event.getCursor().getAmount() > 1) event.getCursor().setAmount(event.getCursor().getAmount() - 1);
+        else event.setCursor(null);
+
+        enchantedItemBuilder.setProtected(false);
+        enchantedItemBuilder.setHolyProtected(true);
+        event.setCurrentItem(enchantedItemBuilder.build());
+
     }
 
     @EventHandler

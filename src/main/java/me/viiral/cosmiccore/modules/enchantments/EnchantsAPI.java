@@ -98,6 +98,13 @@ public class EnchantsAPI {
         return nbtItem.getString(COSMIC_DATA_STRING).equals(WHITE_SCROLL_DATA_STRING);
     }
 
+    public static boolean isHolyWhiteScroll(ItemStack itemStack) {
+        if (itemStack == null) return false;
+        if (itemStack.getType() != Material.PAPER) return false;
+        NBTItem nbtItem = new NBTItem(itemStack);
+        return nbtItem.getString(COSMIC_DATA_STRING).equals(HOLY_WHITE_SCROLL_DATA_STRING);
+    }
+
     public static boolean isTransmogScroll(ItemStack itemStack) {
         if (itemStack == null) return false;
         if (itemStack.getType() != Material.PAPER) return false;

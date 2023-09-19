@@ -183,6 +183,10 @@ public class EnchantedItemBuilder {
         return this.nbtItem.getBoolean(PROTECTED_STRING);
     }
 
+    public boolean isHolyProtected() {
+        return this.nbtItem.getBoolean(HOLY_PROTECTED_STRING);
+    }
+
     public void setProtected(boolean status) {
         this.nbtItem.setBoolean(PROTECTED_STRING, status);
 
@@ -192,6 +196,40 @@ public class EnchantedItemBuilder {
         }
 
         this.removeProtectedFromLore();
+    }
+
+    public void setHolyProtected(boolean status) {
+        this.nbtItem.setBoolean(HOLY_PROTECTED_STRING, status);
+
+        if (status) {
+            this.addHolyProtectedToLore();
+            return;
+        }
+
+        this.removeHolyProtectedFromLore();
+    }
+
+    private void addHolyProtectedToLore() {
+        ItemStack itemStack = this.nbtItem.getItem();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        List<String> lore = this.getLore();
+        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY**f&l)");
+        if (lore.contains(protectedLoreLine)) return;
+        lore.add(protectedLoreLine);
+        itemMeta.setLore(lore);
+        this.nbtItem.getItem().setItemMeta(itemMeta);
+    }
+
+    private void removeHolyProtectedFromLore() {
+        ItemStack itemStack = this.nbtItem.getItem();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY**f&l)");
+        List<String> lore = this.getLore()
+                .stream()
+                .filter(str -> !str.equals(protectedLoreLine))
+                .collect(Collectors.toList());
+        itemMeta.setLore(lore);
+        this.nbtItem.getItem().setItemMeta(itemMeta);
     }
 
     private void addProtectedToLore() {

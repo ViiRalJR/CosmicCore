@@ -14,6 +14,7 @@ public class NbtTags {
     public static final String DUST_DATA_STRING = "dust";
     public static final String ORB_DATA_STRING = "orb";
     public static final String WHITE_SCROLL_DATA_STRING = "whiteScroll";
+    public static final String HOLY_WHITE_SCROLL_DATA_STRING = "holyWhiteScroll";
     public static final String RENAME_TAG_DATA_STRING = "renameTag";
     public static final String TRANSMOG_SCROLL_DATA_STRING = "transmogScroll";
     public static final String RANDOMIZATION_SCROLL_DATA_STRING = "randomizationScroll";
@@ -27,6 +28,7 @@ public class NbtTags {
     public static final String SLOTS_AMOUNT_STRING = "slots";
     public static final String ORB_TYPE_STRING = "orbType";
     public static final String PROTECTED_STRING = "protected";
+    public static final String HOLY_PROTECTED_STRING = "holyProtected";
 
 
 }
