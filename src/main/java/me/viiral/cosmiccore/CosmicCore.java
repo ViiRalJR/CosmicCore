@@ -164,6 +164,7 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         pm.registerEvents(new TinkererListeners(), this);
         pm.registerEvents(new MaskListener(), this);
         pm.registerEvents(new SkinListener(), this);
+        pm.registerEvents(new HolyWhiteScrollListener(), this);
     }
 
     private void registerCommandParameters() {

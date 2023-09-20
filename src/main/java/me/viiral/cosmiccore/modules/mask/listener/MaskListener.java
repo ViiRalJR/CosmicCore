@@ -25,6 +25,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -132,6 +133,8 @@ public class MaskListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         MaskHelmetBuilder item = new MaskHelmetBuilder(event.getCurrentItem());
         MaskBuilder mask = new MaskBuilder(event.getCursor());
+
+        if (event.getSlotType() == InventoryType.SlotType.ARMOR) return;
 
         MaskResult result = applyMask(item, mask);
         if (result == MaskResult.CONTAINS) {

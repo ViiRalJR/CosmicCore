@@ -1,11 +1,10 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.legendary;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
-
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
@@ -16,13 +15,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class Barbarian extends WeaponDamageEventEnchant implements Heroicable {
+public class BrutalBarbarian extends WeaponDamageEventEnchant implements HeroicEnchant {
 
     @ConfigValue
-    private int damageBuff = 20;
+    private int damageBuff = 35;
 
-    public Barbarian() {
-        super("Barbarian", EnchantTier.LEGENDARY, 4, EnchantType.AXE, "Multiplies damage against players who are wielding an AXE", " at the time they are hit.");
+    public BrutalBarbarian() {
+        super("Brutal Barbarian", EnchantTier.HEROIC, 4, EnchantType.AXE, "Heroic Enchant.", "Multiplies damage against players who are wielding an AXE", " at the time they are hit.");
     }
 
     @Override
@@ -40,7 +39,7 @@ public class Barbarian extends WeaponDamageEventEnchant implements Heroicable {
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
-        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Brutal Barbarian");
+    public Enchantment getNonHeroicEnchant() {
+        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Barbarian");
     }
 }

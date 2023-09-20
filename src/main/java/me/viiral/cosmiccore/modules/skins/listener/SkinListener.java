@@ -157,6 +157,8 @@ public class SkinListener implements Listener {
         SkinArmorBuilder item = new SkinArmorBuilder(event.getCurrentItem());
         SkinBuilder skin = new SkinBuilder(event.getCursor());
 
+        if (event.getSlotType() == InventoryType.SlotType.ARMOR) return;
+
         SkinResult result = applySkin(item, skin);
         if (result == SkinResult.CONTAINS) {
             cancelEventWithMessage(event, player, "&c&l(!)&c Cannot apply skin, armor piece already contains a skin.", Sound.ANVIL_LAND);
@@ -208,7 +210,11 @@ public class SkinListener implements Listener {
             return SkinResult.INVALID_COUNT;
         }
 
+
+        if (!skinBuilder.hasApplicable()) return SkinResult.RETURN;
+
         List<Material> applicableMaterials = Arrays.asList(skinBuilder.getApplicable().getApplicable());
+
 
         if (!applicableMaterials.contains(armorItem.getType())) {
             return SkinResult.WRONG_ITEM;
@@ -248,6 +254,6 @@ public class SkinListener implements Listener {
     }
 
     private enum SkinResult {
-        SUCCESS_REMOVAL, SUCCESS, CONTAINS, INVALID_COUNT, RETURN, WRONG_ITEM
+        SUCCESS_REMOVAL, SUCCESS, CONTAINS, INVALID_COUNT, RETURN, WRONG_ITEM, WRONG_SLOT
     }
 }

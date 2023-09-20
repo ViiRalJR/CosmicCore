@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.ultimate;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
@@ -7,25 +7,25 @@ import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
-
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.GameMode;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Cleave extends WeaponDamageEventEnchant implements Heroicable {
+public class MightyCleave extends WeaponDamageEventEnchant implements HeroicEnchant {
 
     @ConfigValue
-    private double procChance = 0.05;
+    private double procChance = 0.10;
     @ConfigValue
-    private int damageAmount = 3;
+    private int damageAmount = 5;
 
-    public Cleave() {
-        super("Cleave", EnchantTier.ULTIMATE, 7, EnchantType.AXE, "Damages players within a radius that", "increases with the level of enchant.");
+    public MightyCleave() {
+        super("Mighty Cleave", EnchantTier.HEROIC, 7, EnchantType.AXE, "Heroic Enchant.", "Damages players within a radius that", "increases with the level of enchant.", "Double chance and double damage");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Cleave extends WeaponDamageEventEnchant implements Heroicable {
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
-        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Mighty Cleave");
+    public Enchantment getNonHeroicEnchant() {
+        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Cleave");
     }
 }

@@ -167,6 +167,25 @@ public class AdminEnchantsCommand extends CommandBase {
         }
     }
 
+    @SubCommand("holy")
+    @Alias("hscroll")
+    @WrongUsage("&cUsage: /ce holy <amount> [player]")
+    @Permission("cosmic.admin")
+    public void holyWhiteScrollCommand(CommandSender sender, @Completion("#range:1-64") Integer amount, @Completion("#players") @Optional Player player) {
+        ItemStack itemStack = new HolyWhiteScrollBuilder().build();
+
+        itemStack.setAmount(amount);
+
+        if (player != null) {
+            player.getInventory().addItem(itemStack);
+            return;
+        }
+
+        if (sender instanceof Player) {
+            InventoryUtils.giveItemToPlayer(((Player) sender), itemStack);
+        }
+    }
+
     @SubCommand("transmogscroll")
     @Alias({"tscroll", "transmog"})
     @WrongUsage("&cUsage: /ce transmogscroll <amount> [player]")

@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static me.viiral.cosmiccore.modules.NbtTags.*;
 
@@ -104,7 +105,8 @@ public class ArmorCrystalBuilder extends CustomItem {
 
     public List<ArmorSet> getArmorSets() {
         return Optional.ofNullable(this.nbtItem.getOrCreateCompound("cosmicData").getString("armorCrystal"))
-                .map(s -> s.split(NBT_SEPARATOR)).stream().flatMap(Arrays::stream)
+                .map(s -> s.split(NBT_SEPARATOR))
+                .map(Arrays::stream).orElseGet(Stream::empty)
                 .map(CosmicCore.getInstance().getArmorSetRegister()::getArmorSetFromID)
                 .collect(Collectors.toList());
     }

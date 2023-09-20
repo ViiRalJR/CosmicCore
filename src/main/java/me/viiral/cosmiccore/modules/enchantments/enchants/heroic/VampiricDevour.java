@@ -1,17 +1,18 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.legendary;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.enchantscache.BleedStacksCache;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
-
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;
+import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import me.viiral.cosmiccore.utils.CacheUtils;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Material;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -19,7 +20,7 @@ import xyz.xenondevs.particle.ParticleBuilder;
 import xyz.xenondevs.particle.ParticleEffect;
 import xyz.xenondevs.particle.data.texture.BlockTexture;
 
-public class Devour extends WeaponDamageEventEnchant implements Reloadable, Heroicable {
+public class VampiricDevour extends WeaponDamageEventEnchant implements Reloadable, HeroicEnchant {
 
     private ParticleBuilder particle;
 
@@ -30,8 +31,8 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable, Hero
     @ConfigValue
     private double particleSpeed = 0.1;
 
-    public Devour() {
-        super("Devour", EnchantTier.LEGENDARY, 4, EnchantType.AXE, "Multiplies damage dealt to players with active bleed stacks", "from the Bleed enchantment.");
+    public VampiricDevour() {
+        super("Vampiric Devour", EnchantTier.HEROIC, 4, EnchantType.AXE, "Heroic Enchant.", "Multiplies damage dealt to players with active bleed stacks", "from the Bleed enchantment.", "Larger radius and more damage.");
     }
 
     @Override
@@ -40,8 +41,8 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable, Hero
         Player victimPlayer = (Player) victim;
 
         BleedStacksCache victimBleedStack = CacheUtils.getBleedStackCache(victimPlayer);
-        this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victimPlayer, 20));
-        super.getDamageHandler().increaseDamage(victimBleedStack.getBleedStack() * 10, event, this.getName());
+        this.particle.setLocation(victim.getLocation()).display(PVPUtils.getNearbyPlayersExceptPlayer(victimPlayer, 30));
+        super.getDamageHandler().increaseDamage(victimBleedStack.getBleedStack() * 15, event, this.getName());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Devour extends WeaponDamageEventEnchant implements Reloadable, Hero
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
-        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Vampiric Devour");
+    public Enchantment getNonHeroicEnchant() {
+        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Devour");
     }
 }

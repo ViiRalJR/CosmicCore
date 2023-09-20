@@ -1,4 +1,4 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.ultimate;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
@@ -9,16 +9,15 @@ import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.enchantscache.BleedStacksCache;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
-
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.utils.CacheUtils;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
-
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -26,16 +25,15 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class Bleed extends WeaponDamageEventEnchant implements Heroicable {
+public class DeepBleed extends WeaponDamageEventEnchant implements HeroicEnchant {
 
     @ConfigValue
-    private double procChance = 0.006;
+    private double procChance = 0.012;
 
-    public Bleed() {
-        super("Bleed", EnchantTier.ULTIMATE, 6, EnchantType.AXE, "Applies bleed stacks to enemies that", "decrease their movement speed.");
+    public DeepBleed() {
+        super("Deep Bleed", EnchantTier.HEROIC, 6, EnchantType.AXE, "Heroic Enchant.", "Applies bleed stacks to enemies that", "decrease their movement speed.", "Has double the chance then bleed");
     }
 
     @Override
@@ -57,7 +55,7 @@ public class Bleed extends WeaponDamageEventEnchant implements Heroicable {
                 this.addPotionEffect((Player) victim, PotionEffectType.SLOW, (victimBleedStack.getBleedStack() + 1) * 20, Math.min(victimBleedStack.getBleedStack() - 1, 1));
             }
 
-            victim.getWorld().playEffect(victim.getEyeLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
+            victim.getWorld().playEffect(victim.getEyeLocation(), Effect.STEP_SOUND, Material.BEDROCK);
             victimBleedStack.incrementBleedStack();
             victimBleedStack.updateLastBleedStackTime();
 
@@ -77,7 +75,7 @@ public class Bleed extends WeaponDamageEventEnchant implements Heroicable {
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
+    public Enchantment getNonHeroicEnchant() {
         return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Deep Bleed");
     }
 }

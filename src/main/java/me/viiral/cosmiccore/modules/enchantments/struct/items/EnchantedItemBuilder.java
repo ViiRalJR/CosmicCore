@@ -213,7 +213,7 @@ public class EnchantedItemBuilder {
         ItemStack itemStack = this.nbtItem.getItem();
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = this.getLore();
-        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY**f&l)");
+        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY*&f&l)");
         if (lore.contains(protectedLoreLine)) return;
         lore.add(protectedLoreLine);
         itemMeta.setLore(lore);
@@ -223,7 +223,7 @@ public class EnchantedItemBuilder {
     private void removeHolyProtectedFromLore() {
         ItemStack itemStack = this.nbtItem.getItem();
         ItemMeta itemMeta = itemStack.getItemMeta();
-        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY**f&l)");
+        String protectedLoreLine = CC.translate("&f&lPROTECTED (&6&l*HOLY*&f&l)");
         List<String> lore = this.getLore()
                 .stream()
                 .filter(str -> !str.equals(protectedLoreLine))

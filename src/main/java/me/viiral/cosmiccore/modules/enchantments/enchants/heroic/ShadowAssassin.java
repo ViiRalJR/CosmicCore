@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class ShadowAssassin extends WeaponDamageEventEnchant implements HeroicEnchant {
 
     public ShadowAssassin() {
-        super("Shadow Assassin", EnchantTier.HEROIC, 5, EnchantType.SWORD, "The closer you are to your enemy,", "the more damage you deal (up to 2.5x).", "However, if you are more than 2 blocks away,", "you will deal LESS damage than normal.");
+        super("Shadow Assassin", EnchantTier.HEROIC, 5, EnchantType.SWORD, "Heroic Enchant.", "The closer you are to your enemy,", "the more damage you deal (up to 2.5x).", "However, if you are more than 2 blocks away,", "you will deal LESS damage than normal.");
         setHeroic();
     }
 

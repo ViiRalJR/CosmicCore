@@ -20,7 +20,7 @@ public class PlanetaryDeathbringer extends ArmorOutgoingPVPDamageEventEnchant im
     private double damageBuff = 25;
 
     public PlanetaryDeathbringer() {
-        super("Planetary Deathbringer", EnchantTier.HEROIC, false, 3, EnchantType.ARMOR, "Has a chance to deal double damage to", "your target with double the chance.");
+        super("Planetary Deathbringer", EnchantTier.HEROIC, false, 3, EnchantType.ARMOR, "Heroic Enchant.", "Has a chance to deal double damage to", "your target with double the chance.");
         setHeroic();
     }
 

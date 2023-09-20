@@ -29,6 +29,7 @@ public class HolyWhiteScrollListener implements Listener {
                 .peek(item -> {
                     EnchantedItemBuilder builder = new EnchantedItemBuilder(item);
                     builder.setHolyProtected(false);  // Setting HolyProtected to false
+                    event.getDrops().remove(item); // Preventing the HolyProtected item from dropping
                 })
                 .collect(Collectors.toSet());
 

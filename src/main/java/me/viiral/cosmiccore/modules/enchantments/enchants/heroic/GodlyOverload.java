@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public class GodlyOverload extends ArmorEquipEventEnchant implements HeroicEnchant {
 
     public GodlyOverload() {
-        super("Godly Overload", EnchantTier.HEROIC, false, 3, EnchantType.ARMOR, "Increases the wearer's total health.");
+        super("Godly Overload", EnchantTier.HEROIC, false, 3, EnchantType.ARMOR, "Heroic Enchant.", "Increases the wearer's total health.");
         setHeroic();
     }
 

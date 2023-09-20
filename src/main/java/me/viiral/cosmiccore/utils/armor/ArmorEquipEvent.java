@@ -6,6 +6,11 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * @author Arnah
+ * @since Jul 30, 2015
+ */
+
 public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
 
     private static final HandlerList handlers = new HandlerList();
@@ -62,18 +67,18 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
      * @return If this event is cancelled
      */
     public final boolean isCancelled(){
-        return cancel;
+        return this.cancel;
     }
 
     public final ArmorType getType(){
-        return type;
+        return this.type;
     }
 
     /**
      * Returns the last equipped armor piece, could be a piece of armor, or null
      */
     public final ItemStack getOldArmorPiece(){
-        return oldArmorPiece;
+        return this.oldArmorPiece;
     }
 
     public final void setOldArmorPiece(final ItemStack oldArmorPiece){
@@ -84,7 +89,7 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
      * Returns the newly equipped armor, could be a piece of armor, or null
      */
     public final ItemStack getNewArmorPiece(){
-        return newArmorPiece;
+        return this.newArmorPiece;
     }
 
     public final void setNewArmorPiece(final ItemStack newArmorPiece){
@@ -95,10 +100,10 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
      * Gets the method used to either equip or unequip an armor piece.
      */
     public EquipMethod getMethod(){
-        return equipType;
+        return this.equipType;
     }
 
-    public enum EquipMethod{// These have got to be the worst documentations ever.
+    public enum EquipMethod { // These have got to be the worst documentations ever.
         /**
          * When you shift click an armor piece to equip or unequip
          */
@@ -111,6 +116,10 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable{
          * When you manually equip or unequip the item. Use to be DRAG
          */
         PICK_DROP,
+        /**
+         * same as PICK_DROP but click type is double click
+         */
+        DOUBLE_PICK_DROP,
         /**
          * When you right click an armor piece in the hotbar without the inventory open to equip.
          */

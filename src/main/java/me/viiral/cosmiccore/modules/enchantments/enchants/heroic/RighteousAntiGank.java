@@ -1,10 +1,9 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.legendary;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.enchantscache.AntiGankCache;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
-
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
@@ -15,10 +14,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class AntiGank extends WeaponDamageEventEnchant implements Heroicable {
+public class RighteousAntiGank extends WeaponDamageEventEnchant implements HeroicEnchant {
 
-    public AntiGank() {
-        super("Anti Gank", EnchantTier.LEGENDARY, 4, EnchantType.AXE, "If more than (6-level) enemies hit you in a short period,", "your outgoing damage will be multiplied by up to 1.5x", "depending on the amount of enemies nearby.");
+    public RighteousAntiGank() {
+        super("Righteous Anti Gank", EnchantTier.HEROIC, 4, EnchantType.AXE, "Heroic Enchant.", "If more than (6-level) enemies hit you in a short period,", "your outgoing damage will be multiplied by up to 1.75x", "depending on the amount of enemies nearby.");
     }
 
     @Override
@@ -37,12 +36,12 @@ public class AntiGank extends WeaponDamageEventEnchant implements Heroicable {
         }
 
         if (antiGankCache.getAmountOfPlayers() >= 6 - enchantedItemBuilder.getEnchantmentLevel(this)) {
-            super.getDamageHandler().increaseDamage(50, event, this.getName());
+            super.getDamageHandler().increaseDamage(75, event, this.getName());
         }
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
-        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Righteous Anti Gank");
+    public Enchantment getNonHeroicEnchant() {
+        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Anti Gank");
     }
 }

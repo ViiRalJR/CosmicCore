@@ -23,7 +23,7 @@ public class ReflectiveBlock extends WeaponDamageEventEnchant implements HeroicE
     private int damageDecrease = 40;
 
     public ReflectiveBlock() {
-        super("Reflective Block", EnchantTier.HEROIC, 3, EnchantType.SWORD, "A chance to increase damage and redirect an attack. (Deflect up to 40%)");
+        super("Reflective Block", EnchantTier.HEROIC, 3, EnchantType.SWORD, "Heroic Enchant.", "A chance to increase damage and redirect an attack. (Deflect up to 40%)");
         setHeroic();
     }
 

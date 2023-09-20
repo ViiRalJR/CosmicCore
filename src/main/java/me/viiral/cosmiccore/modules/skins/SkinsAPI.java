@@ -55,6 +55,8 @@ public class SkinsAPI {
         NBTItem wrapped = new NBTItem(itemStack);
         NBTCompound compound = wrapped.getOrCreateCompound("cosmicData");
 
+        if (itemStack.getType() != Material.EYE_OF_ENDER) return false;
+
         return Optional.ofNullable(compound.getString(SKIN_TYPE_TAG)).isPresent();
     }
 

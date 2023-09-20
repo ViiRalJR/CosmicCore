@@ -1,11 +1,11 @@
-package me.viiral.cosmiccore.modules.enchantments.enchants.legendary;
+package me.viiral.cosmiccore.modules.enchantments.enchants.heroic;
 
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.enchantscache.AegisCache;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.Enchantment;
-import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Heroicable;
+import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.HeroicEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.utils.CacheUtils;
@@ -13,10 +13,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class Aegis extends ArmorIncomingPVPDamageEventEnchant implements Heroicable {
+public class HolyAegis extends ArmorIncomingPVPDamageEventEnchant implements HeroicEnchant {
 
-    public Aegis() {
-        super("Aegis", EnchantTier.LEGENDARY, false, 6, EnchantType.CHESTPLATE, "If you are taking damage from more than (8-level) enemies in a short period,", "the damage from any additional players beyond that initial group", "will be halved.");
+    public HolyAegis() {
+        super("Holy Aegis", EnchantTier.HEROIC, false, 6, EnchantType.CHESTPLATE, "Heroic Enchant.", "If you are taking damage from more than (8-level) enemies in a short period,", "the damage from any additional players beyond that initial group", "will be halved.");
     }
 
     @Override
@@ -35,12 +35,12 @@ public class Aegis extends ArmorIncomingPVPDamageEventEnchant implements Heroica
         }
 
         if (aegisCache.getAmountOfPlayers() >= 8 - enchantInfo.getLevel()) {
-            super.getDamageHandler().reduceDamage(50, event, this.getName());
+            super.getDamageHandler().reduceDamage(75, event, this.getName());
         }
     }
 
     @Override
-    public Enchantment getHeroicEnchant() {
-        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Holy Aegis");
+    public Enchantment getNonHeroicEnchant() {
+        return CosmicCore.getInstance().getEnchantRegister().getEnchantmentFromName("Aegis");
     }
 }

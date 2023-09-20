@@ -35,7 +35,7 @@ public class PaladinArmored extends ArmorIncomingPVPDamageEventEnchant implement
     private double particleSpeed = 0.05;
 
     public PaladinArmored() {
-        super("Paladin Armored", EnchantTier.HEROIC, true, 4, EnchantType.ARMOR, "Decreases damage from enemy swords by", "x2.5 per level");
+        super("Paladin Armored", EnchantTier.HEROIC, true, 4, EnchantType.ARMOR, "Heroic Enchant.", "Decreases damage from enemy swords by", "x2.5 per level");
         this.reloadValues();
         setHeroic();
     }

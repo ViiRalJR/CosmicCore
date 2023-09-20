@@ -36,7 +36,7 @@ public class MightyCactus extends ArmorIncomingPVPDamageEventEnchant implements 
     private double particleSpeed = 0.05;
 
     public MightyCactus() {
-        super("Mighty Cactus", EnchantTier.HEROIC, false, 2, EnchantType.ARMOR, "Injures your attacker but does not", "affect your durability.");
+        super("Mighty Cactus", EnchantTier.HEROIC, false, 2, EnchantType.ARMOR, "Heroic Enchant.", "Injures your attacker but does not", "affect your durability.");
         this.reloadValues();
         setHeroic();
     }

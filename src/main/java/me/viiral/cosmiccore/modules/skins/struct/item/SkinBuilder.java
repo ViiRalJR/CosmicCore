@@ -88,6 +88,10 @@ public class SkinBuilder extends CustomItem {
                 .collect(Collectors.toList());
     }
 
+    public boolean hasApplicable() {
+        return this.nbtItem.hasTag("applicable");
+    }
+
     public SkinType getApplicable() {
         return SkinType.valueOf(this.nbtItem.getString("applicable"));
     }
