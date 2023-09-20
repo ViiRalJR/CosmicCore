@@ -40,6 +40,9 @@ public class MaskAPI {
         CachedPlayer cachedPlayer = CosmicCore.getInstance().getCacheManager().getCachedPlayer(player);
         MaskCache maskCache = (MaskCache) cachedPlayer.getCache("mask");
 
+        if (maskCache == null) refreshMask(player);
+        maskCache = (MaskCache) cachedPlayer.getCache("mask");
+
         return maskCache.getMasks().stream().anyMatch(m -> m.equals(mask));
     }
 

@@ -37,9 +37,12 @@ import me.viiral.cosmiccore.modules.skins.listener.SkinListener;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import me.viiral.cosmiccore.modules.user.UserListener;
 import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.WorldGuardUtils;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -89,52 +92,84 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         this.languageHandler = new LanguageHandler(this);
         this.languageHandler.load();
 
+        sendConsoleMessage("LanguageHandler");
+
         this.cacheManager = new CacheManager();
 
+        sendConsoleMessage("CacheManager");
+
         this.worldGuardUtils = new WorldGuardUtils();
+
+        sendConsoleMessage("WorldGuardHook");
+
         this.damageHandler = new DamageHandler(this);
 
+        sendConsoleMessage("DamageHandler");
 
         this.armorSetRegister = new ArmorSetRegister();
         this.armorSetRegister.initialize();
+
+        sendConsoleMessage("ArmorSetRegister");
 
         this.commandManager = new CommandManager(this);
 
         this.soulManager = new SoulManager();
 
+        sendConsoleMessage("SoulManager");
+
         this.userManager = new UserManager();
+
+        sendConsoleMessage("UserManager");
 
         this.enchantRegister = new EnchantRegister(this);
         this.enchantRegister.initialize();
 
+        sendConsoleMessage("EnchantRegister");
+
         this.enchantConfigManager = new EnchantConfigManager(this);
         this.enchantConfigManager.setupFiles();
+
+        sendConsoleMessage("EnchantConfigManager");
 
         this.configManager = new ConfigManager(this);
         this.configManager.setupFiles();
 
+        sendConsoleMessage("ConfigManager");
+
         this.gkitManager = new GkitManager(this);
         this.gkitManager.initialize();
+
+        sendConsoleMessage("GkitManager");
 
         this.gkitUserManager = new GkitUserManager(this);
         this.gkitUserManager.loadAll();
 
+        sendConsoleMessage("GkitUserManager");
+
         this.maskRegister = new MaskRegister(this);
         this.maskRegister.initialize();
 
+        sendConsoleMessage("MaskRegister");
+
         this.skinRegister = new SkinRegister(this);
         this.skinRegister.initialize();
+
+        sendConsoleMessage("SkinRegister");
 
         this.commandManager = new CommandManager(this);
         this.registerCommandParameters();
         this.registerCommandCompletion();
         this.commandManager.register(new AdminEnchantsCommand(this), new EnchanterCommand(), new ApplyCommand(), new GkitCommand(this), new Tinkerer(), new SplitSoulsCommand(), new WithdrawSoulsCommand(), new AdminArmorSetCommand());
 
+        sendConsoleMessage("CommandManager");
+
         getCommand("givecrystal").setExecutor(new MultiCommand());
         getCommand("givemask").setExecutor(new MaskCommand());
         getCommand("giveextractor").setExecutor(new CrystalExtractorCommand());
         getCommand("giveskin").setExecutor(new SkinCommand());
         this.registerListeners();
+
+        sendConsoleMessage("Listeners");
 
     }
 
@@ -197,5 +232,9 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         this.commandManager.getCompletionHandler().register("#sets", input -> this.armorSetRegister.getArmorSets().stream().map(ArmorSet::getID).collect(Collectors.toList()));
         this.commandManager.getCompletionHandler().register("#enchants", input -> this.enchantRegister.getEnchantments().stream().map(Enchantment::getID).collect(Collectors.toList()));
         this.commandManager.getCompletionHandler().register("#gkits", input -> this.gkitManager.getGkits().stream().map(Gkit::getID).collect(Collectors.toList()));
+    }
+
+    private void sendConsoleMessage(String s) {
+        Bukkit.getConsoleSender().sendMessage(CC.translate("&a(CosmicCore) Successfully loaded " + s + "."));
     }
 }

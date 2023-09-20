@@ -101,9 +101,9 @@ public class User {
 
     private void refresh() {
         Bukkit.getScheduler().runTaskLater(CosmicCore.getInstance(), () ->  {
+            SkinsAPI.refreshSkin(getPlayer());
             EnchantsAPI.reprocEnchants(getPlayer());
             MaskAPI.refreshMask(getPlayer());
-            SkinsAPI.refreshSkin(getPlayer());
             ArmorSetAPI.refreshArmorSets(getPlayer());
         }, 20L);
     }

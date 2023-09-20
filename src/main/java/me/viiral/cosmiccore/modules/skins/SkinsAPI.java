@@ -79,6 +79,9 @@ public class SkinsAPI {
         CachedPlayer cachedPlayer = CosmicCore.getInstance().getCacheManager().getCachedPlayer(player);
         SkinCache skinCache = (SkinCache) cachedPlayer.getCache("skins");
 
+        if (skinCache == null) refreshSkin(player);
+        skinCache = (SkinCache) cachedPlayer.getCache("skins");
+
         return skinCache.getSkins().stream().anyMatch(m -> m.equals(skin));
     }
 }
