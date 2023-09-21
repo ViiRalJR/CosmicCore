@@ -31,12 +31,12 @@ public class User {
     }
 
     public void addPotionEffect(PotionEffectType type, int amplifier, int duration) {
-        if (duration == 0) duration = Integer.MAX_VALUE;
-        if (!hasPotion(type)) addPotionEffect(type, amplifier, duration);
-
         if (type == PotionEffectType.SLOW && hasEffect(EffectType.IMMUNE_TO_SLOWNESS)) return;
 
         if (PotionEffectUtils.getDebuffsList().contains(type) && hasEffect(EffectType.AUTO_BLESS)) return;
+
+        if (duration == 0) duration = Integer.MAX_VALUE;
+        if (!hasPotion(type)) potionEffect(type, amplifier, duration);
 
         if (isStronger(type, amplifier)) {
             removePotionEffect(type);
@@ -78,7 +78,8 @@ public class User {
     }
 
     private boolean hasEffect(EffectType type) {
-        return this.types.contains(type);
+        if (types.isEmpty()) return false;
+        return types.contains(type);
     }
 
     public void addEffect(EffectType type) {

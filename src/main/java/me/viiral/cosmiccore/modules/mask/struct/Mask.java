@@ -67,6 +67,10 @@ public abstract class Mask implements Listener {
 
     public abstract List<String> getLore();
 
+    public void onEquip() {}
+
+    public void onUnequip() {}
+
     protected void addPotionEffect(Player player, PotionEffectType type, int duration, int amplifier) {
         userManager.addPotionEffect(player.getUniqueId(), type, amplifier, duration);
     }

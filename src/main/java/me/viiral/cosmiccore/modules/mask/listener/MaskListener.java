@@ -91,7 +91,7 @@ public class MaskListener implements Listener {
 
         maskHelmetBuilder.getMasks().forEach(mask -> {
             if (mask instanceof EquippableMask) {
-                ((EquipableSkin) mask).onEquip(event.getPlayer());
+                ((EquippableMask) mask).onEquip(event.getPlayer());
             }
         });
     }
