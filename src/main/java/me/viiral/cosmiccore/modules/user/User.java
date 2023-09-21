@@ -57,6 +57,7 @@ public class User {
 
     public void removePotionEffect(PotionEffectType type, int amplifier) {
         if (this.effects.isEmpty()) return;
+        if (!this.effects.containsKey(type)) return;
         if (this.effects.get(type).getAmplifier() <= amplifier) {
             this.effects.remove(type);
             getPlayer().removePotionEffect(type);

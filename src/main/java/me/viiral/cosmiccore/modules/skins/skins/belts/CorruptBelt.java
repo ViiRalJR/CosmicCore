@@ -13,7 +13,7 @@ import java.util.List;
 public class CorruptBelt extends Skin implements EquipableSkin {
 
     public CorruptBelt() {
-        super("Corrupt Belt", SkinType.BELT);
+        super("Power Belt", SkinType.BELT);
     }
 
 
@@ -29,11 +29,11 @@ public class CorruptBelt extends Skin implements EquipableSkin {
 
     @Override
     public void onEquip(Player player) {
-        addPotionEffect(player, PotionEffectType.HEALTH_BOOST, 0, 4);
+        addPotionEffect(player, PotionEffectType.HEALTH_BOOST, 0, 7);
     }
 
     @Override
     public void onUnequip(Player player) {
-        removePotionEffect(player, PotionEffectType.HEALTH_BOOST, 4);
+        removePotionEffect(player, PotionEffectType.HEALTH_BOOST, 7);
     }
 }
