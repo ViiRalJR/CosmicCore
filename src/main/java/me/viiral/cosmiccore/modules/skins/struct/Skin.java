@@ -2,8 +2,8 @@ package me.viiral.cosmiccore.modules.skins.struct;
 
 import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
-import me.viiral.cosmiccore.modules.mask.struct.Mask;
 import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import org.bukkit.entity.Entity;
@@ -11,10 +11,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -85,5 +83,13 @@ public abstract class Skin implements Listener {
 
     protected void removePotionEffect(Player player, PotionEffectType effect, int amplifier) {
         userManager.removePotionEffect(player.getUniqueId(), effect, amplifier);
+    }
+
+    protected void addEffect(Player player, EffectType type) {
+        userManager.addEffect(player.getUniqueId(), type);
+    }
+
+    protected void removeEffect(Player player, EffectType type) {
+        userManager.removeEffect(player.getUniqueId(), type);
     }
 }

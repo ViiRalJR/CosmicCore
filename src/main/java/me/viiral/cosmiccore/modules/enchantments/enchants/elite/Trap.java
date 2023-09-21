@@ -1,5 +1,6 @@
 package me.viiral.cosmiccore.modules.enchantments.enchants.elite;
 
+import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.events.SlownessEnchantProc;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
@@ -9,6 +10,9 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,6 +33,12 @@ public class Trap extends WeaponDamageEventEnchant implements SlownessEnchant {
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
+
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_FREEZES)) return;
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_TRAP)) return;
+
         if (Math.random() < procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
             SlownessEnchantProc slownessEnchantProcEvent = new SlownessEnchantProc(attacker, victim, this, enchantedItemBuilder.getEnchantmentLevel(this));
             Bukkit.getPluginManager().callEvent(slownessEnchantProcEvent);

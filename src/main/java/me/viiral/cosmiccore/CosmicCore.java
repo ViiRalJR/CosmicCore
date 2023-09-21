@@ -37,6 +37,8 @@ import me.viiral.cosmiccore.modules.skins.listener.SkinListener;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
 import me.viiral.cosmiccore.modules.user.UserListener;
 import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.modules.user.commands.BlessCommand;
+import me.viiral.cosmiccore.modules.user.commands.HealCommand;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.WorldGuardUtils;
@@ -167,6 +169,8 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         getCommand("givemask").setExecutor(new MaskCommand());
         getCommand("giveextractor").setExecutor(new CrystalExtractorCommand());
         getCommand("giveskin").setExecutor(new SkinCommand());
+        getCommand("bless").setExecutor(new BlessCommand());
+        getCommand("heal").setExecutor(new HealCommand());
         this.registerListeners();
 
         sendConsoleMessage("Listeners");

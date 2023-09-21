@@ -1,7 +1,9 @@
 package me.viiral.cosmiccore.modules.skins.skins.helmet;
 
+import me.viiral.cosmiccore.modules.skins.struct.EquipableSkin;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -10,7 +12,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import java.util.Arrays;
 import java.util.List;
 
-public class NeonEmotions extends Skin {
+public class NeonEmotions extends Skin implements EquipableSkin {
 
     public NeonEmotions() {
         super("Neon Emotions", SkinType.HELMET);
@@ -38,5 +40,15 @@ public class NeonEmotions extends Skin {
     @Override
     public void onAttacked(Player attacked, Entity attacker, EntityDamageByEntityEvent event) {
         this.getDamageHandler().reduceDamage(2, event, getName());
+    }
+
+    @Override
+    public void onEquip(Player player) {
+        addEffect(player, EffectType.IMMUNE_TO_SLOWNESS);
+    }
+
+    @Override
+    public void onUnequip(Player player) {
+        removeEffect(player, EffectType.IMMUNE_TO_SLOWNESS);
     }
 }

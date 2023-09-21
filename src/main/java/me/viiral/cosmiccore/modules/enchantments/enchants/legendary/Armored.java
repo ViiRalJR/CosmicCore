@@ -9,7 +9,10 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Reloadable;import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.interfaces.Silenceable;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantTier;
 import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
-import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;import org.bukkit.Effect;
+import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -40,6 +43,11 @@ public class Armored extends ArmorIncomingPVPDamageEventEnchant implements Silen
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (!(attacker instanceof Player)) return;
         if (!EnchantType.SWORD.getItems().contains(((Player) attacker).getItemInHand().getType())) return;
+
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(attacker.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.BLOCK_ARMORED)) return;
+
 
         double damageNegation = enchantInfo.getLevel() * damageNegationMultiplier;
         super.getDamageHandler().reduceDamage(damageNegation, event, this.getName());

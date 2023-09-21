@@ -14,6 +14,8 @@ import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.modules.skins.SkinsAPI;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import net.objecthunter.exp4j.Expression;
@@ -47,10 +49,10 @@ public class Teleblock extends BowEventEnchant implements Reloadable, SoulEnchan
 
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, Player victim, Player attacker, Arrow arrow, EnchantedItemBuilder enchantedItemBuilder) {
-        if (!this.soulManager.isInSoulMode(attacker)
-                || MaskAPI.hasMaskOn(victim, MaskRegister.getInstance().getMaskFromName("Glitch"))
-                || SkinsAPI.hasSkinOn(victim, SkinRegister.getInstance().getSkinFromName("Snowflake Slippers"))) return;
 
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_TELEBLOCK)) return;
 
         int level = enchantedItemBuilder.getEnchantmentLevel(this);
         int soulCost = (int) this.soulCostExpression.setVariable("level", level).evaluate();

@@ -10,6 +10,8 @@ import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
@@ -38,7 +40,7 @@ public class RocketEscape extends ArmorIncomingPVPDamageEventEnchant implements 
     @ConfigValue
     private int cooldown = 150;
     @ConfigValue
-    private List<String> message = Arrays.asList("&r ", "&a&l(!) &ayour Roecket Escape boots have activated, recover while they last!", "&r ");
+    private List<String> message = Arrays.asList("&r ", "&a&l(!) &ayour Rocket Escape boots have activated, recover while they last!", "&r ");
 
     private ParticleBuilder particle;
     @ConfigValue
@@ -61,8 +63,10 @@ public class RocketEscape extends ArmorIncomingPVPDamageEventEnchant implements 
         if (victim.getHealth() - event.getFinalDamage() > 2) return;
         if (super.isOnCooldown(victim)) return;
 
-        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))
-            if ((new Random().nextInt(100) + 1) > 50) return;
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(attacker.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.BLOCK_ROCKET_ESCAPE)) return;
+
 
         if (Math.random() < this.procChance * enchantInfo.getLevel()) {
             super.getDamageHandler().cancelDamage(event, this.getName());

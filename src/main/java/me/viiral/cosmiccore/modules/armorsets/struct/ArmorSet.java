@@ -5,6 +5,8 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 
 import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
+import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;
 import org.bukkit.entity.Entity;
@@ -12,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +24,11 @@ public abstract class ArmorSet implements Listener {
 
     @Getter
     private final DamageHandler damageHandler;
+    private final UserManager userManager;
 
     public ArmorSet() {
         this.damageHandler = CosmicCore.getInstance().getDamageHandler();
+        this.userManager = CosmicCore.getInstance().getUserManager();
     }
 
     public abstract String getName();
@@ -75,6 +80,22 @@ public abstract class ArmorSet implements Listener {
         NBTCompound cosmicData = wrapper.getOrCreateCompound("cosmicData");
         cosmicData.setString("armorSetType", this.getName());
         return wrapper.getItem();
+    }
+
+    protected void addPotionEffect(Player player, PotionEffectType type, int duration, int amplifier) {
+        userManager.addPotionEffect(player.getUniqueId(), type, amplifier, duration);
+    }
+
+    protected void removePotionEffect(Player player, PotionEffectType effect, int amplifier) {
+        userManager.removePotionEffect(player.getUniqueId(), effect, amplifier);
+    }
+
+    protected void addEffect(Player player, EffectType type) {
+        userManager.addEffect(player.getUniqueId(), type);
+    }
+
+    protected void removeEffect(Player player, EffectType type) {
+        userManager.removeEffect(player.getUniqueId(), type);
     }
 
 }

@@ -1,6 +1,7 @@
 package me.viiral.cosmiccore.modules.armorsets.struct.armorsets;
 
 import me.viiral.cosmiccore.modules.armorsets.struct.ArmorSet;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;
 import me.viiral.cosmiccore.utils.potion.PotionEffectUtils;
@@ -96,5 +97,6 @@ public class KothArmorSet extends ArmorSet {
 
     public void onEquip(Player player) {
         PotionEffectUtils.bless(player);
+        addEffect(player, EffectType.AUTO_BLESS);
     }
 }

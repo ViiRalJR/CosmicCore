@@ -3,6 +3,7 @@ package me.viiral.cosmiccore.modules.enchantments.enchants.elite;
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.struct.Relation;
+import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.cache.EnchantInfo;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorIncomingPVPDamageEventEnchant;
@@ -11,6 +12,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
@@ -37,8 +40,9 @@ public class Shockwave extends ArmorIncomingPVPDamageEventEnchant {
     public void runIncomingDamageEvent(EntityDamageByEntityEvent event, Player victim, LivingEntity attacker, EnchantInfo enchantInfo) {
         if (super.isOnCooldown(victim)) return;
 
-        if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Terminator")))
-            if ((new Random().nextInt(100) + 1) > 50) return;
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_KNOCKBACK)) return;
 
 
         if (Math.random() < procChance * enchantInfo.getLevel()) {

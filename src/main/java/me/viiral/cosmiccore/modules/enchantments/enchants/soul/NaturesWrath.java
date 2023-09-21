@@ -17,6 +17,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.souls.SoulManager;
 import me.viiral.cosmiccore.modules.enchantments.tasks.NaturesWrathTask;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 import org.bukkit.ChatColor;
@@ -78,6 +80,10 @@ public class NaturesWrath extends ArmorIncomingPVPDamageEventEnchant implements 
         if (!(attacker instanceof Player)) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE) return;
         if (super.isOnCooldown(victim)) return;
+
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_NATURES)) return;
 
         if (MaskAPI.hasMaskOn((Player) attacker, MaskRegister.getInstance().getMaskFromName("Thanos"))) {
             victim.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6&l*** THANOS MASK (&7Blocked Natures Wrath&b&l) ***"));

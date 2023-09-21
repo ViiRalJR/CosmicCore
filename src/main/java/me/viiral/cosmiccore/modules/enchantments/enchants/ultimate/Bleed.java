@@ -16,6 +16,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.enums.EnchantType;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CacheUtils;
 import me.viiral.cosmiccore.modules.enchantments.utils.PVPUtils;
 
@@ -41,6 +43,11 @@ public class Bleed extends WeaponDamageEventEnchant implements Heroicable {
     @Override
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (!(victim instanceof Player)) return;
+
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_DEEPBLEED_SLOWNESS)) return;
+
         int level = enchantedItemBuilder.getEnchantmentLevel(this);
         int deepWoundsLevel = enchantedItemBuilder.getEnchantmentLevel("deepwounds");
         if (Math.random() < (this.procChance * (level + deepWoundsLevel))) {

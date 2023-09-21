@@ -32,6 +32,6 @@ public class LostAmulet extends Skin {
 
     @Override
     public void onAttacked(Player attacked, Entity attacker, EntityDamageByEntityEvent event) {
-        this.getDamageHandler().reduceDamage(7.5, event, "lost_amulet");
+        this.getDamageHandler().reduceDamage(5, event, "lost_amulet");
     }
 }

@@ -3,6 +3,7 @@ package me.viiral.cosmiccore.modules.skins.skins.boots;
 import me.viiral.cosmiccore.modules.skins.struct.EquipableSkin;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -26,7 +27,7 @@ public class TeddySlippers extends Skin implements EquipableSkin {
 
     @Override
     public List<String> getLore() {
-        return Arrays.asList("&cNerf enemy special Armor Set damage by 50%", "&c33% chance to reflect enemy (Titan) Trap", "&c-2% Incoming Damage", "&c+1% Outgoing Damage");
+        return Arrays.asList("&cNerf enemy special Armor Set damage by 50%", "&cImmune to enemy (Titan) Trap", "&c-2% Incoming Damage", "&c+1% Outgoing Damage");
     }
 
     @Override
@@ -37,5 +38,15 @@ public class TeddySlippers extends Skin implements EquipableSkin {
     @Override
     public void onAttack(Player attacker, Entity attacked, EntityDamageByEntityEvent event) {
         this.getDamageHandler().increaseDamage(1, event, getName());
+    }
+
+    @Override
+    public void onEquip(Player player) {
+        addEffect(player, EffectType.IMMUNE_TO_TRAP);
+    }
+
+    @Override
+    public void onUnequip(Player player) {
+        removeEffect(player, EffectType.IMMUNE_TO_TRAP);
     }
 }

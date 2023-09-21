@@ -48,7 +48,7 @@ public class SkinRegister {
                 new WitchHat(),
 
                 // belts
-                new BandolierBelt(), new CandyBuckle(), new CandySortingBelt(), new ChainBelt(), new CorruptBelt(),
+                new BandolierBelt(), new CandySortingBelt(), new ChainBelt(), new CorruptBelt(),
                 new CrystallineBand(), new CupidsHeart(), new DivineStash(), new FirstAidFannypack(),
                 new HulaSkirt(), new InfinityBelt(), new PartyBelt(), new RainbowBelt(), new RoyalBelt(),
                 new SpaceBelt(), new TacticalBelt(), new UtilityBelt(), new GucciBelt(),

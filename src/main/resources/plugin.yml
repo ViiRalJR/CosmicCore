@@ -15,3 +15,7 @@ commands:
     description: extractor
   giveskin:
     description: skins
+  heal:
+    description: heal
+  bless:
+    description: bless

@@ -8,6 +8,8 @@ import java.util.List;
 
 public class BunnyMask extends Mask {
 
+    // TODO: 21/09/2023 this
+
     public BunnyMask() {
         super("Bunny", "");
     }

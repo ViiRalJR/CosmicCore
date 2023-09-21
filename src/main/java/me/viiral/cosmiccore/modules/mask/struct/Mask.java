@@ -3,6 +3,7 @@ package me.viiral.cosmiccore.modules.mask.struct;
 import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.user.UserManager;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import org.bukkit.entity.Entity;
@@ -74,4 +75,11 @@ public abstract class Mask implements Listener {
         userManager.removePotionEffect(player.getUniqueId(), effect, amplifier);
     }
 
+    protected void addEffect(Player player, EffectType type) {
+        userManager.addEffect(player.getUniqueId(), type);
+    }
+
+    protected void removeEffect(Player player, EffectType type) {
+        userManager.removeEffect(player.getUniqueId(), type);
+    }
 }

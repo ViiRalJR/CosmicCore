@@ -1,5 +1,6 @@
 package me.viiral.cosmiccore.modules.enchantments.enchants.legendary;
 
+import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.enchantments.struct.annotations.ConfigValue;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.WeaponDamageEventEnchant;
 
@@ -9,6 +10,8 @@ import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuild
 
 import me.viiral.cosmiccore.modules.mask.MaskAPI;
 import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
+import me.viiral.cosmiccore.modules.user.User;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -30,8 +33,11 @@ public class Lifesteal extends WeaponDamageEventEnchant {
     public void runEntityDamageByEntityEvent(EntityDamageByEntityEvent event, LivingEntity victim, Player attacker, EnchantedItemBuilder enchantedItemBuilder) {
         if (super.isOnCooldown(attacker)) return;
 
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(victim.getUniqueId());
+
+        if (user != null && user.types.contains(EffectType.IMMUNE_TO_LIFESTEAL)) return;
+
         if (Math.random() < this.procChance * enchantedItemBuilder.getEnchantmentLevel(this)) {
-            if (MaskAPI.hasMaskOn((Player) victim, MaskRegister.getInstance().getMaskFromName("Necromancer"))) return;
             super.getDamageHandler().healEntity(attacker, this.healAmount, this.getName());
             super.registerCooldown(attacker, this.cooldown);
         }

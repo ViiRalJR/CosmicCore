@@ -1,13 +1,16 @@
 package me.viiral.cosmiccore.modules.skins.skins.helmet;
 
+import me.viiral.cosmiccore.modules.skins.struct.EquipableSkin;
 import me.viiral.cosmiccore.modules.skins.struct.Skin;
 import me.viiral.cosmiccore.modules.skins.struct.SkinType;
+import me.viiral.cosmiccore.modules.user.effects.EffectType;
 import me.viiral.cosmiccore.utils.CC;
+import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MinemanMuzzle extends Skin {
+public class MinemanMuzzle extends Skin implements EquipableSkin {
 
     // TODO: 19/09/2023 this
 
@@ -30,5 +33,15 @@ public class MinemanMuzzle extends Skin {
                 "&cImmune to Banshee RKO",
                 "&c10% chance to reflect damage to enemies in a 3x3 radius"
         );
+    }
+
+    @Override
+    public void onEquip(Player player) {
+        addEffect(player, EffectType.IMMUNE_TO_BANSHEE_HOLY);
+    }
+
+    @Override
+    public void onUnequip(Player player) {
+        removeEffect(player, EffectType.IMMUNE_TO_BANSHEE_HOLY);
     }
 }
