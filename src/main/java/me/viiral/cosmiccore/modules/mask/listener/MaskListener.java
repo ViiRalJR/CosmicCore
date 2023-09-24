@@ -83,7 +83,7 @@ public class MaskListener implements Listener {
     public void armorEquipEvent(ArmorEquipEvent event) {
         ItemStack itemStack = event.getNewArmorPiece();
 
-        if (!ItemUtils.isEnchantable(itemStack)) return;
+        if (!ItemUtils.isHelmet(itemStack)) return;
 
         MaskHelmetBuilder maskHelmetBuilder = new MaskHelmetBuilder(itemStack);
 
@@ -92,6 +92,23 @@ public class MaskListener implements Listener {
         maskHelmetBuilder.getMasks().forEach(mask -> {
             if (mask instanceof EquippableMask) {
                 ((EquippableMask) mask).onEquip(event.getPlayer());
+            }
+        });
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void armorUnEquipEvent(ArmorEquipEvent event) {
+        ItemStack itemStack = event.getOldArmorPiece();
+
+        if (!ItemUtils.isHelmet(itemStack)) return;
+
+        MaskHelmetBuilder maskHelmetBuilder = new MaskHelmetBuilder(itemStack);
+
+        if (!maskHelmetBuilder.hasMask()) return;
+
+        maskHelmetBuilder.getMasks().forEach(mask -> {
+            if (mask instanceof EquippableMask) {
+                ((EquippableMask) mask).onUnequip(event.getPlayer());
             }
         });
     }
