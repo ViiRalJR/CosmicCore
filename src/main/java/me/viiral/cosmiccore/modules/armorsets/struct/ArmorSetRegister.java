@@ -22,7 +22,7 @@ public class ArmorSetRegister {
     public void initialize() {
         this.registerAll(
                 new KothArmorSet(), new PhantomArmorSet(), new TravelerArmorSet(), new YetiArmorSet(), new YijkiArmorSet(),
-                new DragonArmorSet()
+                new DragonArmorSet(), new SupremeArmorSet(), new AncientArmorSet()
         );
     }
 
