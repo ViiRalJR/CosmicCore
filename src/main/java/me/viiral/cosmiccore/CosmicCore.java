@@ -35,21 +35,17 @@ import me.viiral.cosmiccore.modules.mask.struct.MaskRegister;
 import me.viiral.cosmiccore.modules.skins.command.SkinCommand;
 import me.viiral.cosmiccore.modules.skins.listener.SkinListener;
 import me.viiral.cosmiccore.modules.skins.struct.SkinRegister;
-import me.viiral.cosmiccore.modules.user.UserListener;
 import me.viiral.cosmiccore.modules.user.UserManager;
 import me.viiral.cosmiccore.modules.user.commands.BlessCommand;
-import me.viiral.cosmiccore.modules.user.commands.HealCommand;
 import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.DamageHandler;
 import me.viiral.cosmiccore.utils.WorldGuardUtils;
 import me.viiral.cosmiccore.utils.cache.CacheManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -170,7 +166,6 @@ public final class CosmicCore extends JavaPlugin implements Listener {
         getCommand("giveextractor").setExecutor(new CrystalExtractorCommand());
         getCommand("giveskin").setExecutor(new SkinCommand());
         getCommand("bless").setExecutor(new BlessCommand());
-        getCommand("heal").setExecutor(new HealCommand());
         this.registerListeners();
 
         sendConsoleMessage("Listeners");

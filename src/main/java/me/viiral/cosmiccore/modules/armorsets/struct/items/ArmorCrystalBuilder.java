@@ -5,6 +5,7 @@ import lombok.Getter;
 import me.viiral.cosmiccore.CosmicCore;
 import me.viiral.cosmiccore.modules.armorsets.struct.ArmorSet;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.CustomItem;
+import me.viiral.cosmiccore.utils.CC;
 import me.viiral.cosmiccore.utils.items.ItemBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -49,7 +50,25 @@ public class ArmorCrystalBuilder extends CustomItem {
 
     public ArmorCrystalBuilder(int success, List<ArmorSet> sets) {
         super(ARMOR_CRYSTAL);
-        this.nbtItem = buildNBTItem(success, sets);
+        if (sets.size() == 1) this.nbtItem = buildNBTItem(success, sets.get(0));
+        else this.nbtItem = buildNBTItem(success, sets);
+    }
+
+    private NBTItem buildNBTItem(int success, ArmorSet set) {
+        ItemStack itemStack = new ItemBuilder(CRYSTAL_MATERIAL)
+                .setName(ARMOR_CRYSTAL_FORMAT + set.getColor() + "&l" + set.getName() + "&6&l" + ")")
+                .addLore(String.format(SUCCESS_RATE_FORMAT, success))
+                .addLore(LORE)
+                .addLore(set.getCrystalLore())
+                .colorize()
+                .build();
+
+        NBTItem item = new NBTItem(itemStack);
+        item.setString("randomUUID", UUID.randomUUID().toString());
+        item.setInteger(SUCCESS_RATE_STRING, success);
+
+        item.getOrCreateCompound(COSMIC_DATA_STRING).setString(ARMOR_CRYSTAL, set.getID());
+        return item;
     }
 
     private NBTItem buildNBTItem(int success, List<ArmorSet> sets) {
@@ -57,7 +76,6 @@ public class ArmorCrystalBuilder extends CustomItem {
         StringBuilder name = new StringBuilder(ARMOR_CRYSTAL_FORMAT);
         List<String> lore = new ArrayList<>();
         StringBuilder nbt = new StringBuilder();
-
         for (int i = 0; i < armorSetsLength; i++) {
             ArmorSet set = sets.get(i);
             name.append(set.getColor())
@@ -73,7 +91,9 @@ public class ArmorCrystalBuilder extends CustomItem {
 
             lore.addAll(set.getCrystalLore());
             nbt.append(set.getID()).append(NBT_SEPARATOR);
+
         }
+
 
         ItemStack itemStack = new ItemBuilder(CRYSTAL_MATERIAL)
                 .setName(name.toString())

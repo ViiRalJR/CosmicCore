@@ -85,7 +85,7 @@ public class AncientArmorSet extends ArmorSet {
     @Override
     public List<String> getArmorLore() {
         List<String> lore = new ArrayList<>();
-
+        lore.add("");
         lore.add(CC.translate("&3&lANCIENT SET BONUS"));
         lore.add(CC.translate("&8* &3-15% Incoming Damage"));
         lore.add(CC.translate("&8* &3+35% Outgoing Damage"));

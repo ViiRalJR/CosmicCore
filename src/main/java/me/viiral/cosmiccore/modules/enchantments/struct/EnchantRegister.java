@@ -37,7 +37,8 @@ public class EnchantRegister {
 
     public void initialize() {
         registerAll(
-                new GodlyOverload(), new MightyCactus(), new PaladinArmored(), new PlanetaryDeathbringer(), new ReflectiveBlock(), new ShadowAssassin(),
+                new BloodyDeepWounds(), new BrutalBarbarian(), new DeepWounds(), new GodlyOverload(), new HolyAegis(), new MightyCactus(), new PaladinArmored(),
+                new PlanetaryDeathbringer(), new ReflectiveBlock(), new RighteousAntiGank(), new ShadowAssassin(), new VampiricDevour(),
 
                 new Aquatic(), new Gears(), new Glowing(), new AutoSmelt(), new EnderShift(), new CreeperArmor(), new Spirits(), new Ghost(), new FeatherWeight(),
                 new Obliterate(), new ThunderingBlow(), new Aegis(), new AntiGravity(), new Bleed(),

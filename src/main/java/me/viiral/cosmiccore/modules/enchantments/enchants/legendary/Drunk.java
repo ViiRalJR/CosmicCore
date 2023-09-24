@@ -19,15 +19,15 @@ public class Drunk extends ArmorEquipEventEnchant {
     @Override
     public void runArmorEquipEvent(Player player, int level) {
         this.addPotionEffect(player, PotionEffectType.INCREASE_DAMAGE, 0, Math.min(level - 1, 2));
-        this.addPotionEffect(player, PotionEffectType.SLOW, 0, Math.min(level - 1, 2));
-        this.addPotionEffect(player, PotionEffectType.SLOW_DIGGING, 0, 2);
+//        this.addPotionEffect(player, PotionEffectType.SLOW, 0, Math.min(level - 1, 2));
+//        this.addPotionEffect(player, PotionEffectType.SLOW_DIGGING, 0, 2);
     }
 
     @Override
     public void runArmorUnEquipEvent(Player player, int level) {
         this.removePotionEffect(player, PotionEffectType.INCREASE_DAMAGE, Math.min(level - 1, 2));
-        this.removePotionEffect(player, PotionEffectType.SLOW, Math.min(level - 1, 2));
-        this.removePotionEffect(player, PotionEffectType.SLOW_DIGGING, 2);
+//        this.removePotionEffect(player, PotionEffectType.SLOW, Math.min(level - 1, 2));
+//        this.removePotionEffect(player, PotionEffectType.SLOW_DIGGING, 2);
 
     }
 }
