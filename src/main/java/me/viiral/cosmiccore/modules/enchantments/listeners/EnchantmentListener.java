@@ -8,6 +8,7 @@ import me.viiral.cosmiccore.modules.enchantments.events.EnchantProcOnEquip;
 import me.viiral.cosmiccore.modules.enchantments.struct.enchantstruct.ArmorEquipEventEnchant;
 import me.viiral.cosmiccore.modules.enchantments.struct.items.EnchantedItemBuilder;
 import me.viiral.cosmiccore.modules.enchantments.utils.ItemUtils;
+import me.viiral.cosmiccore.modules.user.User;
 import me.viiral.cosmiccore.utils.armor.ArmorEquipEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,9 @@ public class EnchantmentListener implements Listener {
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
+        User user = CosmicCore.getInstance().getUserManager().getUsers().get(event.getPlayer().getUniqueId());
+        user.clearEffects();
+        event.getPlayer().setMaxHealth(20);
         CosmicCore.getInstance().getUserManager().removeUser(event.getPlayer().getUniqueId());
         EnchantsAPI.clearEnchants(event.getPlayer());
     }
