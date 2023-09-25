@@ -59,7 +59,7 @@ public class AncientArmorSet extends ArmorSet {
     @Override
     protected ItemStack getBoots() {
         return (new ItemBuilder(Material.DIAMOND_BOOTS))
-                .setName(CC.translate("&4&lAncient Boots"))
+                .setName(CC.translate("&3&lAncient Boots"))
                 .addLore(CC.translate("&3&oPowerful, martime boots of"), CC.translate( "&3&othe great Leviathan legend."))
                 .addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4)
                 .addEnchantment(Enchantment.DURABILITY, 3)
@@ -69,16 +69,16 @@ public class AncientArmorSet extends ArmorSet {
     @Override
     public List<String> getEquipMessage() {
         return Arrays.asList(
-                "",
-                "&4&lANCIENT SET BONUS",
-                "&8* &3+35% Outgoing Damage.",
-                "&8* &3+10% Outgoing Damage from Soul Enchants.",
-                "&8* &3-15% Incoming Damage.",
-                "&8* &3Immune to Abyssal Stronghold perks.",
-                "&8* &3-50% Knockback.",
-                "&8* &3Auto Bless.",
-                "&8* &3Leviathan's Curse Ability.",
-                ""
+                CC.translate(""),
+                CC.translate("&4&lANCIENT SET BONUS"),
+                CC.translate("&8* &3+35% Outgoing Damage."),
+                CC.translate("&8* &3+10% Outgoing Damage from Soul Enchants."),
+                CC.translate("&8* &3-15% Incoming Damage."),
+                CC.translate("&8* &3Immune to Abyssal Stronghold perks."),
+                CC.translate("&8* &3-50% Knockback."),
+                CC.translate("&8* &3Auto Bless."),
+                CC.translate("&8* &3Leviathan's Curse Ability."),
+                CC.translate("")
         );
     }
 
