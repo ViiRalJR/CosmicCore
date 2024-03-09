@@ -101,7 +101,7 @@ public class User {
         Bukkit.getScheduler().runTaskLater(CosmicCore.getInstance(), () -> removePotionEffect(type), 20L * duration);
     }
 
-    public Player getPlayer() {
+    public Player getPlayer()  {
         return Bukkit.getPlayer(uuid) != null ? Bukkit.getPlayer(uuid) : null;
     }
 

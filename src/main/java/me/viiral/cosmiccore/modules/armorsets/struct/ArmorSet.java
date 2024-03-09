@@ -48,9 +48,7 @@ public abstract class ArmorSet implements Listener {
     public abstract List<String> getArmorLore();
 
     public abstract List<String> getCrystalLore();
-    public void onAttack(Player attacker, Entity attacked, EntityDamageByEntityEvent event) {}
 
-    public void onAttacked(Player attacked, Entity attacker, EntityDamageByEntityEvent event) {}
 
     public void onAttackCrystal(Player attacker, Entity attacked, int crystalAmount, EntityDamageByEntityEvent event) {}
 
